@@ -1,4 +1,6 @@
 <script>
+    import AddCustomTimerModal from './Modal.svelte';
+
     const minutesToSeconds = (minutes) => minutes * 60;
     const secondsToMinutes = (seconds) => Math.floor(seconds / 60);
     const padWithZeroes = (number) => number.toString().padStart(2, '0');
@@ -14,6 +16,7 @@
     // let shortBreakTime = SHORT_BREAK_S;
     let completedPomodoros = 0;
     let interval;
+    let showModal = false;
   
     function formatTime(timeInSeconds) { 
       const minutes = secondsToMinutes(timeInSeconds);
@@ -38,6 +41,10 @@
   
     function startLongBreak(){
       rest(LONG_BREAK_S);
+    }
+
+    function newCustomTimer(){
+      console.log("hi lol");
     }
   
     function setState(newState){
@@ -110,6 +117,27 @@
       <button class="primary" on:click={startShortBreak} disabled={currentState !== State.idle}>Short Break</button>
       <button class="primary" on:click={startLongBreak} disabled={currentState !== State.idle}>Long Break</button>
       <button on:click={cancelPomodoro} disabled={currentState === State.inProgress && currentState === State.resting}>cancel</button>
+      <button class="primary" on:click={() => (showModal = true)} disabled={currentState !== State.idle}>+ Custom Mode</button>
+      <AddCustomTimerModal bind:showModal>
+        <h2>
+          modal
+          <small><em>adjective</em> mod·al \ˈmō-dəl\</small>
+        </h2>
+      
+        <ol class="definition-list">
+          <li>of or relating to modality in logic</li>
+          <li>
+            containing provisions as to the mode of procedure or the manner of taking effect —used of a contract or legacy
+          </li>
+          <li>of or relating to a musical mode</li>
+          <li>of or relating to structure as opposed to substance</li>
+          <li>of, relating to, or constituting a grammatical form or category characteristically indicating predication</li>
+          <li>of or relating to a statistical mode</li>
+        </ol>
+      
+        <a href="https://www.merriam-webster.com/dictionary/modal">merriam-webster.com</a>
+      </AddCustomTimerModal>
+      
       <!--button on:click={completePomodoro}>complete</button-->
     </footer>
   </section>
