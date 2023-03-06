@@ -1,9 +1,20 @@
 <script>
+	import { createEventDispatcher } from "svelte";
+	import newUniqueId from 'locally-unique-id-generator';
+
 	export let showModal; // boolean
-
 	let dialog; // HTMLDialogElement
-
+	let dispatch = createEventDispatcher();
+    let name = "Custom Mode";
+    let minutes = 0;
+    let seconds = 0;
+	
 	$: if (dialog && showModal) dialog.showModal();
+
+	function handleSubmit() {
+        const customMode = {name, minutes, seconds, id: newUniqueId()};
+        dispatch('addCustomMode', customMode);
+    }
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -13,12 +24,17 @@
 	on:click|self={() => dialog.close()}
 >
 	<div on:click|stopPropagation>
-		<slot name="header" />
-		<hr />
-		<slot />
-		<hr />
 		<!-- svelte-ignore a11y-autofocus -->
-		<button autofocus on:click={() => dialog.close()}>close modal</button>
+		<button autofocus on:click={() => dialog.close()}>X</button>
+		<h2>Create Custom Timer</h2>
+		<form on:submit|preventDefault={handleSubmit}>
+			<h3>Mode Name</h3>
+			<input type="text" bind:value={name}><br>
+			<h3>Timer Duration</h3>
+			<input type="number" min=0 max=59 bind:value={minutes}>
+			<input type="number" min=0 max=59 bind:value={seconds}><br>
+			<input type="submit" value="Confirm" on:click={() => dialog.close()}>
+		</form>
 	</div>
 </dialog>
 
