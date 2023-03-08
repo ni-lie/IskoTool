@@ -1,42 +1,36 @@
-<script>
+<script lang="ts">
   import AddCustomModeModal from './CustomTimerModal.svelte';
 
-  /** @readonly @enum string */
-  const State = {
-    Idle: 'idle',
-    InProgress: 'in progress',
-    Resting: 'resting',
-    ShortResting: 'shortresting',
-    LongResting: 'longresting',
-    CustomResting: 'customresting',
-  };
+  import type { CustomMode } from '../types/event';
 
-  /** @param {number} minutes */
-  const minutesToSeconds = (minutes) => minutes * 60;
-  /** @param {number} seconds */
-  const secondsToMinutes = (seconds) => Math.floor(seconds / 60);
-  /** @param {number} number */
-  const padWithZeroes = (number) => number.toString().padStart(2, '0');
+  enum State {
+    Idle = 'idle',
+    InProgress = 'in progress',
+    Resting = 'resting',
+    ShortResting = 'shortresting',
+    LongResting = 'longresting',
+    CustomResting = 'customresting',
+  }
+
+  const minutesToSeconds = (minutes: number) => minutes * 60;
+  const secondsToMinutes = (seconds: number) => Math.floor(seconds / 60);
+  const padWithZeroes = (number: number) => number.toString().padStart(2, '0');
 
   const POMODORO_S = minutesToSeconds(25);
   const LONG_BREAK_S = minutesToSeconds(20);
   const SHORT_BREAK_S = minutesToSeconds(5);
-
-  /** @type number */
-  let   CUSTOM_MODE_S;
+  let   CUSTOM_MODE_S: number;
   
   let currentState = State.Idle;
   let pomodoroTime = POMODORO_S;
   let completedPomodoros = 0;
 
-  /** @type number */
-  let interval;
+  let interval: number;
 
   let showModal = false;
-  let customModes = [];
+  let customModes: CustomMode[] = [];
   
-  /** @param {number} timeInSeconds */
-  function formatTime(timeInSeconds) { 
+  function formatTime(timeInSeconds: number) { 
     const minutes = secondsToMinutes(timeInSeconds);
     const remainingSeconds = timeInSeconds % 60;
     return `${padWithZeroes(minutes)}:${padWithZeroes(remainingSeconds)}`;
@@ -60,11 +54,7 @@
     rest(LONG_BREAK_S);
   }
 
-  /**
-   * @param {number} min
-   * @param {number} sec
-   */
-  function startCustomMode(min, sec) {
+  function startCustomMode(min: number, sec: number) {
     CUSTOM_MODE_S = minutesToSeconds(min) + sec;
     rest(CUSTOM_MODE_S);
   }
@@ -84,8 +74,7 @@
     }
   }
   
-  /** @param {number} time */
-  function rest(time){
+  function rest(time: number){
     switch (time) {
       case SHORT_BREAK_S:
         setState(State.ShortResting);
