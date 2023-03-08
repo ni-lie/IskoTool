@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { createEventDispatcher } from "svelte";
-	import newUniqueId from 'locally-unique-id-generator';
 
 	import type { CustomMode } from '../types/event';
 
@@ -19,8 +18,12 @@
 		dialog.close();
 
 		// Forward the form data to all event listeners
-        const customMode: CustomMode = {name, minutes, seconds, id: newUniqueId()};
-        dispatch('addCustomMode', customMode);
+        dispatch('addCustomMode', {
+			name,
+			minutes,
+			seconds,
+			id: crypto.randomUUID(),
+		} satisfies CustomMode);
     }
 </script>
 
