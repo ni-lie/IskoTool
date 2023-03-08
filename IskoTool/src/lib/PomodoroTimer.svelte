@@ -138,30 +138,36 @@
 </style>
 
 <section>
-  <time>
-    {formatTime(pomodoroTime)}
-  </time>
+  <div class="prog">  
+    <div class="timer">
+      <time class="actual-time">
+        {formatTime(pomodoroTime)}
+      </time>
+    </div>
+  </div>
   <footer>
-    <button class="primary" on:click={startPomodoro} disabled={currentState !== State.Idle}>start</button>
-    <button class="primary" on:click={startShortBreak} disabled={currentState !== State.Idle}>Short Break</button>
-    <button class="primary" on:click={startLongBreak} disabled={currentState !== State.Idle}>Long Break</button>
-    <button on:click={cancelPomodoro} disabled={currentState === State.InProgress && currentState === State.Resting}>cancel</button>
-    {#each customModes as customMode}
-      <div class="custom mode">
-        <button class="primary" on:click={() => {
-            startCustomMode(customMode.minutes, customMode.seconds);
-          }} disabled={currentState !== State.Idle}>
-          {customMode.name}
-        </button>
-        <button on:click={() => {
-            deleteCustomMode(customMode.id);
-          }} disabled={currentState !== State.Idle}>
-          Delete
-        </button>
-      </div>
-    {/each}
-    <button class="primary" on:click={() => (showModal = true)} disabled={currentState !== State.Idle}>+ Custom Mode</button>
-    <AddCustomModeModal bind:showModal on:addCustomMode={addCustomMode} />
+    <div class="button-class">
+      <button class="primary time-start" on:click={startPomodoro} disabled={currentState !== State.Idle}>start</button>
+      <button class="primary" on:click={startShortBreak} disabled={currentState !== State.Idle}>Short Break</button>
+      <button class="primary" on:click={startLongBreak} disabled={currentState !== State.Idle}>Long Break</button>
+      <button on:click={cancelPomodoro} disabled={currentState === State.InProgress && currentState === State.Resting}>cancel</button>
+      {#each customModes as customMode}
+        <div class="custom mode">
+          <button class="primary" on:click={() => {
+              startCustomMode(customMode.minutes, customMode.seconds);
+            }} disabled={currentState !== State.Idle}>
+            {customMode.name}
+          </button>
+          <button on:click={() => {
+              deleteCustomMode(customMode.id);
+            }} disabled={currentState !== State.Idle}>
+            Delete
+          </button>
+        </div>
+      {/each}
+      <button class="primary extra-time" on:click={() => (showModal = true)} disabled={currentState !== State.Idle}>+ Custom Mode</button>
+      <AddCustomModeModal bind:showModal on:addCustomMode={addCustomMode} />
+    </div>
     <!--button on:click={completePomodoro}>complete</button-->
   </footer>
 </section>

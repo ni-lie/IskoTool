@@ -4,7 +4,7 @@
 </script>
 
 <main>
-  <h1>
+  <h1 class="title">
     Pomodoro Timer
   </h1>
   <PomodoroTimer />
