@@ -95,8 +95,6 @@
   }
 
   function cancelPomodoro() {
-    // TODO: Add some logic to prompt the user to write down
-    // the cause of the interruption.
     idle();
   }
 
@@ -168,7 +166,6 @@
       <button class="primary extra-time" on:click={() => (showModal = true)} disabled={currentState !== State.Idle}>+ Custom Mode</button>
       <AddCustomModeModal bind:showModal on:addCustomMode={addCustomMode} />
     </div>
-    <!--button on:click={completePomodoro}>complete</button-->
   </footer>
 </section>
   
