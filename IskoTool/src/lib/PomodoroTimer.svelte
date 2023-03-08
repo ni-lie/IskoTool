@@ -74,14 +74,15 @@
   }
   
   function rest(time){
-    if(time === SHORT_BREAK_S) {
-      setState(State.ShortResting);
-    }
-    else if(time === LONG_BREAK_S) {
-      setState(State.LongResting);
-    }
-    else {
-      setState(State.CustomResting);
+    switch (time) {
+      case SHORT_BREAK_S:
+        setState(State.ShortResting);
+        break;
+      case LONG_BREAK_S:
+        setState(State.LongResting);
+        break;
+      default:
+        setState(State.CustomResting);
     }
     pomodoroTime = time;
     interval = setInterval(() => {
@@ -99,21 +100,20 @@
   }
 
   function idle(){
-    // 
-    if (currentState === State.ShortResting){
-      pomodoroTime = SHORT_BREAK_S;
-    }
-    else if (currentState === State.LongResting){
-      pomodoroTime = LONG_BREAK_S;
-    }
-    else if (currentState === State.CustomResting){
-      pomodoroTime = CUSTOM_MODE_S;
-    }
-    else {
-      pomodoroTime = POMODORO_S;
+    switch (currentState) {
+      case State.ShortResting:
+        pomodoroTime = SHORT_BREAK_S;
+        break;
+      case State.LongResting:
+        pomodoroTime = LONG_BREAK_S;
+        break;
+      case State.CustomResting:
+        pomodoroTime = CUSTOM_MODE_S;
+        break;
+      default:
+        pomodoroTime = POMODORO_S;
     }
     setState(State.Idle);
-    //pomodoroTime = pomodoroTime;
   }
 
   function addCustomMode(e) {
