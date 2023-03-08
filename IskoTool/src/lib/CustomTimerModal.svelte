@@ -4,11 +4,8 @@
 
 	import type { CustomMode } from '../types/event';
 
-	/** @type boolean */
-	export let showModal;
-
-	/** @type HTMLDialogElement */
-	let dialog;
+	export let showModal: boolean;
+	let dialog: HTMLDialogElement;
 
 	let dispatch = createEventDispatcher();
     let name = "Custom Mode";
