@@ -2,8 +2,12 @@
 	import { createEventDispatcher } from "svelte";
 	import newUniqueId from 'locally-unique-id-generator';
 
-	export let showModal; // boolean
-	let dialog; // HTMLDialogElement
+	/** @type boolean */
+	export let showModal;
+
+	/** @type HTMLDialogElement */
+	let dialog;
+
 	let dispatch = createEventDispatcher();
     let name = "Custom Mode";
     let minutes = 0;
