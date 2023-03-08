@@ -2,8 +2,12 @@
 	import { createEventDispatcher } from "svelte";
 	import newUniqueId from 'locally-unique-id-generator';
 
-	export let showModal; // boolean
-	let dialog; // HTMLDialogElement
+	/** @type boolean */
+	export let showModal;
+
+	/** @type HTMLDialogElement */
+	let dialog;
+
 	let dispatch = createEventDispatcher();
     let name = "Custom Mode";
     let minutes = 0;
@@ -12,6 +16,10 @@
 	$: if (dialog && showModal) dialog.showModal();
 
 	function handleSubmit() {
+		// Close the modal for good
+		dialog.close();
+
+		// Forward the form data to all event listeners
         const customMode = {name, minutes, seconds, id: newUniqueId()};
         dispatch('addCustomMode', customMode);
     }
@@ -33,7 +41,7 @@
 			<h3>Timer Duration</h3>
 			<input type="number" min=0 max=59 bind:value={minutes}>
 			<input type="number" min=0 max=59 bind:value={seconds}><br>
-			<input type="submit" value="Confirm" on:click={() => dialog.close()}>
+			<input type="submit" value="Confirm" />
 		</form>
 	</div>
 </dialog>
