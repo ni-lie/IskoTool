@@ -11,24 +11,31 @@
     CustomResting: 'customresting',
   };
 
+  /** @param {number} minutes */
   const minutesToSeconds = (minutes) => minutes * 60;
+  /** @param {number} seconds */
   const secondsToMinutes = (seconds) => Math.floor(seconds / 60);
+  /** @param {number} number */
   const padWithZeroes = (number) => number.toString().padStart(2, '0');
-  
+
   const POMODORO_S = minutesToSeconds(25);
   const LONG_BREAK_S = minutesToSeconds(20);
   const SHORT_BREAK_S = minutesToSeconds(5);
+
+  /** @type number */
   let   CUSTOM_MODE_S;
   
   let currentState = State.Idle;
   let pomodoroTime = POMODORO_S;
-  // let longBreakTime = LONG_BREAK_S;
-  // let shortBreakTime = SHORT_BREAK_S;
   let completedPomodoros = 0;
+
+  /** @type number */
   let interval;
+
   let showModal = false;
   let customModes = [];
   
+  /** @param {number} timeInSeconds */
   function formatTime(timeInSeconds) { 
     const minutes = secondsToMinutes(timeInSeconds);
     const remainingSeconds = timeInSeconds % 60;
@@ -53,6 +60,10 @@
     rest(LONG_BREAK_S);
   }
 
+  /**
+   * @param {number} min
+   * @param {number} sec
+   */
   function startCustomMode(min, sec) {
     CUSTOM_MODE_S = minutesToSeconds(min) + sec;
     rest(CUSTOM_MODE_S);
@@ -73,6 +84,7 @@
     }
   }
   
+  /** @param {number} time */
   function rest(time){
     switch (time) {
       case SHORT_BREAK_S:
@@ -135,7 +147,7 @@
     margin-bottom: 0.2em;
   }
 </style>
-  
+
 <section>
   <time>
     {formatTime(pomodoroTime)}
