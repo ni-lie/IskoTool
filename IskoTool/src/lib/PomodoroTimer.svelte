@@ -1,17 +1,26 @@
 <script>
   import AddCustomModeModal from './CustomTimerModal.svelte';
 
+  /** @readonly @enum string */
+  const State = {
+    Idle: 'idle',
+    InProgress: 'in progress',
+    Resting: 'resting',
+    ShortResting: 'shortresting',
+    LongResting: 'longresting',
+    CustomResting: 'customresting',
+  };
+
   const minutesToSeconds = (minutes) => minutes * 60;
   const secondsToMinutes = (seconds) => Math.floor(seconds / 60);
   const padWithZeroes = (number) => number.toString().padStart(2, '0');
-  const State = {idle: 'idle', inProgress: 'in progress', shortResting: 'shortresting', longResting: 'longresting', customResting: 'customresting'};
   
   const POMODORO_S = minutesToSeconds(25);
   const LONG_BREAK_S = minutesToSeconds(20);
   const SHORT_BREAK_S = minutesToSeconds(5);
   let   CUSTOM_MODE_S;
   
-  let currentState = State.idle;
+  let currentState = State.Idle;
   let pomodoroTime = POMODORO_S;
   // let longBreakTime = LONG_BREAK_S;
   // let shortBreakTime = SHORT_BREAK_S;
@@ -27,7 +36,7 @@
   }
 
   function startPomodoro() { 
-    setState(State.inProgress);
+    setState(State.InProgress);
     interval = setInterval(() => {
       if (pomodoroTime === 0) {
         completePomodoro();
@@ -66,13 +75,13 @@
   
   function rest(time){
     if(time === SHORT_BREAK_S) {
-      setState(State.shortResting);
+      setState(State.ShortResting);
     }
     else if(time === LONG_BREAK_S) {
-      setState(State.longResting);
+      setState(State.LongResting);
     }
     else {
-      setState(State.customResting);
+      setState(State.CustomResting);
     }
     pomodoroTime = time;
     interval = setInterval(() => {
@@ -91,19 +100,19 @@
 
   function idle(){
     // 
-    if (currentState === State.shortResting){
+    if (currentState === State.ShortResting){
       pomodoroTime = SHORT_BREAK_S;
     }
-    else if (currentState === State.longResting){
+    else if (currentState === State.LongResting){
       pomodoroTime = LONG_BREAK_S;
     }
-    else if (currentState === State.customResting){
+    else if (currentState === State.CustomResting){
       pomodoroTime = CUSTOM_MODE_S;
     }
     else {
       pomodoroTime = POMODORO_S;
     }
-    setState(State.idle);
+    setState(State.Idle);
     //pomodoroTime = pomodoroTime;
   }
 
@@ -132,25 +141,25 @@
     {formatTime(pomodoroTime)}
   </time>
   <footer>
-    <button class="primary" on:click={startPomodoro} disabled={currentState !== State.idle}>start</button>
-    <button class="primary" on:click={startShortBreak} disabled={currentState !== State.idle}>Short Break</button>
-    <button class="primary" on:click={startLongBreak} disabled={currentState !== State.idle}>Long Break</button>
-    <button on:click={cancelPomodoro} disabled={currentState === State.inProgress && currentState === State.resting}>cancel</button>
+    <button class="primary" on:click={startPomodoro} disabled={currentState !== State.Idle}>start</button>
+    <button class="primary" on:click={startShortBreak} disabled={currentState !== State.Idle}>Short Break</button>
+    <button class="primary" on:click={startLongBreak} disabled={currentState !== State.Idle}>Long Break</button>
+    <button on:click={cancelPomodoro} disabled={currentState === State.InProgress && currentState === State.Resting}>cancel</button>
     {#each customModes as customMode}
       <div class="custom mode">
         <button class="primary" on:click={() => {
             startCustomMode(customMode.minutes, customMode.seconds);
-          }} disabled={currentState !== State.idle}>
+          }} disabled={currentState !== State.Idle}>
           {customMode.name}
         </button>
         <button on:click={() => {
             deleteCustomMode(customMode.id);
-          }} disabled={currentState !== State.idle}>
+          }} disabled={currentState !== State.Idle}>
           Delete
         </button>
       </div>
     {/each}
-    <button class="primary" on:click={() => (showModal = true)} disabled={currentState !== State.idle}>+ Custom Mode</button>
+    <button class="primary" on:click={() => (showModal = true)} disabled={currentState !== State.Idle}>+ Custom Mode</button>
     <AddCustomModeModal bind:showModal on:addCustomMode={addCustomMode} />
     <!--button on:click={completePomodoro}>complete</button-->
   </footer>
