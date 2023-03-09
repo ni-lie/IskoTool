@@ -90,7 +90,8 @@
       if (pomodoroTime === 0) {
         idle();
       }
-      pomodoroTime -= 1;
+      else
+        pomodoroTime -= 1;
     },1000);
   }
 
