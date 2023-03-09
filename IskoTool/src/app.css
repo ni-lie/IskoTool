@@ -17,10 +17,6 @@
 h1 {
   margin: 5px 0px;
 }
-h2 {
-  color: red;
-  margin: 5px 0px;
-}
 
 body {
   background-color: var(--evergreen-dark);
