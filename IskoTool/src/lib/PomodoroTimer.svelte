@@ -138,10 +138,10 @@
     </div>
   </div>
     <div class="button-class">
-      <button class="time-start" on:click={startPomodoro} disabled={currentState !== State.Idle}>start</button>
+      <button class="time-start" on:click={startPomodoro} disabled={currentState !== State.Idle}>Start</button>
       <button on:click={startShortBreak} disabled={currentState !== State.Idle}>Short Break</button>
       <button on:click={startLongBreak} disabled={currentState !== State.Idle}>Long Break</button>
-      <button on:click={cancelPomodoro} disabled={currentState === State.InProgress && currentState === State.Resting}>cancel</button>
+      <button on:click={cancelPomodoro} disabled={currentState === State.Idle}>Cancel</button>
       {#each customModes as customMode}
         <div class="custom-mode-select">
           <button on:click={() => {
@@ -213,6 +213,12 @@
     background-color: transparent;
   }
 
+  button:disabled {
+    border-color: var(--evergreen-faded);
+    color: var(--evergreen-faded);
+    background-color: transparent;
+  }
+
   .time-start {
     background-color: var(--orange-light);
     border-color: var(--orange-light);
@@ -225,13 +231,9 @@
     border-color: var(--orange-faded);
   }
 
-  .fadedtext {
-    color: var(--evergreen-faded);
-  }
-
   .danger-action {
     background-color: rgb(231, 67, 67);
-    border: none;
+    border-color: rgb(231, 67, 67);
   }
   
   .button-class button {
