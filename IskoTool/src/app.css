@@ -25,19 +25,18 @@ body {
 
 button {
   text-align: center;
-  width: 180px;
+  color: white;
+  font-family: 'Space Grotesk';
   font-size: 20px;
+  font-weight: bold;
+  width: 180px;
   padding: 7px 0px;
   margin: 20px;
   border-radius: 24px;
   border-width: 3px;
-  box-shadow: none;
   border-style: solid;
-  background-color: transparent;
-  color: white;
-  font-family: 'Space Grotesk';
-  font-weight: bold;
   border-color: white;
+  background-color: transparent;
 }
 
 .time-start {
@@ -99,7 +98,7 @@ h3.pop-up {
   margin: 6px 0px;
 }
 
-.extra-time {
+.fadedtext {
   color: var(--evergreen-faded);
 }
 
@@ -110,7 +109,7 @@ input[type=submit] {
   color: white;
   background-color: var(--evergreen-dark);
   padding: 4px 0px;
-  width: 45%;
+  width: 40%;
   border: solid var(--evergreen-dark);
   border-radius: 3px;
   margin: 30px 0px;
@@ -143,6 +142,7 @@ dialog div {
 }
 
 dialog button {
+  /* Close (X) button. */
   border: transparent;
   color: gray;
   margin: 0px 5px 0px 0px;

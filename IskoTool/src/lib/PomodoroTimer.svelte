@@ -162,8 +162,9 @@
           </button>
         </div>
       {/each}
-      <button class="primary extra-time" on:click={() => (showModal = true)} disabled={currentState !== State.Idle}>+ Custom Mode</button>
+      <button class="primary fadedtext" on:click={() => (showModal = true)} disabled={currentState !== State.Idle}>+ Custom Mode</button>
       <AddCustomModeModal bind:showModal on:addCustomMode={addCustomMode} />
     </div>
   </footer>
 </section>
+  
