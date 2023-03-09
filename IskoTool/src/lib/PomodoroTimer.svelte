@@ -136,30 +136,28 @@
       </time>
     </div>
   </div>
-  <footer>
     <div class="button-class">
-      <button class="primary time-start" on:click={startPomodoro} disabled={currentState !== State.Idle}>start</button>
-      <button class="primary" on:click={startShortBreak} disabled={currentState !== State.Idle}>Short Break</button>
-      <button class="primary" on:click={startLongBreak} disabled={currentState !== State.Idle}>Long Break</button>
+      <button class="time-start" on:click={startPomodoro} disabled={currentState !== State.Idle}>start</button>
+      <button on:click={startShortBreak} disabled={currentState !== State.Idle}>Short Break</button>
+      <button on:click={startLongBreak} disabled={currentState !== State.Idle}>Long Break</button>
       <button on:click={cancelPomodoro} disabled={currentState === State.InProgress && currentState === State.Resting}>cancel</button>
       {#each customModes as customMode}
-        <div class="custom mode">
-          <button class="primary" on:click={() => {
+        <div class="custom-mode-select">
+          <button on:click={() => {
               startCustomMode(customMode.minutes, customMode.seconds);
             }} disabled={currentState !== State.Idle}>
             {customMode.name}
           </button>
-          <button on:click={() => {
+          <button class="danger-action" on:click={() => {
               deleteCustomMode(customMode.id);
             }} disabled={currentState !== State.Idle}>
             Delete
           </button>
         </div>
       {/each}
-      <button class="primary fadedtext" on:click={() => (showModal = true)} disabled={currentState !== State.Idle}>+ Custom Mode</button>
+      <button class="fadedtext" on:click={() => (showModal = true)} disabled={currentState !== State.Idle}>+ Custom Mode</button>
       <AddCustomModeModal bind:showModal on:addCustomMode={addCustomMode} />
     </div>
-  </footer>
 </section>
 
 <style>
@@ -225,8 +223,23 @@
     background: var(--orange-faded);
     border-color: var(--orange-faded);
   }
+
+  .fadedtext {
+    color: var(--evergreen-faded);
+  }
+
+  .danger-action {
+    background-color: rgb(231, 67, 67);
+    border: none;
+  }
   
   .button-class button {
     display: block;
   }
+
+  .custom-mode-select {
+    display: inline-flex;
+    margin-block-start: -20px;
+  }
+
 </style>

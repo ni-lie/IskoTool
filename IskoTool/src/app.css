@@ -37,10 +37,6 @@ h3.pop-up {
   margin: 6px 0px;
 }
 
-.fadedtext {
-  color: var(--evergreen-faded);
-}
-
 input[type=submit] {
   text-align: center;
   font-family: 'Rubik';
