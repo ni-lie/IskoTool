@@ -126,13 +126,7 @@
   }
 </script>
   
-<style>
-  time {
-    display: block;
-    font-size: 5em;
-    margin-bottom: 0.2em;
-  }
-</style>
+
 
 <section>
   <div class="prog">  
@@ -167,4 +161,72 @@
     </div>
   </footer>
 </section>
+
+<style>
+  time {
+    display: block;
+    font-size: 5em;
+    margin-bottom: 0.2em;
+  }
+
+  .prog {
+    border-radius: 50%;
+    background: conic-gradient(#ffffff 0deg, rgb(200, 200, 200, 0.4) 0deg);
+    width: 300px;
+    height: 300px;
+    align-items: center;
+    text-align: center;
+    margin: 25px 0px;
+  }
+
+  .timer {
+    height: 290px;
+    width: 290px;
+    border-radius: 50%;
+    background-color: var(--evergreen-dark);
+    top: 50%;
+    position: relative;
+    transform: translateY(-50%);
+    margin: auto;
+  }
+
+  .actual-time {
+    font-family: 'Space Grotesk';
+    font-weight: bold;
+    top: 50%;
+    position: relative;
+    transform: translateY(-50%);
+  }
+
+  button {
+    text-align: center;
+    color: white;
+    font-family: 'Space Grotesk';
+    font-size: 20px;
+    font-weight: bold;
+    width: 180px;
+    padding: 7px 0px;
+    margin: 20px;
+    border-radius: 24px;
+    border-width: 3px;
+    border-style: solid;
+    border-color: white;
+    background-color: transparent;
+  }
+
+  .time-start {
+    background-color: var(--orange-light);
+    border-color: var(--orange-light);
   
+    transition: background 0.25s ease-in-out, border 0.25s ease-in-out;
+  }
+
+  .time-start:hover {
+    background: var(--orange-faded);
+    border-color: var(--orange-faded);
+  }
+  
+  .button-class button {
+    display: block;
+  }
+</style>
