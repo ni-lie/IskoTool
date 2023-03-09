@@ -1,5 +1,13 @@
 :root {
   font-family: 'Rubik', 'Space Grotesk';
+
+    /* Prototype color scheme */
+    --evergreen-light: #60bfac;
+    --evergreen-dark: #1c8d76;
+    --evergreen-faded: #a7d7cd;
+    --orange-light: #ffc085;
+    --orange-dark: #dfa46d;
+    --orange-faded: #ffd4ac;
 }
 
 .title {
@@ -15,7 +23,7 @@ h2 {
 }
 
 body {
-  background-color: #1c8d76;
+  background-color: var(--evergreen-dark);
   color: white;
 }
 
@@ -37,15 +45,15 @@ button {
 }
 
 .time-start {
-  background-color: #ffc085;
-  border-color: #ffc085;
+  background-color: var(--orange-light);
+  border-color: var(--orange-light);
   
   transition: background 0.25s ease-in-out, border 0.25s ease-in-out;
 }
 
 .time-start:hover {
-  background: #ffd4ac;
-  border-color: #ffd4ac;
+  background: var(--orange-faded);
+  border-color: var(--orange-faded);
 }
 
 .button-class button {
@@ -66,7 +74,7 @@ button {
   height: 290px;
   width: 290px;
   border-radius: 50%;
-  background-color: #1c8d76;
+  background-color: var(--evergreen-dark);
   top: 50%;
   position: relative;
   transform: translateY(-50%);
@@ -82,7 +90,7 @@ button {
 }
 
 .time-prompt {
-  color: #1c8d76;
+  color: var(--evergreen-dark);
 }
 
 h2.time-prompt {
@@ -96,7 +104,7 @@ h3.time-prompt {
 }
 
 .extra-time {
-  color: #A7D7CD;
+  color: var(--evergreen-faded);
 }
 
 input[type=submit] {
@@ -104,10 +112,10 @@ input[type=submit] {
   font-family: 'Rubik';
   font-size: 15px;
   color: white;
-  background-color: #1c8d76;
+  background-color: var(--evergreen-dark);
   padding: 4px 0px;
   width: 45%;
-  border: solid #1c8d76;
+  border: solid var(--evergreen-dark);
   border-radius: 3px;
   margin: 30px 0px;
   
@@ -118,8 +126,8 @@ input[type=submit] {
 }
 
 input[type=submit]:hover {
-  background-color: #60BFAC;
-  border-color: #60BFAC;
+  background-color: var(--evergreen-light);
+  border-color: var(--evergreen-light);
 }
 
 input[type=text] {
@@ -127,7 +135,7 @@ input[type=text] {
   padding: 7px 10px;
   margin-bottom: 10px;
   background-color: #F5F5F5;
-  border: solid #1c8d76 1px;
+  border: solid var(--evergreen-dark) 1px;
   border-radius: 3px;
   font-family: 'Space Grotesk';
   font-size: 15px;
