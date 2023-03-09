@@ -117,7 +117,6 @@
 
   function addCustomMode(e) {
     const customMode = e.detail;
-    console.log(e.detail)
     customModes = [...customModes, customMode];
   }
 
