@@ -85,16 +85,16 @@ button {
   transform: translateY(-50%);
 }
 
-.time-prompt {
+.pop-up {
   color: var(--evergreen-dark);
 }
 
-h2.time-prompt {
+h2.pop-up {
   font-size: 24px;
   margin: 12px 0px 16px 0px;
 }
 
-h3.time-prompt {
+h3.pop-up {
   font-size: 11px;
   margin: 6px 0px;
 }

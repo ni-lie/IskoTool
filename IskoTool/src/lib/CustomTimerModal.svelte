@@ -36,11 +36,11 @@
 	<div on:click|stopPropagation>
 		<!-- svelte-ignore a11y-autofocus -->
 		<button autofocus on:click={() => dialog.close()}>x</button>
-		<h2 class="time-prompt">Create Custom Timer</h2>
+		<h2 class="pop-up">Create Custom Timer</h2>
 		<form on:submit|preventDefault={handleSubmit}>
-			<h3 class="time-prompt">Mode Name</h3>
+			<h3 class="pop-up">Mode Name</h3>
 			<input type="text" bind:value={name}><br>
-			<h3 class="time-prompt">Timer Duration</h3>
+			<h3 class="pop-up">Timer Duration</h3>
 			<input type="number" min=0 max=59 bind:value={minutes}>
 			<input type="number" min=0 max=59 bind:value={seconds}><br>
 			<input type="submit" value="Confirm" />
