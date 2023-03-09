@@ -1,5 +1,13 @@
 :root {
   font-family: 'Rubik', 'Space Grotesk';
+
+    /* Prototype color scheme */
+    --evergreen-light: #60bfac;
+    --evergreen-dark: #1c8d76;
+    --evergreen-faded: #a7d7cd;
+    --orange-light: #ffc085;
+    --orange-dark: #dfa46d;
+    --orange-faded: #ffd4ac;
 }
 
 .title {
@@ -9,94 +17,24 @@
 h1 {
   margin: 5px 0px;
 }
-h2 {
-  color: red;
-  margin: 5px 0px;
-}
 
 body {
-  background-color: #1c8d76;
+  background-color: var(--evergreen-dark);
   color: white;
 }
 
-button {
-  text-align: center;
-  width: 180px;
-  font-size: 20px;
-  padding: 7px 0px;
-  margin: 20px;
-  border-radius: 24px;
-  border-width: 3px;
-  box-shadow: none;
-  border-style: solid;
-  background-color: transparent;
-  color: white;
-  font-family: 'Space Grotesk';
-  font-weight: bold;
-  border-color: white;
+.pop-up {
+  color: var(--evergreen-dark);
 }
 
-.time-start {
-  background-color: #ffc085;
-  border-color: #ffc085;
-  
-  transition: background 0.25s ease-in-out, border 0.25s ease-in-out;
-}
-
-.time-start:hover {
-  background: #ffd4ac;
-  border-color: #ffd4ac;
-}
-
-.button-class button {
-  display: block;
-}
-
-.prog {
-  border-radius: 50%;
-  background: conic-gradient(#ffffff 0deg, rgb(200, 200, 200, 0.4) 0deg);
-  width: 300px;
-  height: 300px;
-  align-items: center;
-  text-align: center;
-  margin: 25px 0px;
-}
-
-.timer {
-  height: 290px;
-  width: 290px;
-  border-radius: 50%;
-  background-color: #1c8d76;
-  top: 50%;
-  position: relative;
-  transform: translateY(-50%);
-  margin: auto;
-}
-
-.actual-time {
-  font-family: 'Space Grotesk';
-  font-weight: bold;
-  top: 50%;
-  position: relative;
-  transform: translateY(-50%);
-}
-
-.time-prompt {
-  color: #1c8d76;
-}
-
-h2.time-prompt {
+h2.pop-up {
   font-size: 24px;
   margin: 12px 0px 16px 0px;
 }
 
-h3.time-prompt {
+h3.pop-up {
   font-size: 11px;
   margin: 6px 0px;
-}
-
-.extra-time {
-  color: #A7D7CD;
 }
 
 input[type=submit] {
@@ -104,10 +42,10 @@ input[type=submit] {
   font-family: 'Rubik';
   font-size: 15px;
   color: white;
-  background-color: #1c8d76;
+  background-color: var(--evergreen-dark);
   padding: 4px 0px;
-  width: 45%;
-  border: solid #1c8d76;
+  width: 40%;
+  border: solid var(--evergreen-dark);
   border-radius: 3px;
   margin: 30px 0px;
   
@@ -118,8 +56,8 @@ input[type=submit] {
 }
 
 input[type=submit]:hover {
-  background-color: #60BFAC;
-  border-color: #60BFAC;
+  background-color: var(--evergreen-light);
+  border-color: var(--evergreen-light);
 }
 
 input[type=text] {
@@ -127,7 +65,7 @@ input[type=text] {
   padding: 7px 10px;
   margin-bottom: 10px;
   background-color: #F5F5F5;
-  border: solid #1c8d76 1px;
+  border: solid var(--evergreen-dark) 1px;
   border-radius: 3px;
   font-family: 'Space Grotesk';
   font-size: 15px;
@@ -139,6 +77,7 @@ dialog div {
 }
 
 dialog button {
+  /* Close (X) button. */
   border: transparent;
   color: gray;
   margin: 0px 5px 0px 0px;

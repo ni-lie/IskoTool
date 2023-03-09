@@ -90,7 +90,8 @@
       if (pomodoroTime === 0) {
         idle();
       }
-      pomodoroTime -= 1;
+      else
+        pomodoroTime -= 1;
     },1000);
   }
 
@@ -126,13 +127,7 @@
   }
 </script>
   
-<style>
-  time {
-    display: block;
-    font-size: 5em;
-    margin-bottom: 0.2em;
-  }
-</style>
+
 
 <section>
   <div class="prog">  
@@ -142,28 +137,112 @@
       </time>
     </div>
   </div>
-  <footer>
     <div class="button-class">
-      <button class="primary time-start" on:click={startPomodoro} disabled={currentState !== State.Idle}>start</button>
-      <button class="primary" on:click={startShortBreak} disabled={currentState !== State.Idle}>Short Break</button>
-      <button class="primary" on:click={startLongBreak} disabled={currentState !== State.Idle}>Long Break</button>
-      <button on:click={cancelPomodoro} disabled={currentState === State.InProgress && currentState === State.Resting}>cancel</button>
+      <button class="time-start" on:click={startPomodoro} disabled={currentState !== State.Idle}>Start</button>
+      <button on:click={startShortBreak} disabled={currentState !== State.Idle}>Short Break</button>
+      <button on:click={startLongBreak} disabled={currentState !== State.Idle}>Long Break</button>
+      <button on:click={cancelPomodoro} disabled={currentState === State.Idle}>Cancel</button>
       {#each customModes as customMode}
-        <div class="custom mode">
-          <button class="primary" on:click={() => {
+        <div class="custom-mode-select">
+          <button on:click={() => {
               startCustomMode(customMode.minutes, customMode.seconds);
             }} disabled={currentState !== State.Idle}>
             {customMode.name}
           </button>
-          <button on:click={() => {
+          <button class="danger-action" on:click={() => {
               deleteCustomMode(customMode.id);
             }} disabled={currentState !== State.Idle}>
             Delete
           </button>
         </div>
       {/each}
-      <button class="primary extra-time" on:click={() => (showModal = true)} disabled={currentState !== State.Idle}>+ Custom Mode</button>
+      <button class="fadedtext" on:click={() => (showModal = true)} disabled={currentState !== State.Idle}>+ Custom Mode</button>
       <AddCustomModeModal bind:showModal on:addCustomMode={addCustomMode} />
     </div>
-  </footer>
 </section>
+
+<style>
+  time {
+    display: block;
+    font-size: 5em;
+    margin-bottom: 0.2em;
+  }
+
+  .prog {
+    border-radius: 50%;
+    background: conic-gradient(#ffffff 0deg, rgb(200, 200, 200, 0.4) 0deg);
+    width: 300px;
+    height: 300px;
+    align-items: center;
+    text-align: center;
+    margin: 25px 0px;
+  }
+
+  .timer {
+    height: 290px;
+    width: 290px;
+    border-radius: 50%;
+    background-color: var(--evergreen-dark);
+    top: 50%;
+    position: relative;
+    transform: translateY(-50%);
+    margin: auto;
+  }
+
+  .actual-time {
+    font-family: 'Space Grotesk';
+    font-weight: bold;
+    top: 50%;
+    position: relative;
+    transform: translateY(-50%);
+  }
+
+  button {
+    text-align: center;
+    color: white;
+    font-family: 'Space Grotesk';
+    font-size: 20px;
+    font-weight: bold;
+    width: 180px;
+    padding: 7px 0px;
+    margin: 20px;
+    border-radius: 24px;
+    border-width: 3px;
+    border-style: solid;
+    border-color: white;
+    background-color: transparent;
+  }
+
+  button:disabled {
+    border-color: var(--evergreen-faded);
+    color: var(--evergreen-faded);
+    background-color: transparent;
+  }
+
+  .time-start {
+    background-color: var(--orange-light);
+    border-color: var(--orange-light);
+  
+    transition: background 0.25s ease-in-out, border 0.25s ease-in-out;
+  }
+
+  .time-start:hover {
+    background: var(--orange-faded);
+    border-color: var(--orange-faded);
+  }
+
+  .danger-action {
+    background-color: rgb(231, 67, 67);
+    border-color: rgb(231, 67, 67);
+  }
+  
+  .button-class button {
+    display: block;
+  }
+
+  .custom-mode-select {
+    display: inline-flex;
+    margin-block-start: -20px;
+  }
+
+</style>
