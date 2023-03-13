@@ -71,10 +71,12 @@
   function completePomodoro(){
     completedPomodoros++;
     if (completedPomodoros === 4) {
-      rest(LONG_BREAK_S);
+      setState(State.LongResting, LONG_BREAK_S);
+      startPomodoro();
       completedPomodoros = 0;
     } else {
-      rest(SHORT_BREAK_S);
+      setState(State.ShortResting, SHORT_BREAK_S);
+      startPomodoro();
     }
   }
   
