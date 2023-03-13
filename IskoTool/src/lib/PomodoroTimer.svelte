@@ -43,7 +43,7 @@
       if (pomodoroTime === 0 && previousState === State.Pomodoro)
         completePomodoro();
       else if (pomodoroTime === 0)
-        idle();
+        idle(previousState);
       else
         pomodoroTime -= 1;
     },1000);
@@ -102,8 +102,8 @@
     idle();
   }
 
-  function idle(){
-    switch (currentState) {
+  function idle(prevState){
+    switch (prevState) {
       case State.ShortResting:
         setState(State.Idle, SHORT_BREAK_S);
         break;
