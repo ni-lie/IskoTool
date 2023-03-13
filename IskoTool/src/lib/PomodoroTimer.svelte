@@ -102,7 +102,8 @@
 
   function deleteCustomMode(id) {
     customModes = customModes.filter((customMode) => customMode.id != id);
-    setState(State.Idle, POMODORO_S);
+    setState(State.Pomodoro, POMODORO_S);
+    idle();
   }
 </script>
   
