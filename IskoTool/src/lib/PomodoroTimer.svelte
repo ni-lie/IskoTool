@@ -54,9 +54,9 @@
     rest(LONG_BREAK_S);
   }
 
-  function startCustomMode(min: number, sec: number) {
+  function setCustomModeState(min: number, sec: number) {
     CUSTOM_MODE_S = minutesToSeconds(min) + sec;
-    rest(CUSTOM_MODE_S);
+    setState(State.CustomMode, CUSTOM_MODE_S);
   }
 
   function setState(newState, time: number){
@@ -144,7 +144,7 @@
       {#each customModes as customMode}
         <div class="custom-mode-select">
           <button on:click={() => {
-              startCustomMode(customMode.minutes, customMode.seconds);
+              setCustomModeState(customMode.minutes, customMode.seconds);
             }} disabled={currentState !== State.Idle}>
             {customMode.name}
           </button>
