@@ -22,7 +22,7 @@
   let   CUSTOM_MODE_S: number;
   
   let currentState = State.Idle;
-  let previousState = State.Idle;
+  let currentMode = State.Pomodoro;
   let pomodoroTime = POMODORO_S;
   let completedPomodoros = 0;
 
@@ -40,7 +40,7 @@
   function startPomodoro() { 
     setState(State.InProgress, pomodoroTime);
     interval = setInterval(() => {
-      if (pomodoroTime === 0 && previousState === State.Pomodoro)
+      if (pomodoroTime === 0 && currentMode === State.Pomodoro)
         completePomodoro();
       else if (pomodoroTime === 0)
         idle();
@@ -64,7 +64,8 @@
 
   function setState(newState, time: number){
     clearInterval(interval);
-    previousState = currentState;
+    if (newState !== State.Idle || newState !== State.InProgress)
+      currentMode = newState;
     currentState = newState;
     pomodoroTime = time;
   }
@@ -106,7 +107,7 @@
   }
 
   function idle(){
-    switch (previousState) {
+    switch (currentMode) {
       case State.ShortResting:
         setState(State.Idle, SHORT_BREAK_S);
         break;
