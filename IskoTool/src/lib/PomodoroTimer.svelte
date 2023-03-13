@@ -9,7 +9,7 @@
     Resting = 'resting',
     ShortResting = 'shortresting',
     LongResting = 'longresting',
-    CustomMode = 'custommode',
+    CustomMode = 'custommode'
   }
 
   const minutesToSeconds = (minutes: number) => minutes * 60;
@@ -37,7 +37,7 @@
   }
 
   function startPomodoro() { 
-    setState(State.InProgress);
+    setState(State.InProgress, POMODORO_S);
     interval = setInterval(() => {
       if (pomodoroTime === 0) {
         completePomodoro();
@@ -59,9 +59,10 @@
     rest(CUSTOM_MODE_S);
   }
 
-  function setState(newState){
-    clearInterval(interval)
+  function setState(newState, time: number){
+    clearInterval(interval);
     currentState = newState;
+    pomodoroTime = time;
   }
 
   function completePomodoro(){
@@ -77,15 +78,14 @@
   function rest(time: number){
     switch (time) {
       case SHORT_BREAK_S:
-        setState(State.ShortResting);
+        setState(State.ShortResting, SHORT_BREAK_S);
         break;
       case LONG_BREAK_S:
-        setState(State.LongResting);
+        setState(State.LongResting, LONG_BREAK_S);
         break;
       default:
-        setState(State.CustomMode);
+        setState(State.CustomMode, CUSTOM_MODE_S);
     }
-    pomodoroTime = time;
     interval = setInterval(() => {
       if (pomodoroTime === 0) {
         idle();
@@ -102,18 +102,17 @@
   function idle(){
     switch (currentState) {
       case State.ShortResting:
-        pomodoroTime = SHORT_BREAK_S;
+        setState(State.Idle, SHORT_BREAK_S);
         break;
       case State.LongResting:
-        pomodoroTime = LONG_BREAK_S;
+        setState(State.Idle, LONG_BREAK_S);
         break;
       case State.CustomMode:
-        pomodoroTime = CUSTOM_MODE_S;
+        setState(State.Idle, CUSTOM_MODE_S);
         break;
       default:
-        pomodoroTime = POMODORO_S;
+        setState(State.Idle, POMODORO_S);
     }
-    setState(State.Idle);
   }
 
   function addCustomMode(e) {
@@ -123,7 +122,7 @@
 
   function deleteCustomMode(id) {
     customModes = customModes.filter((customMode) => customMode.id != id);
-    pomodoroTime = POMODORO_S;
+    setState(State.Idle, POMODORO_S);
   }
 </script>
   
