@@ -37,12 +37,15 @@
   }
 
   function startPomodoro() { 
-    setState(State.InProgress, POMODORO_S);
+    const previousState = currentState;
+    setState(State.InProgress, pomodoroTime);
     interval = setInterval(() => {
-      if (pomodoroTime === 0) {
+      if (pomodoroTime === 0 && previousState === State.Pomodoro)
         completePomodoro();
-      }
-      pomodoroTime -= 1;
+      else if (pomodoroTime === 0)
+        idle();
+      else
+        pomodoroTime -= 1;
     },1000);
   }
 
