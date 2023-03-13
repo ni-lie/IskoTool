@@ -64,8 +64,9 @@
 
   function setState(newState, time: number){
     clearInterval(interval);
-    if (newState !== State.Idle || newState !== State.InProgress)
+    if (newState !== State.Idle && newState !== State.InProgress) {
       currentMode = newState;
+    }
     currentState = newState;
     pomodoroTime = time;
   }
