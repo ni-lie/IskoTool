@@ -49,14 +49,6 @@
     },1000);
   }
 
-  function startShortBreak() { 
-    rest(SHORT_BREAK_S);
-  }
-  
-  function startLongBreak(){
-    rest(LONG_BREAK_S);
-  }
-
   function setCustomModeState(min: number, sec: number) {
     CUSTOM_MODE_S = minutesToSeconds(min) + sec;
     setState(State.CustomMode, CUSTOM_MODE_S);
@@ -83,26 +75,6 @@
     }
   }
   
-  function rest(time: number){
-    switch (time) {
-      case SHORT_BREAK_S:
-        setState(State.ShortResting, SHORT_BREAK_S);
-        break;
-      case LONG_BREAK_S:
-        setState(State.LongResting, LONG_BREAK_S);
-        break;
-      default:
-        setState(State.CustomMode, CUSTOM_MODE_S);
-    }
-    interval = setInterval(() => {
-      if (pomodoroTime === 0) {
-        idle();
-      }
-      else
-        pomodoroTime -= 1;
-    },1000);
-  }
-
   function cancelPomodoro() {
     idle();
   }
