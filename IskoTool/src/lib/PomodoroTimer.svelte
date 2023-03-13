@@ -138,8 +138,8 @@
   </div>
     <div class="button-class">
       <button class="time-start" on:click={startPomodoro} disabled={currentState !== State.Idle}>Start</button>
-      <button on:click={startShortBreak} disabled={currentState !== State.Idle}>Short Break</button>
-      <button on:click={startLongBreak} disabled={currentState !== State.Idle}>Long Break</button>
+      <button on:click={() => {setState(State.ShortResting, SHORT_BREAK_S)}} disabled={currentState !== State.Idle}>Short Break</button>
+      <button on:click={() => {setState(State.LongResting, LONG_BREAK_S)}} disabled={currentState !== State.Idle}>Long Break</button>
       <button on:click={cancelPomodoro} disabled={currentState === State.Idle}>Cancel</button>
       {#each customModes as customMode}
         <div class="custom-mode-select">
