@@ -9,7 +9,7 @@
     Resting = 'resting',
     ShortResting = 'shortresting',
     LongResting = 'longresting',
-    CustomResting = 'customresting',
+    CustomMode = 'custommode',
   }
 
   const minutesToSeconds = (minutes: number) => minutes * 60;
@@ -83,7 +83,7 @@
         setState(State.LongResting);
         break;
       default:
-        setState(State.CustomResting);
+        setState(State.CustomMode);
     }
     pomodoroTime = time;
     interval = setInterval(() => {
@@ -107,7 +107,7 @@
       case State.LongResting:
         pomodoroTime = LONG_BREAK_S;
         break;
-      case State.CustomResting:
+      case State.CustomMode:
         pomodoroTime = CUSTOM_MODE_S;
         break;
       default:
