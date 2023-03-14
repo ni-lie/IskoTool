@@ -1,5 +1,8 @@
 <script lang="ts">
   import AddCustomModeModal from './CustomTimerModal.svelte';
+  
+  import { choice } from './PomodoroModeChoice';
+  import Dropdown from './PomodoroDropdown.svelte';
 
   import type { CustomMode } from '../types/event';
 
@@ -106,8 +109,11 @@
     idle();
   }
 </script>
-  
 
+<!-- USING THE DROPDOWN -->
+<Dropdown />
+<output>{$choice}</output>
+<!--  -->
 
 <section>
   <div class="prog">  
