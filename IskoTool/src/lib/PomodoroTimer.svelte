@@ -9,10 +9,11 @@
   enum State {
     Idle = 'idle',
     InProgress = 'in progress',
+    Rest = 'resting',
     Pomodoro = 'pomodoro',
-    ShortResting = 'shortresting',
-    LongResting = 'longresting',
-    CustomMode = 'custommode'
+    ShortResting = 'short resting',
+    LongResting = 'long resting',
+    CustomMode = 'custom mode'
   }
 
   const minutesToSeconds = (minutes: number) => minutes * 60;
@@ -40,6 +41,20 @@
     return `${padWithZeroes(minutes)}:${padWithZeroes(remainingSeconds)}`;
   }
 
+  function setState(newState, time: number){
+    clearInterval(interval);
+    if (newState !== State.Idle && newState !== State.InProgress) {
+      currentMode = newState;
+    }
+    currentState = newState;
+    pomodoroTime = time;
+  }
+
+  function setCustomModeState(min: number, sec: number) {
+    CUSTOM_MODE_S = minutesToSeconds(min) + sec;
+    setState(State.CustomMode, CUSTOM_MODE_S);
+  }
+
   function startPomodoro() { 
     setState(State.InProgress, pomodoroTime);
     interval = setInterval(() => {
@@ -50,20 +65,6 @@
       else
         pomodoroTime -= 1;
     },1000);
-  }
-
-  function setCustomModeState(min: number, sec: number) {
-    CUSTOM_MODE_S = minutesToSeconds(min) + sec;
-    setState(State.CustomMode, CUSTOM_MODE_S);
-  }
-
-  function setState(newState, time: number){
-    clearInterval(interval);
-    if (newState !== State.Idle && newState !== State.InProgress) {
-      currentMode = newState;
-    }
-    currentState = newState;
-    pomodoroTime = time;
   }
 
   function completePomodoro(){
