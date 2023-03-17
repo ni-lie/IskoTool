@@ -20,6 +20,10 @@
   </main>
   
   <style>
+  h1 {
+    margin-left: 2rem;
+  }
+
   p {
     margin: 0;
   }

@@ -1,14 +1,19 @@
 :root {
   font-family: 'Rubik', 'Space Grotesk';
 
-    /* Prototype color scheme */
-    --evergreen-light: #60bfac;
-    --evergreen-dark: #1c8d76;
-    --evergreen-faded: #a7d7cd;
-    --orange-light: #ffc085;
-    --orange-dark: #dfa46d;
-    --orange-faded: #ffd4ac;
-    --white-bg: #f3f3f2;
+  /* Prototype color scheme */
+  --evergreen-light: #60bfac;
+  --evergreen-dark: #1c8d76;
+  --evergreen-faded: #a7d7cd;
+  --orange-light: #ffc085;
+  --orange-dark: #dfa46d;
+  --orange-faded: #ffd4ac;
+  --white-bg: #f3f3f2;
+}
+
+html, body, #app {
+  margin: 0;
+  padding: 0;
 }
 
 .title {
