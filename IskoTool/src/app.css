@@ -8,10 +8,12 @@
     --orange-light: #ffc085;
     --orange-dark: #dfa46d;
     --orange-faded: #ffd4ac;
+    --white-bg: #f3f3f2;
 }
 
 .title {
   margin: 20px 0px;
+  font-size: 2.5rem;
 }
 
 h1 {
@@ -19,8 +21,7 @@ h1 {
 }
 
 body {
-  background-color: var(--evergreen-dark);
-  color: white;
+  background-color: var(--white-bg);
 }
 
 .pop-up {
