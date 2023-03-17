@@ -171,6 +171,10 @@
 </section>
 
 <style>
+  section {
+    background-color: var(--evergreen-dark);
+  }
+
   time {
     display: block;
     font-size: 5em;
