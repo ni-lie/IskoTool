@@ -158,6 +158,7 @@
       >
         Start
       </button>
+      <button on:click={pausePomodoro} disabled={currentState !== State.InProgress && currentState !== State.Rest}>Pause</button>
       <button on:click={() => {setState(State.Pomodoro, POMODORO_S)}} disabled={currentState === State.InProgress || currentState === State.Rest}>Pomodoro</button>
       <button on:click={() => {setState(State.ShortResting, SHORT_BREAK_S)}} disabled={currentState === State.InProgress || currentState === State.Rest}>Short Break</button>
       <button on:click={() => {setState(State.LongResting, LONG_BREAK_S)}} disabled={currentState === State.InProgress || currentState === State.Rest}>Long Break</button>
