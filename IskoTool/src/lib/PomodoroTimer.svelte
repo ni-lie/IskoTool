@@ -13,7 +13,8 @@
     Pomodoro = 'pomodoro',
     ShortResting = 'short resting',
     LongResting = 'long resting',
-    CustomMode = 'custom mode'
+    CustomMode = 'custom mode',
+    Pause = 'pause'
   }
 
   const minutesToSeconds = (minutes: number) => minutes * 60;
