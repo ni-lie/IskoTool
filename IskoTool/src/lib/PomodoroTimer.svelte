@@ -14,7 +14,7 @@
     ShortResting = 'short resting',
     LongResting = 'long resting',
     CustomMode = 'custom mode',
-    Pause = 'pause'
+    Pause = 'pause' 
   }
 
   const minutesToSeconds = (minutes: number) => minutes * 60;
@@ -101,6 +101,10 @@
 
   function cancelPomodoro() {
     idle();
+  }
+
+  function pausePomodoro(){
+    setState(State.Pause, pomodoroTime);
   }
 
   function idle(){
