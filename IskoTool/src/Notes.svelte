@@ -70,4 +70,8 @@
 		background-color: lightgray;
     border: none;
 	}
+
+    :global(.svelecte-control) {	
+        --sv-color: rgb(0, 0, 0) !important;
+    }
 </style>
