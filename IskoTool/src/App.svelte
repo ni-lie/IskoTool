@@ -3,6 +3,7 @@
   import Router, {location, link} from 'svelte-spa-router';
   import Dashboard from './pages/Dashboard.svelte';
   import Pomodoro from './pages/PomodoroPage.svelte';
+  import Notes from '.pages/Notes.svelte'; 
 
   const routes = {
     '/': Dashboard,
@@ -22,6 +23,18 @@
 
   <Router {routes} />
 </main>
+
+<!-- import Layout from './Layout.svelte'; -->
+
+<!-- 
+<nav>
+  <button on:click={() => component = PomodoroTimer}>Pomodoro Timer</button>
+  <button on:click={() => component = Notes}>Notes</button>
+</nav> -->
+
+<!-- <Layout>
+  <svelte:component this={component} />
+</Layout> -->
 
 <style>
 </style>
