@@ -22,6 +22,7 @@
   
   let currentState = State.Idle;
   let baseDuration: number;
+  let currentTime: number;
   mode.subscribe(value => {
       switch(value) {
         case 0:
@@ -35,7 +36,7 @@
           break;
       }
     });
-  let currentTime = baseDuration;
+  $: currentTime = baseDuration;
   
   let isCustom = false;
   let isBreakMode = false; 
@@ -58,12 +59,13 @@
 
   function setCustomModeState(min: number, sec: number) {
     customDuration = minutesToSeconds(min) + sec;
-    setState(State.CustomMode, customDuration);
+    isCustom = true;
   }
 
   function startPomodoro() {
+    if (currentState != State.Pause)
+      currentTime = baseDuration;
     setState(State.InProgress);
-    currentTime = baseDuration;
     
     // Distinguish between modes.
     isBreakMode = false;
@@ -94,34 +96,23 @@
     if (completedPomodoros === 4) {
       mode.set(2);
       completedPomodoros = 0;
-    } else {
-      mode.set(1);
     }
+    else
+      mode.set(1);
     startPomodoro();
   }
 
   function cancelPomodoro() {
     idle();
   }
-
-  function pausePomodoro(){
-    setState(State.Pause, currentTime);
+  
+  function idle(){
+    currentTime = baseDuration;
+    setState(State.Idle);
   }
 
-  function idle(){
-    switch (currentMode) {
-      case State.ShortResting:
-        setState(State.Idle, shortBreakDuration);
-        break;
-      case State.LongResting:
-        setState(State.Idle, longBreakDuration);
-        break;
-      case State.CustomMode:
-        setState(State.Idle, customDuration);
-        break;
-      default:
-        setState(State.Idle, pomodoroDuration);
-    }
+  function pausePomodoro(){
+    setState(State.Pause);
   }
 
   function addCustomMode(e) {
@@ -146,11 +137,7 @@
   </div>
     <div class="button-class">
       <button class="time-start" 
-        on:click={() => {
-          startPomodoro();
-        }} 
-        disabled={currentState === State.InProgress}
-      >
+        on:click={startPomodoro} disabled={currentState === State.InProgress}>
         Start
       </button>
       <button on:click={pausePomodoro} disabled={currentState !== State.InProgress}>Pause</button>
