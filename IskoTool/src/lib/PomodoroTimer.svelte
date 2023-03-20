@@ -1,10 +1,9 @@
 <script lang="ts">
   import AddCustomModeModal from './CustomTimerModal.svelte';
-  
+  import type { CustomMode } from '../types/event';
+
   import { choice } from './PomodoroModeChoice';
   import Dropdown from './PomodoroDropdown.svelte';
-
-  import type { CustomMode } from '../types/event';
 
   enum State {
     Idle = 'idle',
@@ -21,14 +20,14 @@
   const secondsToMinutes = (seconds: number) => Math.floor(seconds / 60);
   const padWithZeroes = (number: number) => number.toString().padStart(2, '0');
 
-  const POMODORO_S = minutesToSeconds(25);
-  const LONG_BREAK_S = minutesToSeconds(20);
-  const SHORT_BREAK_S = minutesToSeconds(5);
-  let   CUSTOM_MODE_S: number;
+  const pomodoroDuration = minutesToSeconds(25);
+  const longBreakDuration = minutesToSeconds(20);
+  const shortBreakDuration = minutesToSeconds(5);
+  let   customDuration: number;
   
   let currentState = State.Idle;
   let currentMode = State.Pomodoro;
-  let pomodoroTime = POMODORO_S;
+  let currentTime = pomodoroDuration;
   let completedPomodoros = 0;
 
   let interval: number;
@@ -50,52 +49,52 @@
     }
 
     currentState = newState;
-    pomodoroTime = time;
+    currentTime = time;
   }
 
   function setCustomModeState(min: number, sec: number) {
-    CUSTOM_MODE_S = minutesToSeconds(min) + sec;
-    setState(State.CustomMode, CUSTOM_MODE_S);
+    customDuration = minutesToSeconds(min) + sec;
+    setState(State.CustomMode, customDuration);
   }
 
   function startPomodoro() { 
-    setState(State.InProgress, pomodoroTime);
+    setState(State.InProgress, currentTime);
     
     interval = setInterval(() => {
-      if (pomodoroTime === 0 && currentMode === State.CustomMode)
+      if (currentTime === 0 && currentMode === State.CustomMode)
         idle();
-      else if (pomodoroTime === 0)
+      else if (currentTime === 0)
         completePomodoro();
       else
-        pomodoroTime -= 1;
+        currentTime -= 1;
     },1000);
   }
 
   function completePomodoro(){
     completedPomodoros++;
     if (completedPomodoros === 4) {
-      setState(State.LongResting, LONG_BREAK_S);
+      setState(State.LongResting, longBreakDuration);
       startRest();
       completedPomodoros = 0;
     } else {
-      setState(State.ShortResting, SHORT_BREAK_S);
+      setState(State.ShortResting, shortBreakDuration);
       startRest();
     }
   }
 
   function startRest() {
-    setState(State.Rest, pomodoroTime);
+    setState(State.Rest, currentTime);
 
     interval = setInterval(() => {
-      if (pomodoroTime === 0)
+      if (currentTime === 0)
         completeRest();
       else
-        pomodoroTime -= 1;
+        currentTime -= 1;
     },1000);
   }
 
   function completeRest() {
-    setState(State.Pomodoro, POMODORO_S);
+    setState(State.Pomodoro, pomodoroDuration);
     startPomodoro();
   }
 
@@ -104,22 +103,22 @@
   }
 
   function pausePomodoro(){
-    setState(State.Pause, pomodoroTime);
+    setState(State.Pause, currentTime);
   }
 
   function idle(){
     switch (currentMode) {
       case State.ShortResting:
-        setState(State.Idle, SHORT_BREAK_S);
+        setState(State.Idle, shortBreakDuration);
         break;
       case State.LongResting:
-        setState(State.Idle, LONG_BREAK_S);
+        setState(State.Idle, longBreakDuration);
         break;
       case State.CustomMode:
-        setState(State.Idle, CUSTOM_MODE_S);
+        setState(State.Idle, customDuration);
         break;
       default:
-        setState(State.Idle, POMODORO_S);
+        setState(State.Idle, pomodoroDuration);
     }
   }
 
@@ -130,7 +129,7 @@
 
   function deleteCustomMode(id) {
     customModes = customModes.filter((customMode) => customMode.id != id);
-    setState(State.Pomodoro, POMODORO_S);
+    setState(State.Pomodoro, pomodoroDuration);
     idle();
   }
 </script>
@@ -144,7 +143,7 @@
   <div class="prog">  
     <div class="timer">
       <time class="actual-time">
-        {formatTime(pomodoroTime)}
+        {formatTime(currentTime)}
       </time>
     </div>
   </div>
@@ -159,9 +158,9 @@
         Start
       </button>
       <button on:click={pausePomodoro} disabled={currentState !== State.InProgress && currentState !== State.Rest}>Pause</button>
-      <button on:click={() => {setState(State.Pomodoro, POMODORO_S)}} disabled={currentState === State.InProgress || currentState === State.Rest || currentState === State.Pause}>Pomodoro</button>
-      <button on:click={() => {setState(State.ShortResting, SHORT_BREAK_S)}} disabled={currentState === State.InProgress || currentState === State.Rest || currentState === State.Pause}>Short Break</button>
-      <button on:click={() => {setState(State.LongResting, LONG_BREAK_S)}} disabled={currentState === State.InProgress || currentState === State.Rest || currentState === State.Pause}>Long Break</button>
+      <button on:click={() => {setState(State.Pomodoro, pomodoroDuration)}} disabled={currentState === State.InProgress || currentState === State.Rest || currentState === State.Pause}>Pomodoro</button>
+      <button on:click={() => {setState(State.ShortResting, shortBreakDuration)}} disabled={currentState === State.InProgress || currentState === State.Rest || currentState === State.Pause}>Short Break</button>
+      <button on:click={() => {setState(State.LongResting, longBreakDuration)}} disabled={currentState === State.InProgress || currentState === State.Rest || currentState === State.Pause}>Long Break</button>
       <button on:click={cancelPomodoro} disabled={currentState !== State.InProgress && currentState !== State.Rest}>Cancel</button>
       {#each customModes as customMode}
         <div class="custom-mode-select">
