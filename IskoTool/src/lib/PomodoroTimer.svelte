@@ -57,11 +57,6 @@
     currentState = newState;
   }
 
-  function setCustomModeState(min: number, sec: number) {
-    customDuration = minutesToSeconds(min) + sec;
-    isCustom = true;
-  }
-
   function startPomodoro() {
     if (currentState != State.Pause)
       currentTime = baseDuration;
@@ -122,8 +117,13 @@
 
   function deleteCustomMode(id) {
     customModes = customModes.filter((customMode) => customMode.id != id);
-    setState(State.Pomodoro, pomodoroDuration);
+    baseDuration = minutesToSeconds(25);
     idle();
+  }
+
+  function setCustomModeState(min: number, sec: number) {
+    baseDuration = minutesToSeconds(min) + sec; 
+    isCustom = true;
   }
 </script>
 
