@@ -21,13 +21,29 @@
   const padWithZeroes = (number: number) => number.toString().padStart(2, '0');
 
   const pomodoroDuration = minutesToSeconds(25);
-  const longBreakDuration = minutesToSeconds(20);
   const shortBreakDuration = minutesToSeconds(5);
+  const longBreakDuration = minutesToSeconds(20);
   let   customDuration: number;
   
   let currentState = State.Idle;
-  let currentMode = State.Pomodoro;
+  // let currentMode = State.Pomodoro;
   let currentTime = pomodoroDuration;
+  choice.subscribe(value => {
+      console.log(value);
+      switch(value) {
+        case 0:
+          currentTime = pomodoroDuration;
+          break;
+        case 1:
+          currentTime = shortBreakDuration;
+          break;
+        case 2:
+          currentTime = longBreakDuration;
+          break;
+      }
+    });
+  let currentMode;
+
   let completedPomodoros = 0;
 
   let interval: number;
@@ -133,11 +149,6 @@
     idle();
   }
 </script>
-
-<!-- USING THE DROPDOWN -->
-<Dropdown />
-<output>{$choice}</output>
-<!--  -->
 
 <section>
   <div class="prog">  
