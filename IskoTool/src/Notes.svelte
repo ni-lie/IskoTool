@@ -1,6 +1,7 @@
 <script>
 	import Count from './Count.svelte';
 	import {addNote, notesStore} from './stores';
+    import Svelecte from 'svelecte'; 		        // run 'npm install svelecte --save'
 	
 	const NEW_NOTE = {title: '', text: ''};
 	
@@ -42,12 +43,8 @@
 </script>
 <form on:submit|preventDefault={handleSubmit}>
 	<div>
-	  <select bind:value={selectedId}>
-			<option>Select note</option>
-	    {#each sortedNotes as note}
-  		  <option value={note.id}>{note.title}</option>
-	    {/each}
-	  </select>
+        <Svelecte options = {sortedNotes} bind:value={selectedId} placeholder="Search a note...">
+        </Svelecte>
     <button disabled={!note.id} on:click={editNote}>Edit</button>
 		<button disabled={!note.id} on:click={deleteNote}>Delete</button>
 		<button on:click={newNote}>New</button>
