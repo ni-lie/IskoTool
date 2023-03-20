@@ -1,9 +1,9 @@
 <script lang="ts">
-    import { choice } from './PomodoroModeChoice';
+    import { mode } from './PomodoroModeChoice';
 
     let select: HTMLSelectElement;
     function onChange() {
-        choice.set(select.selectedIndex);
+        mode.set(select.selectedIndex);
     }
 
 </script>
