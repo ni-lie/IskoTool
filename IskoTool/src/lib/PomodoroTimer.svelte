@@ -135,6 +135,10 @@
 <output>{$choice}</output>
 <!--  -->
 
+<h1 class="title">
+  Pomodoro Timer
+</h1>
+
 <section>
   <div class="prog">  
     <div class="timer">
