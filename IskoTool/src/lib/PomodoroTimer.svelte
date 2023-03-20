@@ -13,7 +13,8 @@
     Pomodoro = 'pomodoro',
     ShortResting = 'short resting',
     LongResting = 'long resting',
-    CustomMode = 'custom mode'
+    CustomMode = 'custom mode',
+    Pause = 'pause' 
   }
 
   const minutesToSeconds = (minutes: number) => minutes * 60;
@@ -102,6 +103,10 @@
     idle();
   }
 
+  function pausePomodoro(){
+    setState(State.Pause, pomodoroTime);
+  }
+
   function idle(){
     switch (currentMode) {
       case State.ShortResting:
@@ -153,27 +158,28 @@
       >
         Start
       </button>
-      <button on:click={() => {setState(State.Pomodoro, POMODORO_S)}} disabled={currentState === State.InProgress || currentState === State.Rest}>Pomodoro</button>
-      <button on:click={() => {setState(State.ShortResting, SHORT_BREAK_S)}} disabled={currentState === State.InProgress || currentState === State.Rest}>Short Break</button>
-      <button on:click={() => {setState(State.LongResting, LONG_BREAK_S)}} disabled={currentState === State.InProgress || currentState === State.Rest}>Long Break</button>
+      <button on:click={pausePomodoro} disabled={currentState !== State.InProgress && currentState !== State.Rest}>Pause</button>
+      <button on:click={() => {setState(State.Pomodoro, POMODORO_S)}} disabled={currentState === State.InProgress || currentState === State.Rest || currentState === State.Pause}>Pomodoro</button>
+      <button on:click={() => {setState(State.ShortResting, SHORT_BREAK_S)}} disabled={currentState === State.InProgress || currentState === State.Rest || currentState === State.Pause}>Short Break</button>
+      <button on:click={() => {setState(State.LongResting, LONG_BREAK_S)}} disabled={currentState === State.InProgress || currentState === State.Rest || currentState === State.Pause}>Long Break</button>
       <button on:click={cancelPomodoro} disabled={currentState !== State.InProgress && currentState !== State.Rest}>Cancel</button>
       {#each customModes as customMode}
         <div class="custom-mode-select">
           <button 
             on:click={() => setCustomModeState(customMode.minutes, customMode.seconds)} 
-            disabled={currentState === State.InProgress || currentState === State.Rest}
+            disabled={currentState === State.InProgress || currentState === State.Rest || currentState === State.Pause} 
           >
             {customMode.name}
           </button>
           <button class="danger-action" 
             on:click={() => deleteCustomMode(customMode.id)} 
-            disabled={currentState === State.InProgress || currentState === State.Rest}
+            disabled={currentState === State.InProgress || currentState === State.Rest || currentState === State.Pause}
           >
             Delete
           </button>
         </div>
       {/each}
-      <button class="fadedtext" on:click={() => (showModal = true)} disabled={currentState === State.InProgress || currentState === State.Rest}>+ Custom Mode</button>
+      <button class="fadedtext" on:click={() => (showModal = true)} disabled={currentState === State.InProgress || currentState === State.Rest || currentState === State.Pause}>+ Custom Mode</button>
       <AddCustomModeModal bind:showModal on:addCustomMode={addCustomMode} />
     </div>
 </section>
