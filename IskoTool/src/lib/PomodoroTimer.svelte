@@ -16,9 +16,8 @@
   const padWithZeroes = (number: number) => number.toString().padStart(2, '0');
 
   const pomodoroDuration = minutesToSeconds(25);
-  const shortBreakDuration = minutesToSeconds(20); 
-  const longBreakDuration = minutesToSeconds(5);
-  let   customDuration: number;
+  const shortBreakDuration = minutesToSeconds(5); 
+  const longBreakDuration = minutesToSeconds(20);
   
   let currentState = State.Idle;
   let baseDuration: number;
@@ -117,6 +116,7 @@
 
   function deleteCustomMode(id) {
     customModes = customModes.filter((customMode) => customMode.id != id);
+    mode.set(0);
     baseDuration = minutesToSeconds(25);
     idle();
   }
