@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { createEventDispatcher } from "svelte";
 
-	import type { CustomMode } from '../types/event';
+	import type { CustomMode } from '../../types/event';
 
 	export let showModal: boolean;
 	let dialog: HTMLDialogElement;

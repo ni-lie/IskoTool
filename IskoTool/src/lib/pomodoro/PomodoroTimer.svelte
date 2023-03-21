@@ -171,6 +171,11 @@
 </section>
 
 <style>
+  section {
+    background-color: var(--evergreen-dark);
+    padding: 1rem;
+  }
+
   time {
     display: block;
     font-size: 5em;
@@ -184,7 +189,7 @@
     height: 300px;
     align-items: center;
     text-align: center;
-    margin: 25px 0px;
+    margin: 2rem;
   }
 
   .timer {
@@ -201,6 +206,7 @@
   .actual-time {
     font-family: 'Space Grotesk';
     font-weight: bold;
+    color: white;
     top: 50%;
     position: relative;
     transform: translateY(-50%);
@@ -247,6 +253,7 @@
   
   .button-class button {
     display: block;
+    margin-left: 2rem;
   }
 
   .custom-mode-select {
