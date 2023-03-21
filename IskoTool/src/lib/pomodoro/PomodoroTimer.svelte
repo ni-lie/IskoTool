@@ -1,6 +1,6 @@
 <script lang="ts">
   import AddCustomModeModal from './CustomTimerModal.svelte';
-  import type { CustomMode } from '../types/event';
+  import type { CustomMode } from '../../types/event';
 
   import { mode } from './PomodoroModeChoice';
   import Dropdown from './PomodoroDropdown.svelte';
@@ -22,19 +22,21 @@
   let currentState = State.Idle;
   let baseDuration: number;
   let currentTime: number;
-  mode.subscribe(value => {
-      switch(value) {
-        case 0:
-          baseDuration = pomodoroDuration;
-          break;
-        case 1:
-          baseDuration = shortBreakDuration;
-          break;
-        case 2:
-          baseDuration = longBreakDuration;
-          break;
-      }
-    });
+
+  $: switch ($mode) {
+      case 0:
+        baseDuration = pomodoroDuration;
+        break;
+      case 1:
+        baseDuration = shortBreakDuration;
+        break;
+      case 2:
+        baseDuration = longBreakDuration;
+        break;
+      default:
+        throw new Error('unexpected state');
+    }
+
   $: currentTime = baseDuration;
   
   let isCustom = false;
@@ -70,24 +72,22 @@
       );
     
     countdown = setInterval(() => {
-      if (currentTime == 0) {
-        if (isCustom)
-          idle();
-        else if (isBreakMode) {
-          mode.set(0);
-          startPomodoro();
-        }
-        else
-          completePomodoro();
+      if (currentTime !== 0) {
+        --currentTime;
+        return;
       }
-      else
-        currentTime -= 1;
+
+      if (isCustom) idle();
+      else if (isBreakMode) {
+        mode.set(0);
+        startPomodoro();
+      }
+      else completePomodoro();
     },1000);
   }
 
   function completePomodoro(){
-    completedPomodoros++;
-    if (completedPomodoros === 4) {
+    if (++completedPomodoros === 4) {
       mode.set(2);
       completedPomodoros = 0;
     }
@@ -110,14 +110,14 @@
   }
 
   function addCustomMode(e) {
-    const customMode = e.detail;
-    customModes = [...customModes, customMode];
+    customModes.push(e.detail);
+    customModes = customModes;
   }
 
   function deleteCustomMode(id) {
     customModes = customModes.filter((customMode) => customMode.id != id);
     mode.set(0);
-    baseDuration = minutesToSeconds(25);
+    baseDuration = pomodoroDuration;
     idle();
   }
 

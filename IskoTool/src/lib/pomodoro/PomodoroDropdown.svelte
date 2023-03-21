@@ -5,7 +5,6 @@
     function onChange() {
         mode.set(select.selectedIndex);
     }
-
 </script>
 
 <select bind:this={select} on:change={onChange}>
