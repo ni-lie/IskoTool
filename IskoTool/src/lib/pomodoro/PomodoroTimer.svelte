@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
+
   import AddCustomModeModal from './CustomTimerModal.svelte';
   import type { CustomMode } from '../../types/event';
 
@@ -46,7 +48,12 @@
 
   let showModal = false;
   let customModes: CustomMode[] = [];
-  
+
+  onMount(() => {
+    if ("pomodoroCustomModes" in localStorage)
+      customModes = JSON.parse(localStorage.getItem("pomodoroCustomModes"));
+  });
+
   function formatTime(timeInSeconds: number) { 
     const minutes = secondsToMinutes(timeInSeconds);
     const remainingSeconds = timeInSeconds % 60;
@@ -112,6 +119,7 @@
   function addCustomMode(e) {
     customModes.push(e.detail);
     customModes = customModes;
+    localStorage.setItem("pomodoroCustomModes", JSON.stringify(customModes));
   }
 
   function deleteCustomMode(id) {
@@ -119,6 +127,7 @@
     mode.set(0);
     baseDuration = pomodoroDuration;
     idle();
+    localStorage.setItem("pomodoroCustomModes", JSON.stringify(customModes));
   }
 
   function setCustomModeState(min: number, sec: number) {
