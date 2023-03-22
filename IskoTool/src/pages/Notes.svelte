@@ -45,8 +45,9 @@
 	<div>
         <Svelecte options = {sortedNotes} bind:value={selectedId} placeholder="Search a note...">
         </Svelecte>
-    <button disabled={!note.id} on:click={editNote}>Edit</button>
-		<button disabled={!note.id} on:click={deleteNote}>Delete</button>
+		<output>{selectedId}</output>
+    	<button disabled={selectedId == null} on:click={editNote}>Edit</button>
+		<button disabled={selectedId == null} on:click={deleteNote}>Delete</button>
 		<button on:click={newNote}>New</button>
 	</div>
 
