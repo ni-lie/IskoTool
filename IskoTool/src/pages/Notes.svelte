@@ -43,14 +43,11 @@
 </script>
 <form on:submit|preventDefault={handleSubmit}>
 	<div>
-	  <select bind:value={selectedId}>
-			<option>Select note</option>
-	    {#each sortedNotes as note}
-  		  <option value={note.id}>{note.title}</option>
-	    {/each}
-	  </select>
-    <button disabled={!note.id} on:click={editNote}>Edit</button>
-		<button disabled={!note.id} on:click={deleteNote}>Delete</button>
+        <Svelecte options = {sortedNotes} bind:value={selectedId} placeholder="Search a note...">
+        </Svelecte>
+		<output>{selectedId}</output>
+    	<button disabled={selectedId == null} on:click={editNote}>Edit</button>
+		<button disabled={selectedId == null} on:click={deleteNote}>Delete</button>
 		<button on:click={newNote}>New</button>
 	</div>
 
