@@ -1,18 +1,15 @@
-import {writable} from 'svelte/store';
+import { writable } from 'svelte/store';
+import type { Note } from '../../types/note';
 
-let lastId = 0;
+/** Notes are now stored in an array instead of a dictionary (more efficient lookup).*/  
+export const notesStore = writable([] as Note[]);
 
-// Keys are ids and values are objects with id, title, and text properties.
-export const notesStore = writable({});
-
-export function addNote(title, text) {
-	lastId++;
-  const note = {id: lastId, title, text};
+export function addNote(title: string, text: string) {
 	notesStore.update(notes => {
-		notes[lastId] = note;
+		const id = notes.length;
+		notes.push({id, title, text});
 		return notes;
 	});
-	return lastId;
 }
 
 addNote('Note1', 'JS is cool!');

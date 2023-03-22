@@ -1,26 +1,27 @@
-<script>
+<script lang="ts">
 	import Count from '../lib/notes/Count.svelte';
-	import {addNote, notesStore} from '../lib/notes/stores';
-    import Svelecte from 'svelecte'; 		        // run 'npm install svelecte --save'
+	import { addNote, notesStore } from '../lib/notes/stores';
+	import type { Note } from '../types/note';
+    import Svelecte from 'svelecte';
 	
-	const NEW_NOTE = {title: '', text: ''};
+	const NEW_NOTE = {id: ($notesStore.length)+1, title: '', text: ''};
 	
 	let editing = false;
-	let note;
-	let selectedId;
+	let note: Note;
+	let selectedId: number;
 	let textInput;
 	let titleInput;
 	
-	$: console.log('note =', note);
-	$: console.log('editing =', editing);
+	// $: console.log('note =', note);
+	// $: console.log('editing =', editing);
 	
-	$: sortedNotes = Object.values($notesStore).sort();
+	$: sortedNotes = $notesStore.sort();
 	$: note = $notesStore[selectedId] || NEW_NOTE;
 	
 	function deleteNote() {
 		if (confirm('Are you sure you want to delete this note?')) {
 	    notesStore.update(notes => {
-        delete notes[note.id];
+        delete notes[selectedId];
 		    return notes;
 		  });
 		}
@@ -34,9 +35,10 @@
 	function handleSubmit() {
     // do nothing for now
 	}
-	
+
 	function newNote() {
-		selectedId = addNote('', '');
+		selectedId = $notesStore.length;
+		addNote('', '');
 		editing = true;
 		titleInput.focus();
 	}
