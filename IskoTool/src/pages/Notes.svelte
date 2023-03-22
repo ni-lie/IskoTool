@@ -1,6 +1,6 @@
 <script>
-	import Count from './Count.svelte';
-	import {addNote, notesStore} from './stores';
+	import Count from '../lib/notes/Count.svelte';
+	import {addNote, notesStore} from '../lib/notes/stores';
     import Svelecte from 'svelecte'; 		        // run 'npm install svelecte --save'
 	
 	const NEW_NOTE = {title: '', text: ''};
