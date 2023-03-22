@@ -2,8 +2,8 @@
   let title = "POMODORO";
   import PomodoroTimer from './lib/PomodoroTimer.svelte';
 
-  import Layout from './Layout.svelte';
-	import Notes from './Notes.svelte';
+  import Layout from '../src/lib/notes/Layout.svelte';
+	import Notes from '../src/pages/Notes.svelte';
 
   let component = PomodoroTimer;
 
