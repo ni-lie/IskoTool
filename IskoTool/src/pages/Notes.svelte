@@ -12,16 +12,15 @@
 	let textInput;
 	let titleInput;
 	
-	// $: console.log('note =', note);
-	// $: console.log('editing =', editing);
-	
-	$: sortedNotes = $notesStore.sort();
+	// !! NOTE -- adding the .sort() method breaks the delete function. Must find workaround in the future.
+	$: sortedNotes = $notesStore;
 	$: note = $notesStore[selectedId] || NEW_NOTE;
 	
 	function deleteNote() {
 		if (confirm('Are you sure you want to delete this note?')) {
 	    notesStore.update(notes => {
-        delete notes[selectedId];
+        	delete notes[selectedId];
+			selectedId = null;
 		    return notes;
 		  });
 		}
