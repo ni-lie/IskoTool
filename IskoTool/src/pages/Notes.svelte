@@ -19,14 +19,25 @@
 	};
 
 	$: {
-		sortedNotes = $notesStore;
-		note = $notesStore[selectedId] || NEW_NOTE;
+		const found = $notesStore.find(note => note.id === selectedId);
+		if (found) note = found;
 	}
+
+	onMount(() => {
+		const preloaded: string = localStorage.getItem('userNotes');
+		if (preloaded) {
+			$notesStore.push(...JSON.parse(preloaded));
+			$notesStore = $notesStore;
+		}
+	});
 
 	function deleteNote() {
 		if (confirm('Are you sure you want to delete this note?')) {
 			notesStore.deleteNote(selectedId);
+			localStorage.setItem("userNotes", JSON.stringify($notesStore));
 			selectedId = null;
+			note.title = '';
+			note.text = '';
 		}
 	}
 	
