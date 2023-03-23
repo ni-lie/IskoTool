@@ -79,12 +79,13 @@
 		    return notes;
 		  });
 	}
-	
+
 </script>
 	<div>
         <Svelecte options={$notesStore} bind:value={selectedId} valueField="id" labelField="title" placeholder="Search a note..."></Svelecte>
     	<button disabled={selectedId === null} on:click={editNote}>Edit</button>
 		<button disabled={selectedId === null} on:click={deleteNote}>Delete</button>
+		<button disabled={selectedId == null} on:click={pinNote}>Pin</button>
 		<button on:click={newNote}>New</button>
 	</div>
 
