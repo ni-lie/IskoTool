@@ -23,7 +23,9 @@ export const notesStore  = {
     },
     deleteNote(id: number) {
         update(notes => {
-            delete notes[id];
+            let deleteIdx = notes.findIndex(note => note.id == id);
+            delete notes[deleteIdx];
+            notes = notes.filter(Boolean);
             return notes;
         });
     }
