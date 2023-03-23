@@ -51,16 +51,23 @@
 		localStorage.setItem("userNotes", JSON.stringify($notesStore));
 	}
 
-	function newNote() {
-		selectedId = $notesStore.length;
-		notesStore.addNote('', '');
+	function newNote() {	
 		editing = true;
+
+		note = {
+			id: $notesStore.length,
+			title: 'Untitled',
+			text: '',
+		};
+
+		notesStore.addNote(note.title, note.text);
+		selectedId = note.id;
+
 		titleInput.focus();
 	}
 </script>
 	<div>
-        <Svelecte options = {sortedNotes} bind:value={selectedId} placeholder="Search a note...">
-        </Svelecte>
+        <Svelecte options={$notesStore} bind:value={selectedId} valueField="id" labelField="title" placeholder="Search a note..."></Svelecte>
     	<button disabled={selectedId === null} on:click={editNote}>Edit</button>
 		<button disabled={selectedId === null} on:click={deleteNote}>Delete</button>
 		<button on:click={newNote}>New</button>
