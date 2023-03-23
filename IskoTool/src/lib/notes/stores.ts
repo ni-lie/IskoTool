@@ -30,11 +30,3 @@ export const notesStore  = {
         });
     }
 };
-
-notesStore.addNote('Note1', 'JS is cool!');
-notesStore.addNote('Note2', 'Svelte is elegant and minimal.');
-notesStore.addNote('Note3', 'Svelecte is nice.');
-notesStore.addNote('Note4', 'CS 192 is <3.');
-notesStore.addNote('Note5', 'I love UP');
-notesStore.addNote('Note6', 'UP Naming Mahal');
-notesStore.addNote('Note7', '\'Salamat UP\' but read it backwards');
