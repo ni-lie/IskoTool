@@ -155,7 +155,6 @@
       <button on:click={() => {setState(State.LongResting, longBreakDuration)}} disabled={currentState === State.InProgress || currentState === State.Rest || currentState === State.Pause}>Long Break</button> -->
       <!-- USING THE DROPDOWN -->
       <Dropdown />
-      <output>{$mode}</output>
       <!--  -->
       <button on:click={cancelPomodoro} disabled={currentState !== State.InProgress}>Cancel</button>
       {#each customModes as customMode}
@@ -258,6 +257,11 @@
   .danger-action {
     background-color: rgb(231, 67, 67);
     border-color: rgb(231, 67, 67);
+  }
+
+  .button-class {
+    width: 100%;
+    max-width: 600px;
   }
   
   .button-class button {
