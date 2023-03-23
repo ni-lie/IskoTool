@@ -21,6 +21,20 @@ export const notesStore  = {
             return notes;
         });
     },
+
+    pinNote(id: number){
+		update(notes => {
+			let pinNote = notes[id];
+			for(let i=id; i>0; i--){
+				notes[i] = notes[i-1];
+				notes[i].id = i
+			}
+			notes[0] = pinNote;
+			notes[0].id=0;
+		    return notes;
+		});
+	},
+
     deleteNote(id: number) {
         update(notes => {
             let deleteIdx = notes.findIndex(note => note.id == id);

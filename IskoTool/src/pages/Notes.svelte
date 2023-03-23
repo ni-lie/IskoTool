@@ -67,17 +67,8 @@
 	}
 
 	function pinNote(){
-		notesStore.update(notes => {
-			let pinNote = notes[selectedId];
-			for(let i=selectedId; i>0; i--){
-				notes[i] = notes[i-1];
-				notes[i].id = i
-			}
-			notes[0] = pinNote;
-			notes[0].id=0;
-			selectedId = null;
-		    return notes;
-		  });
+		notesStore.pinNote(selectedId);
+		selectedId = null;
 	}
 
 </script>
