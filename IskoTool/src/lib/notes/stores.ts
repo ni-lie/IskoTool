@@ -14,6 +14,13 @@ export const notesStore  = {
 			return notes;
 		});
     },
+    saveNote(note: Note) {
+        update(notes => {
+            notes[note.id].title = note.title;
+            notes[note.id].text = note.text;
+            return notes;
+        });
+    },
     deleteNote(id: number) {
         update(notes => {
             delete notes[id];

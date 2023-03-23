@@ -32,7 +32,8 @@
 	}
 	
 	function handleSubmit() {
-    // do nothing for now
+		notesStore.saveNote(note);
+		localStorage.setItem("userNotes", JSON.stringify($notesStore));
 	}
 
 	function newNote() {
@@ -42,7 +43,6 @@
 		titleInput.focus();
 	}
 </script>
-<form on:submit|preventDefault={handleSubmit}>
 	<div>
         <Svelecte options = {sortedNotes} bind:value={selectedId} placeholder="Search a note...">
         </Svelecte>
@@ -60,11 +60,14 @@
 	{#if note.text}
 	  <Count text={note.text} />
 	{/if}
-</form>
+
+	<form on:submit|preventDefault={handleSubmit}>
+		<button disabled={!editing}>Save</button>
+	</form>
 
 <style>
 	input, textarea {
-    width: 100%;
+    	width: 100%;
 	}
 	
 	input:read-only, textarea:read-only {
