@@ -7,15 +7,18 @@
 	const NEW_NOTE = {id: ($notesStore.length)+1, title: '', text: ''};
 	
 	let editing = false;
-	let note: Note;
-	let selectedId: number;
-	let textInput;
-	let titleInput;
+	let note: Note | null = null;
+	let selectedId: number | null = null;
+	let textInput: HTMLTextAreaElement | null = null;
+	let titleInput: HTMLInputElement | null = null;
+	let sortedNotes: Note[];
 	
 	// !! NOTE -- adding the .sort() method breaks the delete function. Must find workaround in the future.
-	$: sortedNotes = $notesStore;
-	$: note = $notesStore[selectedId] || NEW_NOTE;
-	
+	$: {
+		sortedNotes = $notesStore;
+		note = $notesStore[selectedId] || NEW_NOTE;
+	}
+
 	function deleteNote() {
 		if (confirm('Are you sure you want to delete this note?')) {
 			notesStore.deleteNote(selectedId);
@@ -43,9 +46,8 @@
 	<div>
         <Svelecte options = {sortedNotes} bind:value={selectedId} placeholder="Search a note...">
         </Svelecte>
-		<output>{selectedId}</output>
-    	<button disabled={selectedId == null} on:click={editNote}>Edit</button>
-		<button disabled={selectedId == null} on:click={deleteNote}>Delete</button>
+    	<button disabled={selectedId === null} on:click={editNote}>Edit</button>
+		<button disabled={selectedId === null} on:click={deleteNote}>Delete</button>
 		<button on:click={newNote}>New</button>
 	</div>
 
