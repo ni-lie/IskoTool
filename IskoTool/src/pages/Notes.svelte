@@ -1,19 +1,23 @@
 <script lang="ts">
 	import Count from '../lib/notes/Count.svelte';
 	import { notesStore } from '../lib/notes/stores';
-	import type { Note } from '../types/note';
     import Svelecte from 'svelecte';
-	
-	const NEW_NOTE = {id: ($notesStore.length)+1, title: '', text: ''};
+	import { onMount } from 'svelte';
+    import type { Note } from '../types/note';
 	
 	let editing = false;
-	let note: Note | null = null;
 	let selectedId: number | null = null;
 	let textInput: HTMLTextAreaElement | null = null;
 	let titleInput: HTMLInputElement | null = null;
-	let sortedNotes: Note[];
-	
 	// !! NOTE -- adding the .sort() method breaks the delete function. Must find workaround in the future.
+	// let sortedNotes: Note[];
+
+	let note: Note = {
+		id: $notesStore.length,
+		title: '',
+		text: '',
+	};
+
 	$: {
 		sortedNotes = $notesStore;
 		note = $notesStore[selectedId] || NEW_NOTE;
