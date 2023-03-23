@@ -55,7 +55,7 @@
 		    return notes;
 		  });
 	}
-	
+
 </script>
 <form on:submit|preventDefault={handleSubmit}>
 	<div>
@@ -63,6 +63,7 @@
         </Svelecte>
     	<button disabled={selectedId == null} on:click={editNote}>Edit</button>
 		<button disabled={selectedId == null} on:click={deleteNote}>Delete</button>
+		<button disabled={selectedId == null} on:click={pinNote}>Pin</button>
 		<button on:click={newNote}>New</button>
 	</div>
 
