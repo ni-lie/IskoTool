@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Count from '../lib/notes/Count.svelte';
-	import { addNote, notesStore } from '../lib/notes/stores';
+	import { notesStore } from '../lib/notes/stores';
 	import type { Note } from '../types/note';
     import Svelecte from 'svelecte';
 	
@@ -18,11 +18,8 @@
 	
 	function deleteNote() {
 		if (confirm('Are you sure you want to delete this note?')) {
-	    notesStore.update(notes => {
-        	delete notes[selectedId];
+			notesStore.deleteNote(selectedId);
 			selectedId = null;
-		    return notes;
-		  });
 		}
 	}
 	
@@ -37,7 +34,7 @@
 
 	function newNote() {
 		selectedId = $notesStore.length;
-		addNote('', '');
+		notesStore.addNote('', '');
 		editing = true;
 		titleInput.focus();
 	}
