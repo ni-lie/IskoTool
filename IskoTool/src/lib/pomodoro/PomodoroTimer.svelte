@@ -189,6 +189,8 @@
   section {
     background-color: var(--evergreen-dark);
     padding: 1rem;
+    display: flex;
+    justify-content: center;
   }
 
   time {
@@ -234,7 +236,7 @@
     font-size: 28px;
     font-weight: bold;
     width: 250px;
-    padding: 10px 0px;
+    padding: 12px 0px;
     margin: 20px;
     border-radius: 30px;
     border-width: 3px;
@@ -285,32 +287,48 @@
 
   .timer-class {
     order: 2;
+    
   }
 
-  
-  .start-div > *:first-child {
-    margin-left:0px;
+  .timer-class > *:not(.prog) {
+    display: block;
   }
+
 
   .button-class {
     width: 100%;
     max-width: 600px;
+    margin-top: 50px;
   }
   
   .button-class button {
     display: block;
-    margin-left: 2rem;
   }
 
   .choice-prompt {
     color: var(--evergreen-faded);
-    margin-left: 2rem;
+    margin: 0px 20px;
     font-family: 'Space Grotesk';
+    font-size: 21px;
+  }
+
+  .start-div > * {
+    margin-top: 0px;;
+  }
+
+  .start-div > *:first-child {
+    margin-right: 0px;
   }
 
   .custom-mode-select {
     display: inline-flex;
     margin-block-start: -20px;
+  }
+
+
+
+  .custom-mode-select > *:first-child {
+    margin-right: 0px;
   }
 
 </style>
