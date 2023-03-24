@@ -137,23 +137,24 @@
 </script>
 
 <section>
-  <div class = "timer-class">
-    <div class="prog">  
-      <div class="timer">
-        <time class="actual-time">
-          {formatTime(currentTime)}
-        </time>
+  <div class = "whole">
+    <div class = "timer-class">
+      <div class="prog">  
+        <div class="timer">
+          <time class="actual-time">
+            {formatTime(currentTime)}
+          </time>
+        </div>
       </div>
+      <button class="time-start" 
+        on:click={startPomodoro} disabled={currentState === State.InProgress}>
+        Start
+      </button>
+      <span class="start-div">
+        <button on:click={pausePomodoro} disabled={currentState !== State.InProgress}>Pause</button>
+        <button on:click={cancelPomodoro} disabled={currentState !== State.InProgress}>Cancel</button>
+      </span>
     </div>
-    <button class="time-start" 
-      on:click={startPomodoro} disabled={currentState === State.InProgress}>
-      Start
-    </button>
-    <span class="start-div">
-      <button on:click={pausePomodoro} disabled={currentState !== State.InProgress}>Pause</button>
-      <button on:click={cancelPomodoro} disabled={currentState !== State.InProgress}>Cancel</button>
-    </span>
-  </div>
     <div class="button-class">
       <!-- <button on:click={() => {setState(State.Pomodoro, pomodoroDuration)}} disabled={currentState === State.InProgress || currentState === State.Rest || currentState === State.Pause}>Pomodoro</button>
       <button on:click={() => {setState(State.ShortResting, shortBreakDuration)}} disabled={currentState === State.InProgress || currentState === State.Rest || currentState === State.Pause}>Short Break</button>
@@ -180,6 +181,7 @@
       <button class="fadedtext" on:click={() => (showModal = true)} disabled={currentState === State.InProgress || currentState === State.Pause}>+ Custom Mode</button>
       <AddCustomModeModal bind:showModal on:addCustomMode={addCustomMode} />
     </div>
+  </div>
 </section>
 
 <style>
@@ -261,6 +263,27 @@
   .danger-action {
     background-color: rgb(231, 67, 67);
     border-color: rgb(231, 67, 67);
+  }
+
+  .whole {
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: wrap-reverse;
+    margin: auto;
+    width: clamp(600px, 100%, 1200px);
+    ;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .whole > *{
+    width: 50%;
+    /*max-width: 600px;*/
+    min-width: 600px;
+  }
+
+  .timer-class {
+    order: 2;
   }
 
   .button-class {
