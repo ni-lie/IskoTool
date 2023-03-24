@@ -156,6 +156,7 @@
       </span>
     </div>
     <div class="button-class">
+      <p class = "choice-prompt">Choose a mode:</p>
       <!-- <button on:click={() => {setState(State.Pomodoro, pomodoroDuration)}} disabled={currentState === State.InProgress || currentState === State.Rest || currentState === State.Pause}>Pomodoro</button>
       <button on:click={() => {setState(State.ShortResting, shortBreakDuration)}} disabled={currentState === State.InProgress || currentState === State.Rest || currentState === State.Pause}>Short Break</button>
       <button on:click={() => {setState(State.LongResting, longBreakDuration)}} disabled={currentState === State.InProgress || currentState === State.Rest || currentState === State.Pause}>Long Break</button> -->
@@ -203,7 +204,7 @@
     height: 300px;
     align-items: center;
     text-align: center;
-    margin: 2rem;
+    margin: 0rem;
   }
 
   .timer {
@@ -230,12 +231,12 @@
     text-align: center;
     color: white;
     font-family: 'Space Grotesk';
-    font-size: 20px;
+    font-size: 28px;
     font-weight: bold;
-    width: 180px;
-    padding: 7px 0px;
+    width: 250px;
+    padding: 10px 0px;
     margin: 20px;
-    border-radius: 24px;
+    border-radius: 30px;
     border-width: 3px;
     border-style: solid;
     border-color: white;
@@ -286,6 +287,11 @@
     order: 2;
   }
 
+  
+  .start-div > *:first-child {
+    margin-left:0px;
+  }
+
   .button-class {
     width: 100%;
     max-width: 600px;
@@ -294,6 +300,12 @@
   .button-class button {
     display: block;
     margin-left: 2rem;
+  }
+
+  .choice-prompt {
+    color: var(--evergreen-faded);
+    margin-left: 2rem;
+    font-family: 'Space Grotesk';
   }
 
   .custom-mode-select {

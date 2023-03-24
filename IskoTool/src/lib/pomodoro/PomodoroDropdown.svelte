@@ -20,12 +20,12 @@ select {
     text-align: center;
     color: var(--evergreen-dark);
     font-family: 'Space Grotesk';
-    font-size: 20px;
+    font-size: 28px;
     font-weight: bold;
-    width: 180px;
-    padding: 7px 0px;
+    width: 250px;
+    padding: 10px 0px;
     margin: 20px 20px 20px 2rem;
-    border-radius: 24px;
+    border-radius: 30px;
     border-width: 3px;
     border-style: solid;
     border-color: white;
