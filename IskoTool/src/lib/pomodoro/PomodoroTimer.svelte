@@ -137,26 +137,30 @@
 </script>
 
 <section>
-  <div class="prog">  
-    <div class="timer">
-      <time class="actual-time">
-        {formatTime(currentTime)}
-      </time>
+  <div class = "timer-class">
+    <div class="prog">  
+      <div class="timer">
+        <time class="actual-time">
+          {formatTime(currentTime)}
+        </time>
+      </div>
     </div>
+    <button class="time-start" 
+      on:click={startPomodoro} disabled={currentState === State.InProgress}>
+      Start
+    </button>
+    <span class="start-div">
+      <button on:click={pausePomodoro} disabled={currentState !== State.InProgress}>Pause</button>
+      <button on:click={cancelPomodoro} disabled={currentState !== State.InProgress}>Cancel</button>
+    </span>
   </div>
     <div class="button-class">
-      <button class="time-start" 
-        on:click={startPomodoro} disabled={currentState === State.InProgress}>
-        Start
-      </button>
-      <button on:click={pausePomodoro} disabled={currentState !== State.InProgress}>Pause</button>
       <!-- <button on:click={() => {setState(State.Pomodoro, pomodoroDuration)}} disabled={currentState === State.InProgress || currentState === State.Rest || currentState === State.Pause}>Pomodoro</button>
       <button on:click={() => {setState(State.ShortResting, shortBreakDuration)}} disabled={currentState === State.InProgress || currentState === State.Rest || currentState === State.Pause}>Short Break</button>
       <button on:click={() => {setState(State.LongResting, longBreakDuration)}} disabled={currentState === State.InProgress || currentState === State.Rest || currentState === State.Pause}>Long Break</button> -->
       <!-- USING THE DROPDOWN -->
       <Dropdown />
       <!--  -->
-      <button on:click={cancelPomodoro} disabled={currentState !== State.InProgress}>Cancel</button>
       {#each customModes as customMode}
         <div class="custom-mode-select">
           <button 
