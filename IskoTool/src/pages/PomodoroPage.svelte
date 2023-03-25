@@ -7,3 +7,8 @@
   <PomodoroTimer />
 </main>
 
+<style>
+  main {
+    height: 100vh;
+  }
+</style>

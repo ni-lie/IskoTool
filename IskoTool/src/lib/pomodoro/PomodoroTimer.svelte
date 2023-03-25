@@ -191,6 +191,7 @@
     padding: 1rem;
     display: flex;
     justify-content: center;
+    height: 100vh;
   }
 
   time {
@@ -298,7 +299,7 @@
   .button-class {
     width: 100%;
     max-width: 600px;
-    margin-top: 50px;
+    margin-top: 4%;
   }
   
   .button-class button {
