@@ -26,8 +26,7 @@
 	onMount(() => {
 		const preloaded: string = localStorage.getItem('userNotes');
 		if (preloaded) {
-			$notesStore.push(...JSON.parse(preloaded));
-			$notesStore = $notesStore;
+			$notesStore = JSON.parse(preloaded);
 		}
 	});
 
