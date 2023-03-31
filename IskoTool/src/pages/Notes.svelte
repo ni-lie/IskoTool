@@ -4,11 +4,13 @@
     import Svelecte from 'svelecte';
 	import { onMount } from 'svelte';
     import type { Note } from '../types/note';
+	import {loadNotes, setNotes} from '../types/LocalStorageAccess';
 	
 	let editing = false;
 	let selectedId: number | null = null;
 	let textInput: HTMLTextAreaElement | null = null;
 	let titleInput: HTMLInputElement | null = null;
+	let noteList: Note[];
 	// !! NOTE -- adding the .sort() method breaks the delete function. Must find workaround in the future.
 	// let sortedNotes: Note[];
 
@@ -33,7 +35,7 @@
 	function deleteNote() {
 		if (confirm('Are you sure you want to delete this note?')) {
 			notesStore.deleteNote(selectedId);
-			localStorage.setItem("userNotes", JSON.stringify($notesStore));
+			setNotes($notesStore);
 			selectedId = null;
 			note.title = '';
 			note.text = '';
@@ -47,7 +49,7 @@
 	
 	function handleSubmit() {
 		notesStore.saveNote(note);
-		localStorage.setItem("userNotes", JSON.stringify($notesStore));
+		setNotes($notesStore);
 	}
 
 	function newNote() {	
