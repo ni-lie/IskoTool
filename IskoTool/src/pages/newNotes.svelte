@@ -24,7 +24,7 @@
 
 <style>
     input {
-        background-color: lightgray;
+        background-color: white;
     }
 	input:read-only, textarea:read-only {
 		background-color: lightgray;
