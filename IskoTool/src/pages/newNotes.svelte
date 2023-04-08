@@ -20,11 +20,18 @@
 </main>
 
 <style>
+    input {
+        background-color: lightgray;
+    }
+	input:read-only, textarea:read-only {
+		background-color: lightgray;
+        border: none;
+	}
+
     main {
         text-align: center;
         padding: 1em;
         max-width: 240px;
         margin: 0 auto;
     }
-
 </style>
