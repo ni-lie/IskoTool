@@ -7,6 +7,7 @@
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <div class = "backdrop" on:click|self>
         <div class = "modal">
+        <slot></slot>
         </div>
     </div>
 {/if}
