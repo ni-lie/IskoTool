@@ -8,7 +8,9 @@
     };
 </script>
 
-<Modal message = "Hey there!" {showModal} on:click={toggleNote} />
+<Modal {showModal} on:click={toggleNote}>
+    
+</Modal>
 <main>
     <button on:click={toggleNote}>Add a note</button>
 </main>
