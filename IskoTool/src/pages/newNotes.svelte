@@ -12,7 +12,9 @@
     <h3> Add a new note </h3>
     <form>
         <input type="text" placeholder="Title">
-        <input type="text" placeholder="Type a note">
+        <textarea placeholder="Type your note" cols="30" rows="10"></textarea>
+        <br>
+        <button>Save note</button>
     </form>
 </Modal>
 <main>
@@ -27,7 +29,6 @@
 		background-color: lightgray;
         border: none;
 	}
-
     main {
         text-align: center;
         padding: 1em;
