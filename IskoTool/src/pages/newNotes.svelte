@@ -9,7 +9,11 @@
 </script>
 
 <Modal {showModal} on:click={toggleNote}>
-    
+    <h3> Add a new note </h3>
+    <form>
+        <input type="text" placeholder="Title">
+        <input type="text" placeholder="Type a note">
+    </form>
 </Modal>
 <main>
     <button on:click={toggleNote}>Add a note</button>
