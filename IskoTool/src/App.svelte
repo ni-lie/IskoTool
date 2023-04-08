@@ -5,18 +5,21 @@
   import Pomodoro from './pages/PomodoroPage.svelte';
   import Notes from './pages/Notes.svelte'; 
   import Calendar from './pages/CalendarPage.svelte'
+  import newNotes from './pages/newNotes.svelte';
 
   const routes = {
     '/': Dashboard,
     '/calendar': Calendar,
     '/pomodoro': Pomodoro,
-    '/notes': Notes
+    '/notes': Notes,
+    '/newNotes':newNotes
   }
   
 </script>
 
 <main>
   <nav>
+    <button><a href="#/newNotes">New Notes</a></button>
     <button><a href="/">Home</a></button>
     <button><a href="#/calendar">Calendar</a></button>
     <button><a href="#/pomodoro">Pomodoro</a></button>
