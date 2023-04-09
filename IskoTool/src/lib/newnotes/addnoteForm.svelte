@@ -13,7 +13,6 @@
     <textarea placeholder= "Type your note" cols="30" rows="10" bind:value={noteMessage}></textarea>
     <br>
     <button>Save note</button>
-    <button>Delete</button>
 </form>
 
 <style>
