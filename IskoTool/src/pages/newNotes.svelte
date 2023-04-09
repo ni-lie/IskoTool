@@ -10,7 +10,7 @@
     let notes = [
         { title: 'first note', note: 'this is the first note', id: 1 },
         { title: 'second note', note: 'this is the second note', id: 2 },
-        { title: 'third note', note: 'this is the third note', id: 3 },
+        { title: 'third note', note: 'this is the third note', id: 3 }
     ];
 </script>
 
@@ -27,20 +27,14 @@
 
 <main>
     <button on:click={toggleNote}>Add a note</button>
-    <div>
-        <h4>{notes[0].title}</h4>
-        <p>{notes[0].note}</p>
-    </div>
 
-    <div>
-        <h4>{notes[1].title}</h4>
-        <p>{notes[1].note}</p>
-    </div>
-
-    <div>
-        <h4>{notes[1].title}</h4>
-        <p>{notes[1].note}</p>
-    </div>
+    {#each notes as note (note.id)}
+        <div>
+            <h3>{note.title}</h3>
+            <p>{note.note}</p>
+        </div>
+    {/each}
+    
 </main>
 
 <style>
