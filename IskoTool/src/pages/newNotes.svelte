@@ -9,9 +9,9 @@
     };
 
     let notes = [
-        { title: 'first note', note: 'this is the first note', id: 1 },
-        { title: 'second note', note: 'this is the second note', id: 2 },
-        { title: 'third note', note: 'this is the third note', id: 3 }
+        { title: 'first note', noteContent: 'this is the first note', id: 1 },
+        { title: 'second note', noteContent: 'this is the second note', id: 2 },
+        { title: 'third note', noteContent: 'this is the third note', id: 3 }
     ];
 
     const handleDelete = (id) => {
@@ -20,7 +20,7 @@
 
     const addNote = (e) => {
         const note = e.detail;
-        people = [note, ...notes]
+        notes  = [note, ...notes];
     };
 </script>
 
@@ -34,7 +34,7 @@
     {#each notes as note (note.id)}
         <div>
             <h3>{note.title}</h3>
-            <p>{note.note}</p>
+            <p>{note.noteContent}</p>
             <button on:click={() => {handleDelete(note.id)}}>Delete</button>
         </div>
     {:else}
