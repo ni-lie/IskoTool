@@ -1,6 +1,6 @@
 <script>
-    import Button from "./Button.svelte";
-    import DeletenoteForm from "./deletenoteForm.svelte";
+    import NotesDetails from "./notesDetails.svelte";
+
     export let notes = [];
     // const handleDelete = (id) => {
     //     notes = notes.filter((note) => note.id != id);
