@@ -1,6 +1,7 @@
 <script>
     import Modal from '../lib/newnotes/modal.svelte';
     import AddnoteForm from '../lib/newnotes/addnoteForm.svelte';
+    import NotesList from '../lib/newnotes/notesList.svelte';
 
     let showModal = false;
 
