@@ -6,6 +6,12 @@
     const toggleNote = () => {
         showModal = !showModal;
     };
+
+    let notes = [
+        { title: 'first note', note: 'this is the first note', id: 1 },
+        { title: 'second note', note: 'this is the second note', id: 2 },
+        { title: 'third note', note: 'this is the third note', id: 3 },
+    ];
 </script>
 
 <Modal {showModal} on:click={toggleNote}>
@@ -18,8 +24,23 @@
         <button>Delete</button>
     </form>
 </Modal>
+
 <main>
     <button on:click={toggleNote}>Add a note</button>
+    <div>
+        <h4>{notes[0].title}</h4>
+        <p>{notes[0].note}</p>
+    </div>
+
+    <div>
+        <h4>{notes[1].title}</h4>
+        <p>{notes[1].note}</p>
+    </div>
+
+    <div>
+        <h4>{notes[1].title}</h4>
+        <p>{notes[1].note}</p>
+    </div>
 </main>
 
 <style>
