@@ -33,7 +33,6 @@
 <main>
     <button on:click={toggleNote}>Add a note</button>
     <NotesList notes={notes} />
-    
 </main>
 
 <style>

@@ -1,6 +1,7 @@
 <script>
+    import Button from "./Button.svelte";
+    
     export let notes = [];
-
     const handleDelete = (id) => {
         notes = notes.filter((note) => note.id != id);
     }
@@ -11,7 +12,7 @@
     <div>
         <h3>{note.title}</h3>
         <p>{note.noteContent}</p>
-        <button on:click={() => {handleDelete(note.id)}}>Delete</button>
+        <Button type="secondary" on:click={() => {handleDelete(note.id)}}> Delete </Button>
     </div>
     {:else}
         <p>There are no notes to show...</p>
