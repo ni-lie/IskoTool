@@ -33,6 +33,8 @@
             <h3>{note.title}</h3>
             <p>{note.note}</p>
         </div>
+    {:else}
+        <p>There are no notes to show...</p>
     {/each}
     
 </main>
