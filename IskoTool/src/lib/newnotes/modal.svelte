@@ -1,5 +1,4 @@
 <script>
-    export let message
     export let showModal = false;
 </script>
 
