@@ -21,6 +21,7 @@
     const addNote = (e) => {
         const note = e.detail;
         notes  = [note, ...notes];
+        showModal = false;
     };
 </script>
 
