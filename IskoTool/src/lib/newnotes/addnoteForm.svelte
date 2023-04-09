@@ -56,4 +56,9 @@
     input {
         background-color: white;
     }
+    .errors{
+        font-weight: bold;
+        font-size: 12px;
+        color: #d91b42;
+    }
 </style>
