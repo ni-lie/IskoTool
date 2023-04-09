@@ -24,6 +24,7 @@
         notes  = [note, ...notes];
         showModal = false;
     };
+
 </script>
 
 <Modal {showModal} on:click={toggleNote}>
@@ -42,7 +43,5 @@
         max-width: 240px;
         margin: 0 auto;
     }
-    h3 {
-        color: #1c8d76;
-    }
+
 </style>
