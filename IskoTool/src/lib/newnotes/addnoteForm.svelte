@@ -7,13 +7,38 @@
     let title;
     let noteContent;
 
+    let valid = false;
+    let errors = { title: 'first note', noteContent: 'this is the first note'};
+
+
     const handleSubmit = () => {
-        const note = {
+        valid = true;
+        
+        // validate title
+        if (title.trim().length < 1){
+            valid = false;
+            errors.title = 'Title must be at least 1 character long';
+        } else {
+            errors.title = '';
+        }
+        // validate noteContent
+        if (noteContent.trim().length < 1){
+            valid = false;
+            errors.noteContent = 'Note cannot be empty';
+        } else {
+            errors.noteContent = '';
+        }
+
+        // add new note, if valid
+
+        if (valid) {
+            const note = {
             title,
             noteContent,
             id: Math.random()
-        };
-        dispatch('addNote', note);
+            };
+            dispatch('addNote', note);
+        }
     };
 </script>
 
@@ -22,7 +47,7 @@
     <input type="text" placeholder="Title" bind:value={title}>
     <textarea placeholder= "Type your note" cols="30" rows="10" bind:value={noteContent}></textarea>
     <br>
-    <Button type='primary'>Save note</Button>
+    <Button type="primary">Save note</Button>
 </form>
 
 <style>
