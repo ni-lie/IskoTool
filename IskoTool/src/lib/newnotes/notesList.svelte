@@ -19,5 +19,9 @@
 </div>
 
 <style>
-
+    .notes-list{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 20px;
+    }
 </style>

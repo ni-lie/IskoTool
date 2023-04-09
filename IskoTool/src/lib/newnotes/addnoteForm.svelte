@@ -4,10 +4,11 @@
 
     let dispatch = createEventDispatcher();
 
-    let title;
-    let noteContent;
+    let title = '';
+    let noteContent = '';
 
     let valid = false;
+    // let fields = { title: '', noteContent: ''};
     let errors = { title: '', noteContent: ''};
 
 
@@ -15,14 +16,14 @@
         valid = true;
         
         // validate title
-        if (errors.title.trim().length < 1){
+        if (title.trim().length < 1){
             valid = false;
             errors.title = 'Title must be at least 1 character long';
         } else {
             errors.title = '';
         }
         // validate noteContent
-        if (errors.noteContent.trim().length < 1){
+        if (noteContent.trim().length < 1){
             valid = false;
             errors.noteContent = 'Note cannot be empty';
         } else {
@@ -45,7 +46,7 @@
 <h3> Add a new note </h3>
 <form on:submit|preventDefault={handleSubmit}>
     <input type="text" placeholder="Title" bind:value={title}>
-    <div class="errors"> { errors.title}</div>
+    <div class="errors"> { errors.title }</div>
     <textarea placeholder= "Type your note" cols="30" rows="10" bind:value={noteContent}></textarea>
     <div class="errors">{ errors.noteContent }</div>
     <br>
