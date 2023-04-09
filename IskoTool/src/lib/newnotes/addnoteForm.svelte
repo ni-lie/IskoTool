@@ -8,7 +8,7 @@
     let noteContent;
 
     let valid = false;
-    let errors = { title: 'first note', noteContent: 'this is the first note'};
+    let errors = { title: '', noteContent: ''};
 
 
     const handleSubmit = () => {
