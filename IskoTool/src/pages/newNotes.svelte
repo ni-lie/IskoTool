@@ -1,5 +1,6 @@
 <script>
     import Modal from '../lib/newnotes/modal.svelte';
+    import AddnoteForm from '../lib/newnotes/addnoteForm.svelte';
 
     let showModal = false;
 
@@ -19,7 +20,7 @@
 </script>
 
 <Modal {showModal} on:click={toggleNote}>
-
+    
 </Modal>
 
 <main>
