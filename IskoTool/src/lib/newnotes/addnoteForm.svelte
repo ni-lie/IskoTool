@@ -15,14 +15,14 @@
         valid = true;
         
         // validate title
-        if (title.trim().length < 1){
+        if (errors.title.trim().length < 1){
             valid = false;
             errors.title = 'Title must be at least 1 character long';
         } else {
             errors.title = '';
         }
         // validate noteContent
-        if (noteContent.trim().length < 1){
+        if (errors.noteContent.trim().length < 1){
             valid = false;
             errors.noteContent = 'Note cannot be empty';
         } else {
