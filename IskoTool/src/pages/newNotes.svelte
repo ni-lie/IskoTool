@@ -19,7 +19,8 @@
     }
 
     const addNote = (e) => {
-        console.log(e.detail);
+        const note = e.detail;
+        people = [note, ...notes]
     };
 </script>
 
