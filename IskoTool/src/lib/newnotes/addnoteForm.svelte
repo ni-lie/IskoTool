@@ -1,4 +1,8 @@
 <script>
+    import { createEventDispatcher } from "svelte";
+
+    let dispatch = createEventDispatcher();
+
     let title;
     let noteMessage;
 
