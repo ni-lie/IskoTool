@@ -23,9 +23,9 @@
         background: rgba(0, 0, 0, 0.8);
     }
     .modal{
-        padding: 10px;
+        padding: 100px;
         border-radius: 10px;
-        max-width: 400px;
+        max-width: 500px;
         margin: 10% auto;
         text-align: center;
         background: white;
