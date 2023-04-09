@@ -12,6 +12,7 @@
             noteMessage,
             id: Math.random()
         };
+        dispatch('addNote', note);
     };
 </script>
 
