@@ -20,7 +20,7 @@
 </script>
 
 <Modal {showModal} on:click={toggleNote}>
-    
+    <AddnoteForm /> 
 </Modal>
 
 <main>
