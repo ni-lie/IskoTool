@@ -7,7 +7,11 @@
     let noteMessage;
 
     const handleSubmit = () => {
-        console.log(title, noteMessage);
+        const note = {
+            title,
+            noteMessage,
+            id: Math.random()
+        };
     };
 </script>
 
