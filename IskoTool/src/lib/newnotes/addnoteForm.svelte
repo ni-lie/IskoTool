@@ -1,5 +1,6 @@
 <script>
     import { createEventDispatcher } from "svelte";
+    import Button from "./Button.svelte";
 
     let dispatch = createEventDispatcher();
 
@@ -21,7 +22,7 @@
     <input type="text" placeholder="Title" bind:value={title}>
     <textarea placeholder= "Type your note" cols="30" rows="10" bind:value={noteContent}></textarea>
     <br>
-    <button>Save note</button>
+    <Button>Save note</Button>
 </form>
 
 <style>
