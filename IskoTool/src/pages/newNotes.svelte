@@ -17,10 +17,14 @@
     const handleDelete = (id) => {
         notes = notes.filter((note) => note.id != id);
     }
+
+    const addNote = (e) => {
+        console.log(e.detail);
+    };
 </script>
 
 <Modal {showModal} on:click={toggleNote}>
-    <AddnoteForm /> 
+    <AddnoteForm on:addNote={addNote} /> 
 </Modal>
 
 <main>
