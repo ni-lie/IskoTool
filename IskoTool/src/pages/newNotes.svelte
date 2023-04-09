@@ -12,6 +12,10 @@
         { title: 'second note', note: 'this is the second note', id: 2 },
         { title: 'third note', note: 'this is the third note', id: 3 }
     ];
+
+    const handleDelete = (id) => {
+        notes = notes.filter((note) => note.id != id);
+    }
 </script>
 
 <Modal {showModal} on:click={toggleNote}>
@@ -32,6 +36,7 @@
         <div>
             <h3>{note.title}</h3>
             <p>{note.note}</p>
+            <button on:click={() => {handleDelete(note.id)}}>Delete</button>
         </div>
     {:else}
         <p>There are no notes to show...</p>
