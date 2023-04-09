@@ -19,8 +19,9 @@
         background: #1c8d76;
         color: white;
     }
+    
     .secondary{
         background: red;
         color: white;
-    };
+    }
 </style>
