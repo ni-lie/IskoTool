@@ -45,7 +45,9 @@
 <h3> Add a new note </h3>
 <form on:submit|preventDefault={handleSubmit}>
     <input type="text" placeholder="Title" bind:value={title}>
+    <div class="errors"> { errors.title}</div>
     <textarea placeholder= "Type your note" cols="30" rows="10" bind:value={noteContent}></textarea>
+    <div class="errors">{ errors.noteContent }</div>
     <br>
     <Button type="primary">Save note</Button>
 </form>
