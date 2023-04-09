@@ -22,7 +22,7 @@
     <input type="text" placeholder="Title" bind:value={title}>
     <textarea placeholder= "Type your note" cols="30" rows="10" bind:value={noteContent}></textarea>
     <br>
-    <Button>Save note</Button>
+    <Button type='primary'>Save note</Button>
 </form>
 
 <style>
