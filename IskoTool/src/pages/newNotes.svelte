@@ -15,9 +15,9 @@
         { title: 'third note', noteContent: 'this is the third note', id: 3 }
     ];
 
-    const handleDelete = (id) => {
-        notes = notes.filter((note) => note.id != id);
-    }
+    // const handleDelete = (id) => {
+    //     notes = notes.filter((note) => note.id != id);
+    // }
 
     const addNote = (e) => {
         const note = e.detail;

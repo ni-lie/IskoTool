@@ -1,5 +1,9 @@
 <script>
     export let notes = [];
+
+    const handleDelete = (id) => {
+        notes = notes.filter((note) => note.id != id);
+    }
 </script>
 
 <div class="notes-list">
