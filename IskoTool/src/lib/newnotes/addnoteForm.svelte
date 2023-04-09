@@ -15,8 +15,4 @@
     input {
         background-color: white;
     }
-	input:read-only, textarea:read-only {
-		background-color: lightgray;
-        border: none;
-	}
 </style>
