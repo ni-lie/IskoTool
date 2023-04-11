@@ -1,15 +1,13 @@
 <script lang="ts">
 	import { createEventDispatcher } from "svelte";
 
-	import type { CustomMode } from '../../types/event';
-
 	export let showModal: boolean;
 	let dialog: HTMLDialogElement;
 
 	let dispatch = createEventDispatcher();
-    let name = "Custom Mode";
-    let minutes = 0;
-    let seconds = 0;
+    let name = "New Event";
+    let startTime;
+    let endTime;
 	
 	$: if (dialog && showModal) dialog.showModal();
 
@@ -20,10 +18,10 @@
 		// Forward the form data to all event listeners
         dispatch('addCustomMode', {
 			name,
-			minutes,
-			seconds,
+			startTime,
+			endTime,
 			id: crypto.randomUUID(),
-		} satisfies CustomMode);
+		});
     }
 </script>
 
