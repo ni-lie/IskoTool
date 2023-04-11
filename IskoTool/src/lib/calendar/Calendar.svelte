@@ -1,6 +1,7 @@
 <script>
 	import calendarize from 'calendarize';
 	import Arrow from './Arrow.svelte';
+    import EventModal from './EventModal.svelte';
 	
     export let today = new Date(); // Date
 	export let year = today.getFullYear();
@@ -72,6 +73,10 @@
 		{/if}
 	{/each}
 </div>
+
+<footer>
+    <EventModal />
+</footer>
 
 <style>
 	header {
