@@ -1,11 +1,11 @@
 <script lang="ts">
-    export let select: HTMLSelectElement;
+    export let select: string;
 </script>
 
-<select bind:this={select}>
-    <option>General</option>
-    <option>Birthday</option>
-    <option>Appointment</option>
+<select bind:value={select}>
+    <option value="General">General</option>
+    <option value="Birthday">Birthday</option>
+    <option value="Appointment">Appointment</option>
 </select>
 
 <style>

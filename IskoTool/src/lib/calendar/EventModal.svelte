@@ -1,11 +1,13 @@
 <script lang="ts">
 	import { createEventDispatcher } from "svelte";
+    import EventTypeDropdown from "./EventTypeDropdown.svelte";
 
 	export let showModal: boolean;
 	let dialog: HTMLDialogElement;
 
 	let dispatch = createEventDispatcher();
     let name = "New Event";
+    let eventType: string;
     let startTime;
     let endTime;
 	
@@ -14,10 +16,11 @@
 	function handleSubmit() {
 		// Close the modal for good
 		dialog.close();
-
+        //console.log(name, eventType, startTime, endTime);
 		// Forward the form data to all event listeners
         dispatch('addNewEvent', {
 			name,
+            eventType,
 			startTime,
 			endTime,
 			id: crypto.randomUUID(),
@@ -38,6 +41,8 @@
 		<form on:submit|preventDefault={handleSubmit}>
 			<h3 class="pop-up">Event Name</h3>
 			<input type="text" class="transparent-bg" bind:value={name}><br>
+            <h3 class="pop-up">Event Type</h3>
+            <EventTypeDropdown bind:select={eventType} />
 			<h3 class="pop-up">Start Time</h3>
 			<input type="datetime-local" bind:value={startTime}><br>
             <h3 class="pop-up">End Time</h3>
