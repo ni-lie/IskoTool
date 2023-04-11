@@ -16,7 +16,7 @@
 		dialog.close();
 
 		// Forward the form data to all event listeners
-        dispatch('addCustomMode', {
+        dispatch('addNewEvent', {
 			name,
 			startTime,
 			endTime,
@@ -34,13 +34,14 @@
 	<div on:click|stopPropagation>
 		<!-- svelte-ignore a11y-autofocus -->
 		<button autofocus on:click={() => dialog.close()}>x</button>
-		<h2 class="pop-up">Create Custom Timer</h2>
+		<h2 class="pop-up">Create New Event</h2>
 		<form on:submit|preventDefault={handleSubmit}>
-			<h3 class="pop-up">Mode Name</h3>
+			<h3 class="pop-up">Event Name</h3>
 			<input type="text" class="transparent-bg" bind:value={name}><br>
-			<h3 class="pop-up">Timer Duration</h3>
-			<input type="number" min=0 max=59 bind:value={minutes}>
-			<input type="number" min=0 max=59 bind:value={seconds}><br>
+			<h3 class="pop-up">Start Time</h3>
+			<input type="datetime-local" bind:value={startTime}><br>
+            <h3 class="pop-up">End Time</h3>
+			<input type="datetime-local" bind:value={endTime}><br>
 			<input type="submit" value="Confirm" />
 		</form>
 	</div>
