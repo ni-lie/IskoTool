@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { createEventDispatcher } from "svelte";
 
-	export let showModal: boolean = true;
+	export let showModal: boolean;
 	let dialog: HTMLDialogElement;
 
 	let dispatch = createEventDispatcher();

@@ -18,6 +18,8 @@
 	let prev = calendarize(new Date(year, month-1), offset);
 	let current = calendarize(new Date(year, month), offset);
 	let next = calendarize(new Date(year, month+1), offset);
+
+    let showModal = false;
 	
 	function toPrev() {
 		[current, next] = [prev, current];
@@ -75,7 +77,8 @@
 </div>
 
 <footer>
-    <EventModal />
+    <button class="fadedtext" on:click={() => (showModal = true)}>+ New Event</button>
+    <EventModal bind:showModal/>
 </footer>
 
 <style>
