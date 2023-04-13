@@ -1,10 +1,12 @@
 <script lang="ts">
+	import { createEventDispatcher } from "svelte";
     import EventTypeDropdown from "./EventTypeDropdown.svelte";
 	import type { Event } from "../../types/event";
-    import { eventStore } from './CalendarStore';
 
 	export let showEditEventModal: boolean;
 	let dialog: HTMLDialogElement;
+
+	let dispatch = createEventDispatcher();
     export let event: Event = {
 		name: '',
 		eventType: '',
@@ -20,7 +22,7 @@
 		dialog.close();
         console.log(event);
 		// Forward the form data to all event listeners
-        eventStore.saveEvent(event);
+        dispatch('editExistingEvent', event satisfies Event);
     }
 </script>
 
