@@ -7,9 +7,10 @@ const { set, update, subscribe } = writable([] as Event[]);
 export const eventStore  = {
 	subscribe,
 	set,
-	addEvent(name: string, eventType: string, startTime: string, endTime: string, id: string) {
+	addEvent(event: Event) {
 		update(events => {
-			events.push({name, eventType, startTime, endTime, id});
+			events.push({...event});
+            console.log(events);
 			return events;
 		});
     },

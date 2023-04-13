@@ -1,7 +1,7 @@
 <script>
 	import calendarize from 'calendarize';
 	import Arrow from './Arrow.svelte';
-    import EventModal from './EventModal.svelte';
+	import Events from './Events.svelte';
 	
     export let today = new Date(); // Date
 	export let year = today.getFullYear();
@@ -18,8 +18,6 @@
 	let prev = calendarize(new Date(year, month-1), offset);
 	let current = calendarize(new Date(year, month), offset);
 	let next = calendarize(new Date(year, month+1), offset);
-
-    let showModal = false;
 	
 	function toPrev() {
 		[current, next] = [prev, current];
@@ -77,8 +75,7 @@
 </div>
 
 <footer>
-    <button class="fadedtext" on:click={() => (showModal = true)}>+ New Event</button>
-    <EventModal bind:showModal/>
+    <Events />
 </footer>
 
 <style>
