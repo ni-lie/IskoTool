@@ -24,6 +24,13 @@
     function addEvent(e) {
         eventStore.addEvent(e.detail);
     }
+
+    function deleteEvent() {
+        if (confirm('Are you sure you want to delete this event?')) {
+			eventStore.deleteEvent(selectedID);
+			selectedID = null;
+		}
+    }
 </script>
 
 <section>
@@ -32,4 +39,5 @@
     <AddEventModal bind:showAddEventModal on:addNewEvent={addEvent}/>
     <button class="fadedtext" disabled={selectedID === null} on:click={() => (showEditEventModal = true)}>Edit Event</button>
     <EditEventModal bind:showEditEventModal bind:event/>
+    <button disabled={selectedID === null} on:click={deleteEvent}>Delete</button>
 </section>
