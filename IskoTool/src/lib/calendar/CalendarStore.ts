@@ -15,12 +15,14 @@ export const eventStore  = {
 		});
     },
 
-    saveEvent(event: Event) {
+    saveEvent(eventEd: Event) {
         update(events => {
-            events[event.id].name = event.name;
-            events[event.id].eventType = event.eventType;
-            events[event.id].startTime = event.startTime;
-            events[event.id].endTime = event.endTime;
+            let editIdx = events.findIndex(event => event.id == eventEd.id);
+            events[editIdx].name = eventEd.name;
+            events[editIdx].eventType = eventEd.eventType;
+            events[editIdx].startTime = eventEd.startTime;
+            events[editIdx].endTime = eventEd.endTime;
+            console.log(events);
             return events;
         });
     },
@@ -30,6 +32,7 @@ export const eventStore  = {
             let deleteIdx = events.findIndex(event => event.id == id);
             delete events[deleteIdx];
             events = events.filter(Boolean);
+            console.log(events);
             return events;
         });
     }

@@ -1,9 +1,25 @@
 <script lang="ts">
     import { eventStore } from './CalendarStore';
     import type { Event } from '../../types/event';
-    import EventModal from './EventModal.svelte';
+    import AddEventModal from './AddEventModal.svelte';
+    import EditEventModal from './EditEventModal.svelte';
+    import Svelecte from 'svelecte';
 
-    let showModal = false;
+    let showAddEventModal = false;
+    let showEditEventModal = false;
+    let selectedID: string | null = null;
+    let event: Event = {
+		name: '',
+		eventType: '',
+		startTime: '',
+        endTime: '',
+        id: '',
+	};
+
+	$: {
+		const found = $eventStore.find(event => event.id === selectedID);
+		if (found) event = found;
+	}
 
     function addEvent(e) {
         eventStore.addEvent(e.detail);
@@ -11,6 +27,9 @@
 </script>
 
 <section>
-    <button class="fadedtext" on:click={() => (showModal = true)}>+ New Event</button>
-    <EventModal bind:showModal on:addNewEvent={addEvent}/>
+    <Svelecte options={$eventStore} bind:value={selectedID} valueField="id" labelField="name" placeholder="Select an event..."></Svelecte>
+    <button class="fadedtext" on:click={() => (showAddEventModal = true)}>+ New Event</button>
+    <AddEventModal bind:showAddEventModal on:addNewEvent={addEvent}/>
+    <button class="fadedtext" disabled={selectedID === null} on:click={() => (showEditEventModal = true)}>Edit Event</button>
+    <EditEventModal bind:showEditEventModal bind:event/>
 </section>

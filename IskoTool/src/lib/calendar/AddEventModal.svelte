@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
-    import EventTypeDropdown from './EventTypeDropdown.svelte';
-	import type { Event } from '../../types/event';
+	import { createEventDispatcher } from "svelte";
+    import EventTypeDropdown from "./EventTypeDropdown.svelte";
+	import type { Event } from "../../types/event";
 
-	export let showModal: boolean;
+	export let showAddEventModal: boolean;
 	let dialog: HTMLDialogElement;
 
 	let dispatch = createEventDispatcher();
@@ -12,7 +12,7 @@
     let startTime: string;
     let endTime: string;
 	
-	$: if (dialog && showModal) dialog.showModal();
+	$: if (dialog && showAddEventModal) dialog.showModal();
 
 	function handleSubmit() {
 		// Close the modal for good
@@ -32,7 +32,7 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <dialog
 	bind:this={dialog}
-	on:close={() => (showModal = false)}
+	on:close={() => (showAddEventModal = false)}
 	on:click|self={() => dialog.close()}
 >
 	<div on:click|stopPropagation>
