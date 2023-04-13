@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { createEventDispatcher } from "svelte";
-    import EventTypeDropdown from "./EventTypeDropdown.svelte";
+	import { createEventDispatcher } from 'svelte';
+    import EventTypeDropdown from './EventTypeDropdown.svelte';
+	import type { Event } from '../../types/event';
 
 	export let showModal: boolean;
 	let dialog: HTMLDialogElement;
@@ -24,7 +25,7 @@
 			startTime,
 			endTime,
 			id: crypto.randomUUID(),
-		});
+		} satisfies Event);
     }
 </script>
 
