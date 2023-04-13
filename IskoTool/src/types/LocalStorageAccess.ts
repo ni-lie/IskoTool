@@ -1,5 +1,5 @@
 import type { Note } from '../types/note';
-import type { CustomMode } from './CustomTimerMode';
+import type { CustomMode } from './customtimer';
 
 // export function saveToLocal(key: string, value: any[]) {
 //     return localStorage.setItem(key, JSON.stringify(value));
