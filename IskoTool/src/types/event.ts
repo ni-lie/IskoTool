@@ -1,8 +1,11 @@
-export interface CustomMode {
-    /** Name of the custom mode. */
+export interface Event {
+    /** Name of the event. */
     name: string;
-    minutes: number;
-    seconds: number;
-    /** Unique ID assigned to this custom mode. */
+    eventType: string;
+    /** Start date and time of the event. */
+    startTime: string;
+    /** End date and time of the event. */
+    endTime: string;
+    /** Unique ID assigned to this event. */
     id: string;
 }

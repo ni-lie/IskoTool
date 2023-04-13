@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
 
   import AddCustomModeModal from './CustomTimerModal.svelte';
-  import type { CustomMode } from '../../types/event';
+  import type { CustomMode } from '../../types/customtimer';
 
   import { mode } from './PomodoroModeChoice';
   import Dropdown from './PomodoroDropdown.svelte';

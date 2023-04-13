@@ -8,15 +8,15 @@
 	let dispatch = createEventDispatcher();
     let name = "New Event";
     let eventType: string;
-    let startTime;
-    let endTime;
+    let startTime: string;
+    let endTime: string;
 	
 	$: if (dialog && showModal) dialog.showModal();
 
 	function handleSubmit() {
 		// Close the modal for good
 		dialog.close();
-        //console.log(name, eventType, startTime, endTime);
+        console.log(name, eventType, startTime, endTime);
 		// Forward the form data to all event listeners
         dispatch('addNewEvent', {
 			name,
