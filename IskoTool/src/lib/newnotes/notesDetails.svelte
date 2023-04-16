@@ -1,19 +1,41 @@
 <script>
     import Card from "./Card.svelte";
+    import NotesStore from "./stores/NotesStore";
+    import Modal from "./modal.svelte";
+    import EditNoteForm from "./editNoteForm.svelte";
+    import Button from "./Button.svelte";
+    import { createEventDispatcher } from "svelte";
+
+    let dispatch = createEventDispatcher();
+
     export let note;
+    export let showModal;
+    export let toggleNote;
+
+    // const handleEdit = (id) => {
+    //     NotesStore.update(currentNotes => {
+    //         let copiedNotes = [... currentNotes];
+    //         let noteToBeEdited = copiedNotes.find(note => note.id == id);
+
+    //         noteToBeEdited 
+    //     })
+    // }
+
+    function handleEdit(){
+        toggleNote();
+    }
+
+
 </script>
 
+<!-- <Modal {showModal} on:click={toggleNote}> 
+    <EditNoteForm {note} on:editNote={editNote}/>
+</Modal> -->
+
 <Card>
-    <div class="note">
-        <!-- <div class="title">  -->
-            <h4>{note.title}</h4>
-        <!-- </div> -->
-        <!-- <div class="note-content"> -->
-            <p>{note.noteContent}</p>
-        <!-- </div> -->
-        <!-- <Button type="secondary" on:click={() => {handleDelete(note.id)}}> Delete </Button> -->
-        <!-- <DeletenoteForm on:deleteNote={note.id}/> -->
-        <!-- <DeletenoteForm noteID={note.id} notes={notes}/> -->
+    <div class="note" on:click={handleEdit}>
+        <h4>{note.title}</h4>
+        <p>{note.noteContent}</p>
     </div>    
 </Card>
 
@@ -28,7 +50,7 @@
     color: #000000;
     margin-bottom: 30px;
     }
-    .title, .note-content{
+    /* .note.title, .note-content{
         background: #fafafa;
         cursor: pointer;
         margin: 10px auto;
@@ -36,9 +58,6 @@
     }
     .title:hover, .note-content:hover{
     opacity: 0.6;
-    }
-    /* span{
-        display: inline-block;
-        padding: 10px 20px;
     } */
+
 </style>

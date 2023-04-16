@@ -2,18 +2,18 @@
     import NotesDetails from "./notesDetails.svelte";
     import NotesStore from "./stores/NotesStore";
 
+    export let showModal;
+    export let toggleNote;
     export let notes = [];
-    // const handleDelete = (id) => {
-    //     notes = notes.filter((note) => note.id != id);
-    // }
 
+    
 
 </script>
 
 <div class="notes-list">
     {#each $NotesStore as note (note.id)}
     <div>
-        <NotesDetails {note} /> 
+        <NotesDetails note={note} showModal={showModal} toggleNote={toggleNote} /> 
     </div>
     {:else}
         <p>There are no notes to show...</p>

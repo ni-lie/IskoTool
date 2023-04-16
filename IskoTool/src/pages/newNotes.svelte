@@ -25,7 +25,7 @@
 
 <main>
     <button on:click={toggleNote}>Add a note</button>
-    <NotesList />
+    <NotesList showModal={showModal} toggleNote={toggleNote} />
 </main>
 
 <style>
