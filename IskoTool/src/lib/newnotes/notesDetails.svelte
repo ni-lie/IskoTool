@@ -4,9 +4,7 @@
     import Modal from "./modal.svelte";
     import EditNoteForm from "./editNoteForm.svelte";
     import Button from "./Button.svelte";
-    import { createEventDispatcher } from "svelte";
 
-    let dispatch = createEventDispatcher();
 
     export let note;
     export let showModal;
@@ -21,19 +19,14 @@
     //     })
     // }
 
-    function handleEdit(){
-        toggleNote();
-    }
-
-
 </script>
 
 <!-- <Modal {showModal} on:click={toggleNote}> 
     <EditNoteForm {note} on:editNote={editNote}/>
 </Modal> -->
 
-<Card>
-    <div class="note" on:click={handleEdit}>
+<Card showModal={showModal} toggleNote={toggleNote}>
+    <div class="note">
         <h4>{note.title}</h4>
         <p>{note.noteContent}</p>
     </div>    

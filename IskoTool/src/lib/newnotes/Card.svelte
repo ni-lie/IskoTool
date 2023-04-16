@@ -1,5 +1,12 @@
-<div class="card">
+<script>
+    export let showModal;
+    export let toggleNote;
     
+    function handleEdit(){
+        toggleNote();
+    }
+</script>
+<div class="card" on:click={handleEdit}> 
     <slot></slot>
 </div>
 
@@ -12,6 +19,7 @@
     }
     .card:hover{
         cursor: pointer;
-        background: green;
+        background: #1c8d76;
+        color: black;
     }
 </style>
