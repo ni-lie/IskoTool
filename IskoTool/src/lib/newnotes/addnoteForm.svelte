@@ -39,6 +39,10 @@
             noteContent,
             id: Math.random()
             };
+            // save note to NoteStore
+            NotesStore.update(currentNotes => {
+                return [note, ...currentNotes];
+            });
             dispatch('addNote', note);
         }
     };
