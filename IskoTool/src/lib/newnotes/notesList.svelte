@@ -7,14 +7,11 @@
     //     notes = notes.filter((note) => note.id != id);
     // }
 
-    NotesStore.subscribe(data => {
-        notes = data;
-    });
 
 </script>
 
 <div class="notes-list">
-    {#each notes as note (note.id)}
+    {#each $NotesStore as note (note.id)}
     <div>
         <NotesDetails {note} /> 
     </div>
