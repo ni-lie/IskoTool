@@ -8,8 +8,8 @@
 
     export let note;
     export let showModal;
-    export let toggleNote;
-
+    export let toggleEdit;
+    export let showAddNoteForm;
     // const handleEdit = (id) => {
     //     NotesStore.update(currentNotes => {
     //         let copiedNotes = [... currentNotes];
@@ -25,7 +25,7 @@
     <EditNoteForm {note} on:editNote={editNote}/>
 </Modal> -->
 
-<Card showModal={showModal} toggleNote={toggleNote}>
+<Card showModal={showModal} toggleEdit={toggleEdit} showAddNoteForm={showAddNoteForm}>
     <div class="note">
         <h4>{note.title}</h4>
         <p>{note.noteContent}</p>

@@ -1,9 +1,10 @@
 <script>
     export let showModal;
-    export let toggleNote;
-    
+    export let toggleEdit;
+    export let showAddNoteForm;
+
     function handleEdit(){
-        toggleNote();
+        toggleEdit();
     }
 </script>
 <div class="card" on:click={handleEdit}> 

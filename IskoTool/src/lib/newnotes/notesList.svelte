@@ -3,17 +3,15 @@
     import NotesStore from "./stores/NotesStore";
 
     export let showModal;
-    export let toggleNote;
-    export let notes = [];
-
-    
+    export let toggleEdit;
+    export let showAddNoteForm;
 
 </script>
 
 <div class="notes-list">
     {#each $NotesStore as note (note.id)}
     <div>
-        <NotesDetails note={note} showModal={showModal} toggleNote={toggleNote} /> 
+        <NotesDetails note={note} showModal={showModal} toggleEdit={toggleEdit} showAddNoteForm={showAddNoteForm}/> 
     </div>
     {:else}
         <p>There are no notes to show...</p>
