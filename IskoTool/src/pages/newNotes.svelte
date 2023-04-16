@@ -9,11 +9,11 @@
         showModal = !showModal;
     };
 
-    let notes = [
-        { title: 'first note', noteContent: 'this is the first note', id: 1 },
-        { title: 'second note', noteContent: 'this is the second note', id: 2 },
-        { title: 'third note', noteContent: 'this is the third note', id: 3 }
-    ];
+    // let notes = [
+    //     { title: 'first note', noteContent: 'this is the first note', id: 1 },
+    //     { title: 'second note', noteContent: 'this is the second note', id: 2 },
+    //     { title: 'third note', noteContent: 'this is the third note', id: 3 }
+    // ];
 
     // const handleDelete = (id) => {
     //     notes = notes.filter((note) => note.id != id);
