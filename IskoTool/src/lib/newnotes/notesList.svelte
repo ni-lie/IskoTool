@@ -1,11 +1,15 @@
 <script>
     import NotesDetails from "./notesDetails.svelte";
+    import NotesStore from "./stores/NotesStore";
 
     export let notes = [];
     // const handleDelete = (id) => {
     //     notes = notes.filter((note) => note.id != id);
     // }
-        
+
+    NotesStore.subscribe(data => {
+        notes = data;
+    });
 
 </script>
 
