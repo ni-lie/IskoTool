@@ -185,6 +185,8 @@
   </div>
 </section>
 
+<audio src="https://freesound.org/data/previews/536/536420_4921277-lq.mp3" bind:this={audio}></audio>
+
 <style>
   section {
     background-color: var(--evergreen-dark);
