@@ -24,6 +24,7 @@
   let currentState = State.Idle;
   let baseDuration: number;
   let currentTime: number;
+  let audio;
 
   $: switch ($mode) {
       case 0:
@@ -83,7 +84,9 @@
         --currentTime;
         return;
       }
-
+      else if(currentTime === 0 ){
+        audio.play()  
+      }
       if (isCustom) idle();
       else if (isBreakMode) {
         mode.set(0);
