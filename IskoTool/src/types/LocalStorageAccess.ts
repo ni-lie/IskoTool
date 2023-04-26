@@ -1,5 +1,6 @@
-import type { Note } from '../types/note';
 import type { CustomMode } from './customtimer';
+import type { Note } from '../types/note';
+import type { Event } from '../types/event';
 
 export function loadCustomModes(): CustomMode[] {
     const value = localStorage.getItem('pomodoroCustomModes');
@@ -17,4 +18,13 @@ export function loadNotes(): Note[] {
 
 export function setNotes(notes: Note[]) {
     localStorage.setItem('userNotes', JSON.stringify(notes));
+}
+
+export function loadEvents(): Event[] {
+    const value = localStorage.getItem('events');
+    return value === null ? [] : JSON.parse(value);
+}
+
+export function setEvents(events: Event[]) {
+    localStorage.setItem('events', JSON.stringify(events));
 }

@@ -4,7 +4,7 @@
     import Svelecte from 'svelecte';
 	import { onMount } from 'svelte';
     import type { Note } from '../types/note';
-	import {loadNotes, setNotes} from '../types/LocalStorageAccess';
+	import { setNotes } from '../types/LocalStorageAccess';
 	
 	let editing = false;
 	let selectedId: number | null = null;
