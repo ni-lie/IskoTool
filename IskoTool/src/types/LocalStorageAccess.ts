@@ -1,14 +1,6 @@
 import type { Note } from '../types/note';
 import type { CustomMode } from './customtimer';
 
-// export function saveToLocal(key: string, value: any[]) {
-//     return localStorage.setItem(key, JSON.stringify(value));
-// }
-
-// export function loadFromLocal(key: string) {
-//     return JSON.parse(localStorage.getItem(key));
-// }
-
 export function loadCustomModes(): CustomMode[] {
     const value = localStorage.getItem('pomodoroCustomModes');
     return value === null ? [] : JSON.parse(value);

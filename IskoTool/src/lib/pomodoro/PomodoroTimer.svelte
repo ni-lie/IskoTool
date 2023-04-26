@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
 
+  import {loadCustomModes, setCustomModes} from '../../types/LocalStorageAccess';
   import AddCustomModeModal from './CustomTimerModal.svelte';
   import type { CustomMode } from '../../types/customtimer';
 
@@ -52,7 +53,7 @@
 
   onMount(() => {
     if ("pomodoroCustomModes" in localStorage)
-      customModes = JSON.parse(localStorage.getItem("pomodoroCustomModes"));
+      customModes = loadCustomModes();
   });
 
   function formatTime(timeInSeconds: number) { 
@@ -122,7 +123,7 @@
   function addCustomMode(e) {
     customModes.push(e.detail);
     customModes = customModes;
-    localStorage.setItem("pomodoroCustomModes", JSON.stringify(customModes));
+    setCustomModes(customModes);
   }
 
   function deleteCustomMode(id) {
@@ -130,7 +131,7 @@
     mode.set(0);
     baseDuration = pomodoroDuration;
     idle();
-    localStorage.setItem("pomodoroCustomModes", JSON.stringify(customModes));
+    setCustomModes(customModes);
   }
 
   function setCustomModeState(min: number, sec: number) {
@@ -160,9 +161,6 @@
     </div>
     <div class="button-class">
       <p class = "choice-prompt">Choose a mode:</p>
-      <!-- <button on:click={() => {setState(State.Pomodoro, pomodoroDuration)}} disabled={currentState === State.InProgress || currentState === State.Rest || currentState === State.Pause}>Pomodoro</button>
-      <button on:click={() => {setState(State.ShortResting, shortBreakDuration)}} disabled={currentState === State.InProgress || currentState === State.Rest || currentState === State.Pause}>Short Break</button>
-      <button on:click={() => {setState(State.LongResting, longBreakDuration)}} disabled={currentState === State.InProgress || currentState === State.Rest || currentState === State.Pause}>Long Break</button> -->
       <!-- USING THE DROPDOWN -->
       <Dropdown />
       <!--  -->
