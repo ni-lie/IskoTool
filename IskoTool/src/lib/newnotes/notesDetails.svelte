@@ -10,20 +10,9 @@
     export let showModal;
     export let toggleEdit;
     export let showAddNoteForm;
-    // const handleEdit = (id) => {
-    //     NotesStore.update(currentNotes => {
-    //         let copiedNotes = [... currentNotes];
-    //         let noteToBeEdited = copiedNotes.find(note => note.id == id);
 
-    //         noteToBeEdited 
-    //     })
-    // }
 
 </script>
-
-<!-- <Modal {showModal} on:click={toggleNote}> 
-    <EditNoteForm {note} on:editNote={editNote}/>
-</Modal> -->
 
 <Card showModal={showModal} toggleEdit={toggleEdit} showAddNoteForm={showAddNoteForm}>
     <div class="note">

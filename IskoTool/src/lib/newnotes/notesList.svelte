@@ -2,9 +2,8 @@
     import NotesDetails from "./notesDetails.svelte";
     import NotesStore from "./stores/NotesStore";
 
-    export let showModal;
-    export let toggleEdit;
-    export let showAddNoteForm;
+    export let showModal, toggleEdit, showAddNoteForm;
+
 
 </script>
 

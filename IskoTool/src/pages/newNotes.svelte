@@ -6,7 +6,12 @@
 
     let showModal = false;
     let showAddNoteForm = true;
-    
+    let noteId = null;
+
+    function handleNoteClick(id) {
+        noteId = id;
+    }
+
     const toggleNote = () => {
         showModal = !showModal;
         showAddNoteForm = true;
@@ -37,7 +42,7 @@
 
 <main>
     <button on:click={toggleNote}>Add a note</button>
-    <NotesList showModal={showModal} toggleEdit={toggleEdit} showAddNoteForm={showAddNoteForm}/>
+    <NotesList showModal={showModal} toggleEdit={toggleEdit} showAddNoteForm={showAddNoteForm} />
 </main>
 
 <style>
