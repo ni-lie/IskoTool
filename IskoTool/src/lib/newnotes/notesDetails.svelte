@@ -11,6 +11,12 @@
     export let toggleEdit;
     export let showAddNoteForm;
 
+    // delete a poll
+    const handleDelete = (id) => {
+        NotesStore.update(notes => {
+            return notes.filter(note => note.id != id)
+        })
+    }
 
 </script>
 
@@ -19,6 +25,9 @@
         <h4>{note.title}</h4>
         <p>{note.noteContent}</p>
     </div>    
+    <div class = "delete">
+        <Button type="secondary" on:click={() => handleDelete(note.id)}>Delete</Button>
+    </div>
 </Card>
 
 <style>

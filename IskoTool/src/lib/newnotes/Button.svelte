@@ -2,7 +2,7 @@
     export let type = 'primary';
 </script>
 
-<button class={type}>
+<button class={type} on:click>
     <slot></slot>
 </button>
 
