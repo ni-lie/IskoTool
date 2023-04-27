@@ -4,6 +4,7 @@
 	import Arrow from './Arrow.svelte';
 	import EventsDropdown from './Events.svelte';
 	import type { Event } from '../../types/event';
+	import ViewEventDialog from '../global-components/DialogBox.svelte';
 	import { isInRange } from '../isInRange';
 
 	export let today = new Date();
@@ -36,16 +37,19 @@
 				const endMth = end.getMonth()+1;
 				const endDay = end.getDate();
 				if (isInRange(year, startYr, endYr) && isInRange(month+1, startMth, endMth) && isInRange(day, startDay, endDay)) {
-					return e.name;
+					return e;
 				}
 			}
 			// Display a one-day event
 			if (startYr == year && startMth == month+1 && startDay == day) {
-				return e.name;
+				return e;
 			}
 		}
-		return '';
+		return null;
 	}
+	
+	let showModal = false;
+	let eventToView: Event | null = null;
 
 	function toPrev() {
 		[current, next] = [prev, current];
@@ -91,8 +95,12 @@
 				{#if current[idxw][idxd] != 0}
 					<span class="date" class:today={isToday(current[idxw][idxd])}>
 						{ current[idxw][idxd] }
-						<div class="eventdisplay">
-							{displayEvent($eventStore, current[idxw][idxd])}
+						<div class="eventdisplay"
+							on:click={() => { 
+								showModal = true;
+								eventToView = displayEvent($eventStore, current[idxw][idxd]);
+								}}>
+							{ displayEvent($eventStore, current[idxw][idxd]) != null ? displayEvent($eventStore, current[idxw][idxd]).name : ''}
 						</div>
 					</span>
 				{:else if (idxw < 1)}
@@ -108,6 +116,23 @@
 <footer>
     <EventsDropdown />
 </footer>
+
+{#if eventToView !== null}
+	<ViewEventDialog bind:showModal>
+		<h2 slot="header" class="pop-up">Event details</h2>
+		<div slot="contents">
+			<p> Name: {eventToView.name} </p>
+			<p> Event type: {eventToView.eventType} </p>
+			<p> Start date: {months[new Date(eventToView.startTime).getMonth()]} {new Date(eventToView.startTime).getDate()}, {new Date(eventToView.startTime).getFullYear()}</p>
+			{#if eventToView.endTime == null}
+				<p> End date: {months[new Date(eventToView.startTime).getMonth()]} {new Date(eventToView.startTime).getDate()}, {new Date(eventToView.startTime).getFullYear()}</p>
+			{:else}
+				<p> End date: {months[new Date(eventToView.endTime).getMonth()]} {new Date(eventToView.endTime).getDate()}, {new Date(eventToView.endTime).getFullYear()}</p>
+			{/if}
+		</div>
+		
+	</ViewEventDialog>
+{/if}
 
 <style>
 	header {
@@ -165,5 +190,10 @@
 		font-weight: 600;
 		text-align: center;
 		color: #1c8d76;
+		user-select: none;
+	}
+
+	.eventdisplay:hover {
+		color: #60bfac;
 	}
 </style>
