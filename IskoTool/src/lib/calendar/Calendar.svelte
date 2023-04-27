@@ -4,6 +4,7 @@
 	import Arrow from './Arrow.svelte';
 	import EventsDropdown from './Events.svelte';
 	import type { Event } from '../../types/event';
+	import { isInRange } from '../isInRange';
 
 	export let today = new Date();
 	export let year = today.getFullYear();
@@ -23,8 +24,23 @@
 	
 	function displayEvent(events: Event[], day) {
 		for (const e of events) {
-			let [sYear, sMonth, sDay, sTime] = e.startTime.split(/-|T/);
-			if (Number(sYear) == year && Number(sMonth) == month+1 && Number(sDay) == day) {
+			let start = new Date(e.startTime);
+			let startYr = start.getFullYear();
+			let startMth = start.getMonth()+1;
+			let startDay = start.getDate();
+
+			// Display a range of events
+			if (e.endTime != undefined) {
+				let end = new Date(e.endTime);
+				let endYr = end.getFullYear();
+				let endMth = end.getMonth()+1;
+				let endDay = end.getDate();
+				if (isInRange(year, startYr, endYr) && isInRange(month+1, startMth, endMth) && isInRange(day, startDay, endDay)) {
+					return e.name;
+				}
+			}
+			// Display a one-day event
+			if (startYr == year && startMth == month+1 && startDay == day) {
 				return e.name;
 			}
 		}
