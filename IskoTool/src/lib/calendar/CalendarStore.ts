@@ -1,20 +1,20 @@
 import { writable } from 'svelte/store';
+import { loadEvents, setEvents } from '../../types/LocalStorageAccess';
 import type { Event } from '../../types/event';
 
-/** Notes are now stored in an array instead of a dictionary (more efficient lookup).*/  
-const { set, update, subscribe } = writable([] as Event[]);
+const init: Event[] = loadEvents();
+const { update, subscribe } = writable(init);
 
 export const eventStore  = {
 	subscribe,
-	set,
 	addEvent(event: Event) {
 		update(events => {
 			events.push({...event});
-            console.log(events);
+
+            setEvents(events);
 			return events;
 		});
     },
-
     saveEvent(eventEd: Event) {
         update(events => {
             let editIdx = events.findIndex(event => event.id == eventEd.id);
@@ -22,17 +22,18 @@ export const eventStore  = {
             events[editIdx].eventType = eventEd.eventType;
             events[editIdx].startTime = eventEd.startTime;
             events[editIdx].endTime = eventEd.endTime;
-            console.log(events);
+
+            setEvents(events);
             return events;
         });
     },
-
     deleteEvent(id: string) {
         update(events => {
             let deleteIdx = events.findIndex(event => event.id == id);
             delete events[deleteIdx];
             events = events.filter(Boolean);
-            console.log(events);
+
+            setEvents(events);
             return events;
         });
     }
