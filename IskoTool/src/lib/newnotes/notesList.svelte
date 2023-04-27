@@ -1,22 +1,25 @@
 <script>
     import NotesDetails from "./notesDetails.svelte";
     import NotesStore from "./stores/NotesStore";
-    import { onMount } from 'svelte';
     import { createEventDispatcher } from 'svelte';
 
-    const dispatch = createEventDispatcher();
-    export let showModal, toggleEdit, showAddNoteForm;
 
-    let selectedNoteId = null
+    const dispatch = createEventDispatcher();
+    export let showModal, toggleEdit, showAddNoteForm, searchTerm;
+    let selectedNoteId = null;
+
     const noteSelection = (e) => {
         selectedNoteId = e.detail;
         dispatch('selectedNote', selectedNoteId);
     };
 
+    $: filteredNotes = $NotesStore.filter(note => note.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
+            note.noteContent.toLowerCase().includes(searchTerm.toLowerCase()));
+
 </script>
 
 <div class="notes-list">
-    {#each $NotesStore as note (note.id)}
+    {#each filteredNotes as note (note.id)}    <!-- {#each $NotesStore as note (note.id)} -->
     <div>
         <NotesDetails note={note} showModal={showModal} toggleEdit={toggleEdit} showAddNoteForm={showAddNoteForm} on:cardClick={noteSelection}/> 
     </div>

@@ -37,9 +37,9 @@
     input {
         background-color: white;
     }
-    .errors{
+    /* .errors{
         font-weight: bold;
         font-size: 12px;
         color: #d91b42;
-    }
+    } */
 </style>

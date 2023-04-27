@@ -6,7 +6,7 @@
 
     let selectedNoteId = null;
 
-
+    let searchTerm = '';
 
     let showModal = false;
     let showAddNoteForm = true;
@@ -33,7 +33,12 @@
         selectedNoteId = null;
     };
 
-    console.log(selectedNoteId);
+    function handleInput(event) {
+        searchTerm = event.target.value;
+        console.log(searchTerm);
+    };
+
+    // console.log(selectedNoteId);
 </script>
 
 <Modal {showModal} on:click={toggleNote}>
@@ -49,11 +54,16 @@
 </Modal>
 
 <main>
+    <input type="text" placeholder="Search..." bind:value={searchTerm}> <!-- on:input={handleInput}-->
     <button on:click={toggleNote}>Add a note</button>
-    <NotesList showModal={showModal} toggleEdit={toggleEdit} showAddNoteForm={showAddNoteForm} on:selectedNote={noteSelection}/> 
+    <NotesList showModal={showModal} toggleEdit={toggleEdit} showAddNoteForm={showAddNoteForm} on:selectedNote={noteSelection} searchTerm={searchTerm}/> 
+    <!-- <p> Typed term: {searchTerm}</p> -->
 </main>
 
 <style>
+    input {
+        background-color: white;
+    }
     main {
         text-align: center;
         padding: 1em;

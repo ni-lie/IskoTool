@@ -1,4 +1,4 @@
-import { writable } from "svelte/store";
+import { writable, get } from "svelte/store";
 
 // Load the initial notes from local storage, or use a default value
 const initialNotes = JSON.parse(localStorage.getItem("notes")) || [
