@@ -1,16 +1,15 @@
 <script lang="ts">
-	import calendarize from 'calendarize';
 	import { eventStore } from './CalendarStore';
-	import Arrow from './Arrow.svelte';
 	import EventsDropdown from './Events.svelte';
 	import type { Event } from '../../types/event';
 	import ViewEventDialog from '../global-components/DialogBox.svelte';
 	import { isInRange } from '../isInRange';
 
-	export let today = new Date();
-	export let year = today.getFullYear();
-	export let month = today.getMonth(); 
-	export let offset = 0; // Display Sunday as first day of the week
+	const today = new Date();
+	const year = today.getFullYear();
+	const month = today.getMonth();
+	const weekday = today.getDay();
+	const offset = 0; // Display Sunday as first day of the week
 
 	export let labels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 	export let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -18,12 +17,24 @@
 	$: today_month = today && today.getMonth();
 	$: today_year = today && today.getFullYear();
 	$: today_day = today && today.getDate();
-	
-	let prev = calendarize(new Date(year, month-1), offset);
-	let current = calendarize(new Date(year, month), offset);
-	let next = calendarize(new Date(year, month+1), offset);
-	
-	function displayEvent(events: Event[], day) {
+
+	// Populate the currentWeek array with dates relative to today's date.
+	let currentWeek: Date[] = [];
+	let day = today.getDate()-weekday-1;
+	for (let i = 0; i < weekday; ++i) {
+		currentWeek.push(new Date(today.setDate(day + 1)));
+		day = today.getDate();
+	}
+	for (let i = weekday; i < 7; ++i) {
+		let day = today.getDate();
+		currentWeek.push(new Date(today.setDate(day + 1)));
+	}
+
+	function displayEvent(events: Event[], currDate: Date) {
+		const currYear = currDate.getFullYear();
+		const currMth = currDate.getMonth()+1;
+		const currDay = currDate.getDate();
+
 		for (const e of events) {
 			const start = new Date(e.startTime);
 			const startYr = start.getFullYear();
@@ -36,12 +47,12 @@
 				const endYr = end.getFullYear();
 				const endMth = end.getMonth()+1;
 				const endDay = end.getDate();
-				if (isInRange(year, startYr, endYr) && isInRange(month+1, startMth, endMth) && isInRange(day, startDay, endDay)) {
+				if (isInRange(currYear, startYr, endYr) && isInRange(currMth, startMth, endMth) && isInRange(currDay, startDay, endDay)) {
 					return e;
 				}
 			}
 			// Display a one-day event
-			if (startYr == year && startMth == month+1 && startDay == day) {
+			if (startYr == currYear && startMth == currMth && startDay == currDay) {
 				return e;
 			}
 		}
@@ -51,65 +62,31 @@
 	let showModal = false;
 	let eventToView: Event | null = null;
 
-	function toPrev() {
-		[current, next] = [prev, current];
-		
-		if (--month < 0) {
-			month = 11;
-			year--;
-		}
-		
-		prev = calendarize(new Date(year, month-1), offset);
-	}
-	
-	function toNext() {
-		[prev, current] = [current, next];
-		
-		if (++month > 11) {
-			month = 0;
-			year++;
-		}
-		
-		next = calendarize(new Date(year, month+1), offset);
-	}
-	
 	function isToday(day) {
 		return today && today_year === year && today_month === month && today_day === day;
 	}
 </script>
 
 <header>
-	<Arrow left on:click={toPrev} />
-	<h4>{months[month]} {year}</h4>
-	<Arrow on:click={toNext} />
+	<h4>Week Planner</h4>
 </header>
 
-<div class="month">
+<div class="week">
 	{#each labels as txt, idx (txt)}
 		<span class="label">{ labels[(idx + offset) % 7] }</span>
 	{/each}
 
-	{#each { length:6 } as w,idxw (idxw)}
-		{#if current[idxw]}
-			{#each { length:7 } as d,idxd (idxd)}
-				{#if current[idxw][idxd] != 0}
-					<span class="date" class:today={isToday(current[idxw][idxd])}>
-						{ current[idxw][idxd] }
-						<div class="eventdisplay" on:keydown
-							on:click={() => { 
-								showModal = true;
-								eventToView = displayEvent($eventStore, current[idxw][idxd]);
-								}}>
-							{ displayEvent($eventStore, current[idxw][idxd]) != null ? displayEvent($eventStore, current[idxw][idxd]).name : ''}
-						</div>
-					</span>
-				{:else if (idxw < 1)}
-					<span class="date other">{ prev[prev.length - 1][idxd] }</span>
-				{:else}
-					<span class="date other">{ next[0][idxd] }</span>
-				{/if}
-			{/each}
-		{/if}
+	{#each { length:7 } as d,idxd (idxd)}
+		<span class="date" class:today={idxd==weekday}>
+			{months[currentWeek[idxd].getMonth()]} {currentWeek[idxd].getDate()}
+			<div class="eventdisplay" on:keydown
+				on:click={() => { 
+					showModal = true;
+					eventToView = displayEvent($eventStore, currentWeek[idxd]);
+					}}>
+				{ displayEvent($eventStore, currentWeek[idxd]) != null ? displayEvent($eventStore, currentWeek[idxd]).name : ''}
+			</div>
+		</span>
 	{/each}
 </div>
 
@@ -151,10 +128,10 @@
 		margin: 0 1rem;
 	}
 	
-	.month {
+	.week {
 		display: grid;
 		grid-template-columns: repeat(7, 1fr);
-		text-align: right;
+		text-align: center;
 		grid-gap: 4px;
 	}
 	
@@ -167,7 +144,7 @@
 	}
 	
 	.date {
-		height: 50px;
+		height: 400px;
 		font-size: 16px;
 		letter-spacing: -1px;
 		border: 1px solid #e6e4e4;
@@ -175,19 +152,16 @@
 		font-weight: 700;
 		padding: 0.5rem;
 	}
-	
+
 	.date.today {
 		color: #5286fa;
 		background: #c4d9fd;
 		border-color: currentColor;
 	}
-	
-	.date.other {
-		opacity: 0.2;
-	}
 
 	.eventdisplay {
 		font-weight: 600;
+		padding-top: 2em;
 		text-align: center;
 		color: #1c8d76;
 		user-select: none;
