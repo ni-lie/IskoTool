@@ -1,13 +1,15 @@
-<script>
+<script lang="ts">
 	import calendarize from 'calendarize';
+	import { eventStore } from './CalendarStore';
 	import Arrow from './Arrow.svelte';
-	import Events from './Events.svelte';
-	
-    export let today = new Date(); // Date
+	import EventsDropdown from './Events.svelte';
+	import type { Event } from '../../types/event';
+
+	export let today = new Date();
 	export let year = today.getFullYear();
-	export let month = today.getMonth(); // Jan
-	export let offset = 0; // Sun
-	
+	export let month = today.getMonth(); 
+	export let offset = 0; // Display Sunday as first day of the week
+
 	export let labels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 	export let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 	
@@ -75,7 +77,7 @@
 </div>
 
 <footer>
-    <Events />
+    <EventsDropdown />
 </footer>
 
 <style>
