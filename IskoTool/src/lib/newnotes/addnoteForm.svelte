@@ -43,6 +43,7 @@
             NotesStore.update(currentNotes => {
                 return [note, ...currentNotes];
             });
+            console.log("new note ID: ", note.id)
             dispatch('addNote');
         }
     };

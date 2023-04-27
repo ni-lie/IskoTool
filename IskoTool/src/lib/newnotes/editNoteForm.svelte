@@ -2,33 +2,44 @@
     import NotesStore from "./stores/NotesStore";
     import { createEventDispatcher } from "svelte";
     import Button from "./Button.svelte";
-    export let note;
+    
+    export let selectedNoteId;
 
     let dispatch = createEventDispatcher();
 
-    const handleEdit = (id) => {
+    console.log(selectedNoteId)
+    const handleEdit = (event) => {
         NotesStore.update(currentNotes => {
-            let copiedNotes = [... currentNotes];
-            let noteToBeEdited = copiedNotes.find(note => note.id == id);
+            let copiedNotes = [...currentNotes];
+            let noteToBeEdited = copiedNotes.find(note => note.id == selectedNoteId.id);
 
-            noteToBeEdited.title = note.title;
-            noteToBeEdited.noteContent = note.noteContent;
+            console.log(noteToBeEdited.id)
+
+            noteToBeEdited.title = selectedNoteId.title;
+            noteToBeEdited.noteContent = selectedNoteId.noteContent;
+            return copiedNotes;
         });
-        dispatch('editNote', note);
+        dispatch('editNote');
+        // console.log(selectedNoteId)
     };
 </script>
 
 
 <h3> Edit Note </h3>
 <form on:submit|preventDefault={handleEdit}>
-    <input type="text" placeholder="Title" bind:value={note.title}>
-    <!-- <div class="errors"> { errors.title }</div> -->
-    <textarea placeholder= "Type your note" cols="30" rows="10" bind:value={note.noteContent}></textarea>
-    <!-- <div class="errors">{ errors.noteContent }</div> -->
+    <input type="text" placeholder="Title" bind:value={selectedNoteId.title}>
+    <textarea placeholder= "Type your note" cols="30" rows="10" bind:value={selectedNoteId.noteContent}></textarea>
     <br>
     <Button type="primary">Save note</Button>
 </form>
 
 <style>
-
+    input {
+        background-color: white;
+    }
+    .errors{
+        font-weight: bold;
+        font-size: 12px;
+        color: #d91b42;
+    }
 </style>

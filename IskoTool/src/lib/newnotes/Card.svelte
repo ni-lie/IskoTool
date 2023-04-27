@@ -6,8 +6,10 @@
     function handleEdit(){
         toggleEdit();
     }
+    
+
 </script>
-<div class="card" on:click={handleEdit}> 
+<div class="card" on:click={handleEdit} on:click> 
     <slot></slot>
 </div>
 

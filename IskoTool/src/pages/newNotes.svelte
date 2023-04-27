@@ -4,14 +4,17 @@
     import NotesList from '../lib/newnotes/notesList.svelte';
     import EditNoteForm from '../lib/newnotes/editNoteForm.svelte';
 
+    let selectedNoteId = null;
+
+
+
     let showModal = false;
     let showAddNoteForm = true;
-    let noteId = null;
 
-    function handleNoteClick(id) {
-        noteId = id;
+    const noteSelection = (e) => {
+        selectedNoteId = e.detail;
     }
-
+    
     const toggleNote = () => {
         showModal = !showModal;
         showAddNoteForm = true;
@@ -21,28 +24,33 @@
         showAddNoteForm = false;
     };
 
-    // const handleDelete = (id) => {
-    //     notes = notes.filter((note) => note.id != id);
-    // }
-
     const addNote = (e) => {
         showModal = false;
     };
 
+    const editNote = (e) => {
+        showModal = false;
+        selectedNoteId = null;
+    };
+
+    console.log(selectedNoteId);
 </script>
 
 <Modal {showModal} on:click={toggleNote}>
     {#if showAddNoteForm}
         <AddnoteForm on:addNote={addNote} /> 
     {:else}
-        <AddnoteForm on:addNote={addNote}/>
-        <!-- <EditNoteForm on:addNote={addNote}/> -->
+        {#if selectedNoteId !== null}
+            <EditNoteForm selectedNoteId={selectedNoteId} on:editNote={editNote}/>
+        {:else}
+            <p>Note not found</p>
+        {/if}
     {/if}
 </Modal>
 
 <main>
     <button on:click={toggleNote}>Add a note</button>
-    <NotesList showModal={showModal} toggleEdit={toggleEdit} showAddNoteForm={showAddNoteForm} />
+    <NotesList showModal={showModal} toggleEdit={toggleEdit} showAddNoteForm={showAddNoteForm} on:selectedNote={noteSelection}/> 
 </main>
 
 <style>

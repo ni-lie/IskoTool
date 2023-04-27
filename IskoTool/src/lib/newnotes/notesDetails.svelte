@@ -4,7 +4,9 @@
     import Modal from "./modal.svelte";
     import EditNoteForm from "./editNoteForm.svelte";
     import Button from "./Button.svelte";
+    import { createEventDispatcher } from "svelte";
 
+    let dispatch = createEventDispatcher();
 
     export let note;
     export let showModal;
@@ -18,9 +20,12 @@
         })
     }
 
+    function handleCardClick(sel) {
+        dispatch('cardClick', sel);
+    }
 </script>
 
-<Card showModal={showModal} toggleEdit={toggleEdit} showAddNoteForm={showAddNoteForm}>
+<Card showModal={showModal} toggleEdit={toggleEdit} showAddNoteForm={showAddNoteForm} on:click={() => handleCardClick(note)}>
     <div class="note">
         <h4>{note.title}</h4>
         <p>{note.noteContent}</p>
