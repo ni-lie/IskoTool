@@ -20,7 +20,6 @@
 	function handleSubmit() {
 		// Close the modal for good
 		dialog.close();
-        console.log(event);
 		// Forward the form data to all event listeners
         dispatch('editExistingEvent', event satisfies Event);
     }
@@ -35,7 +34,7 @@
 	<div on:click|stopPropagation>
 		<!-- svelte-ignore a11y-autofocus -->
 		<button autofocus on:click={() => dialog.close()}>x</button>
-		<h2 class="pop-up">Create New Event</h2>
+		<h2 class="pop-up">Edit Event</h2>
 		<form on:submit|preventDefault={handleSubmit}>
 			<h3 class="pop-up">Event Name</h3>
 			<input type="text" class="transparent-bg" bind:value={event.name}><br>

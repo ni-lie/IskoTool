@@ -17,7 +17,6 @@
 	function handleSubmit() {
 		// Close the modal for good
 		dialog.close();
-        console.log(name, eventType, startTime, endTime);
 		// Forward the form data to all event listeners
         dispatch('addNewEvent', {
 			name,

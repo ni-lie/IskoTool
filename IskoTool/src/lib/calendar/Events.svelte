@@ -16,6 +16,11 @@
         id: '',
 	};
 
+    $: {
+		const found = $eventStore.find(event => event.id === selectedID);
+		if (found) event = found;
+	}
+
     function addEvent(e) {
         eventStore.addEvent(e.detail);
     }
@@ -35,8 +40,8 @@
 <section>
     <Svelecte options={$eventStore} bind:value={selectedID} valueField="id" labelField="name" placeholder="Select (or search for) an event..."></Svelecte>
     <button class="fadedtext" on:click={() => (showAddEventModal = true)}>+ New Event</button>
-    <AddEventModal bind:showAddEventModal on:addNewEvent={addEvent}/>
+    <AddEventModal bind:showAddEventModal on:addNewEvent={addEvent} />
     <button class="fadedtext" disabled={selectedID === null} on:click={() => (showEditEventModal = true)}>Edit Event</button>
-    <EditEventModal bind:showEditEventModal on:editExistingEvent={editEvent} bind:event/>
+    <EditEventModal bind:showEditEventModal bind:event on:editExistingEvent={editEvent} />
     <button disabled={selectedID === null} on:click={deleteEvent}>Delete</button>
 </section>
