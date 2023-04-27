@@ -24,17 +24,17 @@
 	
 	function displayEvent(events: Event[], day) {
 		for (const e of events) {
-			let start = new Date(e.startTime);
-			let startYr = start.getFullYear();
-			let startMth = start.getMonth()+1;
-			let startDay = start.getDate();
+			const start = new Date(e.startTime);
+			const startYr = start.getFullYear();
+			const startMth = start.getMonth()+1;
+			const startDay = start.getDate();
 
-			// Display a range of events
+			// Display an event over a span of multiple days
 			if (e.endTime != undefined) {
-				let end = new Date(e.endTime);
-				let endYr = end.getFullYear();
-				let endMth = end.getMonth()+1;
-				let endDay = end.getDate();
+				const end = new Date(e.endTime);
+				const endYr = end.getFullYear();
+				const endMth = end.getMonth()+1;
+				const endDay = end.getDate();
 				if (isInRange(year, startYr, endYr) && isInRange(month+1, startMth, endMth) && isInRange(day, startDay, endDay)) {
 					return e.name;
 				}
