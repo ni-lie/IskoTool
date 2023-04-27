@@ -78,8 +78,8 @@ input[type=text] {
 }
 
 dialog div {
-  height: 250px;
-  width: 480px;
+  min-height: 250px;
+  min-width: 480px;
 }
 
 dialog button {
