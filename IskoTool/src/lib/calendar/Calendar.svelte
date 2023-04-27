@@ -21,6 +21,16 @@
 	let current = calendarize(new Date(year, month), offset);
 	let next = calendarize(new Date(year, month+1), offset);
 	
+	function displayEvent(events: Event[], day) {
+		for (const e of events) {
+			let [sYear, sMonth, sDay, sTime] = e.startTime.split(/-|T/);
+			if (Number(sYear) == year && Number(sMonth) == month+1 && Number(sDay) == day) {
+				return e.name;
+			}
+		}
+		return '';
+	}
+
 	function toPrev() {
 		[current, next] = [prev, current];
 		
@@ -65,6 +75,9 @@
 				{#if current[idxw][idxd] != 0}
 					<span class="date" class:today={isToday(current[idxw][idxd])}>
 						{ current[idxw][idxd] }
+						<div class="eventdisplay">
+							{displayEvent($eventStore, current[idxw][idxd])}
+						</div>
 					</span>
 				{:else if (idxw < 1)}
 					<span class="date other">{ prev[prev.length - 1][idxd] }</span>
@@ -130,5 +143,11 @@
 	
 	.date.other {
 		opacity: 0.2;
+	}
+
+	.eventdisplay {
+		font-weight: 600;
+		text-align: center;
+		color: #1c8d76;
 	}
 </style>
