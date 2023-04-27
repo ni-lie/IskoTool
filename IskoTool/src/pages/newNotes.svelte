@@ -55,6 +55,7 @@
 
 <main>
     <input type="text" placeholder="Search..." bind:value={searchTerm}> <!-- on:input={handleInput}-->
+    <br>
     <button on:click={toggleNote}>Add a note</button>
     <NotesList showModal={showModal} toggleEdit={toggleEdit} showAddNoteForm={showAddNoteForm} on:selectedNote={noteSelection} searchTerm={searchTerm}/> 
     <!-- <p> Typed term: {searchTerm}</p> -->
