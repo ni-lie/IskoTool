@@ -29,23 +29,36 @@
     <div class="note">
         <h4>{note.title}</h4>
         <p>{note.noteContent}</p>
+        <div class = "delete">
+            <Button type="secondary" on:click={() => handleDelete(note.id)}>Delete</Button>
+        </div>
     </div>    
-    <div class = "delete">
-        <Button type="secondary" on:click={() => handleDelete(note.id)}>Delete</Button>
-    </div>
 </Card>
 
 <style>
+    .note {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
     h4 {
         margin: 0 auto;
         color:black;
+        min-height: 7%;
+        max-height: 15%;
+        overflow: hidden;
     }
-    p{
-    margin-top: 6px;
-    font-size: 14px;
-    color: var(--evergreen-dark);
-    margin-bottom: 30px;
-    font-family: 'Space Grotesk';
+    p {
+        min-height: 60%;
+        max-height: 75%;
+        margin-top: 6px;
+        font-size: 14px;
+        color: var(--evergreen-dark);
+        margin-bottom: 5%;
+        font-family: 'Space Grotesk';
+        overflow: hidden;
+        flex-basis: 75%;
+        flex-shrink: 1;
     }
     /* .note.title, .note-content{
         background: #fafafa;
@@ -56,5 +69,4 @@
     .title:hover, .note-content:hover{
     opacity: 0.6;
     } */
-
 </style>

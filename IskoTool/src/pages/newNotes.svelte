@@ -83,7 +83,7 @@
         justify-content: center;
         background-color: var(--orange-light);
 
-        position: absolute;
+        position: fixed;
         bottom: 2em;
         right: 2em;
         z-index: 5;
