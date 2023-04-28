@@ -68,7 +68,6 @@
     main {
         text-align: center;
         padding: 1em;
-        max-width: 240px;
         margin: 0 auto;
     }
     .add-note {
@@ -83,6 +82,11 @@
         align-items: center;
         justify-content: center;
         background-color: var(--orange-light);
+
+        position: absolute;
+        bottom: 2em;
+        right: 2em;
+        z-index: 5;
 
         transition: background 0.25s ease-in-out, border 0.25s ease-in-out;
     }
