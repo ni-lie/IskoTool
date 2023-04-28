@@ -56,7 +56,7 @@
 <main>
     <input type="text" placeholder="Search..." bind:value={searchTerm}> <!-- on:input={handleInput}-->
     <br>
-    <button on:click={toggleNote}>Add a note</button>
+    <button class="add-note" on:click={toggleNote}><img class="white-plus" src="src/lib/images/white_plus.png" alt="whiteplus"/></button>
     <NotesList showModal={showModal} toggleEdit={toggleEdit} showAddNoteForm={showAddNoteForm} on:selectedNote={noteSelection} searchTerm={searchTerm}/> 
     <!-- <p> Typed term: {searchTerm}</p> -->
 </main>
@@ -70,5 +70,28 @@
         padding: 1em;
         max-width: 240px;
         margin: 0 auto;
+    }
+    .add-note {
+        color: white;
+        margin: auto;
+        height: 4rem;
+        width: 4rem;
+        padding: 0.1em;
+        border-radius: 50%;
+        border: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--orange-light);
+
+        transition: background 0.25s ease-in-out, border 0.25s ease-in-out;
+    }
+
+    .add-note:hover {
+        background: var(--orange-faded);
+        border-color: var(--orange-faded);
+    }
+    .white-plus {
+        height: 50%;
     }
 </style>

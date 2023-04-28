@@ -108,4 +108,10 @@
     :global(.svelecte-control) {	
         --sv-color: rgb(0, 0, 0) !important;
     }
+	
+	textarea {
+		resize: none;
+		height: 500px;
+	}
+
 </style>

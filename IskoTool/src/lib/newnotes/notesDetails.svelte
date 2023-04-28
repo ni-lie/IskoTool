@@ -38,13 +38,14 @@
 <style>
     h4 {
         margin: 0 auto;
-        color: #1c8d76;
+        color:black;
     }
     p{
     margin-top: 6px;
     font-size: 14px;
-    color: #000000;
+    color: var(--evergreen-dark);
     margin-bottom: 30px;
+    font-family: 'Space Grotesk';
     }
     /* .note.title, .note-content{
         background: #fafafa;
