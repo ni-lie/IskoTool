@@ -43,10 +43,12 @@
     }
     h4 {
         margin: 0 auto;
+        width: 100%;
         color:black;
         min-height: 7%;
         max-height: 15%;
         overflow: hidden;
+        text-overflow: ellipsis;
     }
     p {
         min-height: 60%;
@@ -57,6 +59,7 @@
         margin-bottom: 5%;
         font-family: 'Space Grotesk';
         overflow: hidden;
+        text-overflow: ellipsis;
         flex-basis: 75%;
         flex-shrink: 1;
     }
