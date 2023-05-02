@@ -47,8 +47,11 @@
         color:black;
         min-height: 7%;
         max-height: 15%;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        overflow: clip;
+        overflow-wrap: break-word;
+        display: -webkit-box;     
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
     }
     p {
         min-height: 60%;
@@ -59,7 +62,7 @@
         margin-bottom: 5%;
         font-family: 'Space Grotesk';
         overflow: hidden;
-        text-overflow: ellipsis;
+        word-break: break-all;
         flex-basis: 75%;
         flex-shrink: 1;
     }
