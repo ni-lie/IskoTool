@@ -4,7 +4,7 @@
     import NotesList from '../lib/newnotes/notesList.svelte';
     import EditNoteForm from '../lib/newnotes/editNoteForm.svelte';
 
-    import addButtonFilePath from '../../public/images/white_plus_resized.png';
+    import addButtonFilePath from '../images/white_plus_resized.png';
 
     let selectedNoteId = null;
 
