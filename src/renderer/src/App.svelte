@@ -21,7 +21,7 @@
 
 <main>
   <nav>
-    <button><a href="/">Home</a></button>
+    <button><a href="#/">Home</a></button>
     <button><a href="#/calendar">Calendar</a></button>
     <button><a href="#/planner">Week Planner</a></button>
     <button><a href="#/pomodoro">Pomodoro</a></button>

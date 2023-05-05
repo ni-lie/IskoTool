@@ -4,6 +4,8 @@
     import NotesList from '../lib/newnotes/notesList.svelte';
     import EditNoteForm from '../lib/newnotes/editNoteForm.svelte';
 
+    import addButtonFilePath from '../images/white_plus_resized.png';
+
     let selectedNoteId = null;
 
     let searchTerm = '';
@@ -56,7 +58,7 @@
 <main>
     <input type="text" placeholder="Search..." bind:value={searchTerm}> <!-- on:input={handleInput}-->
     <br>
-    <button class="add-note" on:click={toggleNote}><img class="white-plus" src="src/lib/images/white_plus_resized.png" alt="whiteplus"/></button>
+    <button class="add-note" on:click={toggleNote}><img class="white-plus" src={addButtonFilePath} alt="Add note"/></button>
     <NotesList showModal={showModal} toggleEdit={toggleEdit} showAddNoteForm={showAddNoteForm} on:selectedNote={noteSelection} searchTerm={searchTerm}/> 
     <!-- <p> Typed term: {searchTerm}</p> -->
 </main>
