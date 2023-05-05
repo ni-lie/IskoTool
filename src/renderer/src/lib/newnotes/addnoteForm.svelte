@@ -57,7 +57,10 @@
         noteContent += event.detail
     }
 
-    $: words = noteContent.split(' ').length;
+    let words = 0;
+    $: if (noteContent.trim().length > 0) {
+        words = noteContent.trim().split(' ').length;
+    }
 </script>
 
 <h3> Add a new note </h3>
@@ -75,7 +78,6 @@
     <div>
         <Button type="primary">Save note</Button>
     </div>
-    
     
 </form>
 
