@@ -38,7 +38,8 @@
 <form on:submit|preventDefault={handleEdit}>
     <input type="text" placeholder="Title" bind:value={selectedNoteId.title}>
     <EmojiSelector on:emoji={emojiOnTitle} />
-    <textarea placeholder= "Type your note" cols="30" rows="10" bind:value={selectedNoteId.noteContent}></textarea>
+    <textarea placeholder= "Type your note" cols="30" rows="10" bind:value={selectedNoteId.noteContent}></textarea><br>
+    <EmojiSelector on:emoji={emojiOnNote} />
     <br>
     <Button type="primary">Save note</Button>
 </form>
