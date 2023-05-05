@@ -56,6 +56,8 @@
     function emojiOnNote(event) {
         noteContent += event.detail
     }
+
+    $: words = noteContent.split(' ').length;
 </script>
 
 <h3> Add a new note </h3>
@@ -67,7 +69,14 @@
     <EmojiSelector on:emoji={emojiOnNote} />
     <div class="errors">{ errors.noteContent }</div>
     <br>
-    <Button type="primary">Save note</Button>
+    <div>
+        {words} words, {noteContent.length} characters
+    </div>
+    <div>
+        <Button type="primary">Save note</Button>
+    </div>
+    
+    
 </form>
 
 <style>
