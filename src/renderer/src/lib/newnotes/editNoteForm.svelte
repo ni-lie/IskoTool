@@ -31,6 +31,7 @@
         noteContent += event.detail
     }
 
+    $: words = selectedNoteId.noteContent.split(' ').length;
 </script>
 
 
@@ -41,6 +42,9 @@
     <textarea placeholder= "Type your note" cols="30" rows="10" bind:value={selectedNoteId.noteContent}></textarea><br>
     <EmojiSelector on:emoji={emojiOnNote} />
     <br>
+    <div>
+        {words} words, {selectedNoteId.noteContent.length} characters
+    </div>
     <Button type="primary">Save note</Button>
 </form>
 
