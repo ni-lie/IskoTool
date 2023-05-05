@@ -21,6 +21,7 @@
     "@electron-toolkit/utils": "^1.0.2",
     "calendarize": "^1.1.1",
     "svelecte": "^3.16.0",
+    "svelte-emoji-selector": "^1.0.1",
     "svelte-spa-router": "^3.3.0"
   },
   "devDependencies": {

@@ -2,6 +2,7 @@
     import NotesStore from "./stores/NotesStore";
     import { createEventDispatcher } from "svelte";
     import Button from "./Button.svelte";
+    import EmojiSelector from 'svelte-emoji-selector';
 
     let dispatch = createEventDispatcher();
 
@@ -47,13 +48,23 @@
             dispatch('addNote');
         }
     };
+
+    function emojiOnTitle(event) {
+        title += event.detail
+    }
+
+    function emojiOnNote(event) {
+        noteContent += event.detail
+    }
 </script>
 
 <h3> Add a new note </h3>
 <form on:submit|preventDefault={handleSubmit}>
     <input type="text" placeholder="Title" bind:value={title}>
+    <EmojiSelector on:emoji={emojiOnTitle} />
     <div class="errors"> { errors.title }</div>
-    <textarea placeholder= "Type your note" cols="30" rows="10" bind:value={noteContent}></textarea>
+    <textarea placeholder= "Type your note" cols="30" rows="10" bind:value={noteContent}></textarea><br>
+    <EmojiSelector on:emoji={emojiOnNote} />
     <div class="errors">{ errors.noteContent }</div>
     <br>
     <Button type="primary">Save note</Button>
