@@ -2,7 +2,7 @@
     import NotesStore from "./stores/NotesStore";
     import { createEventDispatcher } from "svelte";
     import Button from "./Button.svelte";
-    
+    import EmojiSelector from 'svelte-emoji-selector';
     export let selectedNoteId;
 
     let dispatch = createEventDispatcher();
@@ -22,6 +22,15 @@
         dispatch('editNote');
         // console.log(selectedNoteId)
     };
+
+    function emojiOnTitle(event) {
+        title += event.detail
+    }
+
+    function emojiOnNote(event) {
+        noteContent += event.detail
+    }
+
 </script>
 
 
