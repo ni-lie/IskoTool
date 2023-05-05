@@ -32,8 +32,8 @@
     }
 
     let words = 0;
-    $: if (noteContent.trim().length > 0) {
-        words = noteContent.trim().split(' ').length;
+    $: if (selectedNoteId.noteContent.trim().length > 0) {
+        words = selectedNoteId.noteContent.trim().split(' ').length;
     }
 </script>
 
