@@ -31,7 +31,10 @@
         noteContent += event.detail
     }
 
-    $: words = selectedNoteId.noteContent.split(' ').length;
+    let words = 0;
+    $: if (noteContent.trim().length > 0) {
+        words = noteContent.trim().split(' ').length;
+    }
 </script>
 
 
