@@ -14,7 +14,6 @@
 
     const autoClose = false;
 
-
     const handleSubmit = () => {
         valid = true;
         

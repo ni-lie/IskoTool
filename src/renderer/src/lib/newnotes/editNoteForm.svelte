@@ -7,7 +7,7 @@
 
     let dispatch = createEventDispatcher();
 
-    console.log(selectedNoteId)
+    const autoClose = false;
     const handleEdit = (event) => {
         NotesStore.update(currentNotes => {
             let copiedNotes = [...currentNotes];
@@ -38,9 +38,9 @@
 <h3> Edit Note </h3>
 <form on:submit|preventDefault={handleEdit}>
     <input type="text" placeholder="Title" bind:value={selectedNoteId.title}>
-    <EmojiSelector on:emoji={emojiOnTitle} />
+    <EmojiSelector on:emoji={emojiOnTitle} {autoClose}/>
     <textarea placeholder= "Type your note" cols="30" rows="10" bind:value={selectedNoteId.noteContent}></textarea><br>
-    <EmojiSelector on:emoji={emojiOnNote} />
+    <EmojiSelector on:emoji={emojiOnNote} {autoClose}/>
     <br>
     <div>
         {words} words, {selectedNoteId.noteContent.length} characters
