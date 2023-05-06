@@ -73,10 +73,10 @@
 		next = calendarize(new Date(year, month+1), offset);
 	}
 
-	function toToday() {
-		month = today_month;
-		year = today_year;
-		
+	function toDate(gotoMonth, gotoYear) {
+		month = gotoMonth;
+		year = gotoYear;
+
 		prev = calendarize(new Date(year, month-1), offset);
 		current = calendarize(new Date(year, month), offset);
 		next = calendarize(new Date(year, month+1), offset);
@@ -95,7 +95,7 @@
 	<Arrow left on:click={toPrev} />
 	<h4>{months[month]} {year}</h4>
 	<Arrow on:click={toNext} />
-	<button style="position: fixed; left: 2em;" on:click={toToday}>Today</button>
+	<button style="position: fixed; left: 2em;" on:click={() => toDate(today_month, today_year)}>Today</button>
 	<EventsDropdown right />
 </header>
 
