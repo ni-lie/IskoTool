@@ -5,6 +5,7 @@
 	import EventsDropdown from './Events.svelte';
 	import type { Event } from '../../types/event';
 	import ViewEventDialog from '../global-components/DialogBox.svelte';
+	import GoToDateModal from './GoToDateModal.svelte';
 	import { isInRange } from '../isInRange';
 
 	export let today = new Date();
@@ -51,6 +52,10 @@
 	let showModal = false;
 	let eventToView: Event | null = null;
 
+	let showGoToDateModal: boolean = false;
+	let gotoMonth: number = 0;
+	let gotoYear: number = today.getFullYear();
+
 	function toPrev() {
 		[current, next] = [prev, current];
 		
@@ -93,10 +98,12 @@
 
 <header>
 	<Arrow left on:click={toPrev} />
-	<h4>{months[month]} {year}</h4>
+	<!-- svelte-ignore a11y-click-events-have-key-events -->
+	<h4 on:click={() => (showGoToDateModal = true)}>{months[month]} {year}</h4>
 	<Arrow on:click={toNext} />
 	<button style="position: fixed; left: 2em;" on:click={() => toDate(today_month, today_year)}>Today</button>
 	<EventsDropdown right />
+	<GoToDateModal bind:showGoToDateModal bind:gotoMonth bind:gotoYear on:gotoDate={() => {toDate(gotoMonth, gotoYear)}}/>
 </header>
 
 <div class="month">
@@ -162,6 +169,11 @@
 		margin: 0 1rem;
 	}
 	
+	h4:hover {
+		outline: 2px solid gray;
+		border-radius: 2px;
+	}
+
 	.month {
 		display: grid;
 		grid-template-columns: repeat(7, 1fr);
