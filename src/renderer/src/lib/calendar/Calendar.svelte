@@ -6,8 +6,6 @@
 	import type { Event } from '../../types/event';
 	import ViewEventDialog from '../global-components/DialogBox.svelte';
 	import { isInRange } from '../isInRange';
-	import AddEventModal from './AddEventModal.svelte';
-	import addButtonFilePath from '../../images/white_plus_resized.png';
 
 	export let today = new Date();
 	export let year = today.getFullYear();
@@ -24,8 +22,6 @@
 	let prev = calendarize(new Date(year, month-1), offset);
 	let current = calendarize(new Date(year, month), offset);
 	let next = calendarize(new Date(year, month+1), offset);
-	
-	let showAddEventModal = false;
 
 	function displayEvent(events: Event[], day) {
 		for (const e of events) {
@@ -89,10 +85,6 @@
 	function isToday(day) {
 		return today && today_year === year && today_month === month && today_day === day;
 	}
-
-	function addEvent(e) {
-        eventStore.addEvent(e.detail);
-    }
 </script>
 
 <!-- <div>
@@ -135,11 +127,6 @@
 		{/if}
 	{/each}
 </div>
-
-<footer>
-	<button class="add-event" on:click={() => (showAddEventModal = true)}><img class="white-plus" src={addButtonFilePath} alt="Add note"/></button>
-	<AddEventModal bind:showAddEventModal on:addNewEvent={addEvent} />
-</footer>
 
 {#if eventToView !== null}
 	<ViewEventDialog bind:showModal>
@@ -220,33 +207,4 @@
 	.eventdisplay:hover {
 		color: #60bfac;
 	}
-
-	.add-event {
-        color: white;
-        margin: auto;
-        height: 4rem;
-        width: 4rem;
-        padding: 0.1em;
-        border-radius: 50%;
-        border: none;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        background-color: var(--orange-light);
-
-        position: fixed;
-        bottom: 2em;
-        right: 2em;
-        z-index: 5;
-
-        transition: background 0.25s ease-in-out, border 0.25s ease-in-out;
-    }
-
-    .add-event:hover {
-        background: var(--orange-faded);
-        border-color: var(--orange-faded);
-    }
-    .white-plus {
-        height: 50%;
-    }
 </style>
