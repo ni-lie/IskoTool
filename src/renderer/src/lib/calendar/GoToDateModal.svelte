@@ -28,7 +28,7 @@
 	<div on:click|stopPropagation>
 		<!-- svelte-ignore a11y-autofocus -->
 		<button autofocus on:click={() => dialog.close()}>x</button>
-		<h2 class="pop-up">Create New Event</h2>
+		<h2 class="pop-up">Go To...</h2>
 		<form on:submit|preventDefault={handleSubmit}>
 			<h3 class="pop-up">Month</h3>
 			<MonthDropdown bind:month={gotoMonth} />
