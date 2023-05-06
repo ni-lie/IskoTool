@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { createEventDispatcher } from "svelte";
     import { eventStore } from './CalendarStore';
     import type { Event } from '../../types/event';
     import EditEventModal from './EditEventModal.svelte';
@@ -7,6 +8,7 @@
     import Svelecte from 'svelecte';
 
     export let right = false;
+    export let calendar = false;
 
     let showAddEventModal = false;
     let showEditEventModal = false;
@@ -18,6 +20,8 @@
         endTime: '',
         id: '',
 	};
+
+    let dispatch = createEventDispatcher();
 
     $: {
 		const found = $eventStore.find(event => event.id === selectedID);
@@ -38,6 +42,10 @@
 			selectedID = null;
 		}
     }
+
+    function jumptoEvent() {
+        dispatch('jumptoEvent', {startTime: event.startTime});
+    }
 </script>
 
 <section class:right>
@@ -47,6 +55,9 @@
     <button class="fadedtext" disabled={selectedID === null} on:click={() => (showEditEventModal = true)}>Edit Event</button>
     <EditEventModal bind:showEditEventModal bind:event on:editExistingEvent={editEvent} />
     <button disabled={selectedID === null} on:click={deleteEvent}>Delete</button>
+    {#if calendar}
+        <button class="fadedtext" disabled={selectedID === null} on:click={jumptoEvent}>Jump to Event</button>
+    {/if}
 </section>
 
 <style>

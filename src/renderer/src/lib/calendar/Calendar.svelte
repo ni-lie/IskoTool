@@ -88,6 +88,14 @@
 		current = calendarize(new Date(year, month), offset);
 		next = calendarize(new Date(year, month+1), offset);
 	}
+
+	function jumptoEvent(e) {
+		const event = new Date(e.detail.startTime);
+		let event_month = event.getMonth();
+		let event_year = event.getFullYear();
+
+		toDate(event_month, event_year);
+	}
 	
 	function isToday(day) {
 		return today && today_year === year && today_month === month && today_day === day;
@@ -114,7 +122,7 @@
 	<h4 on:click={() => (showGoToDateModal = true)}>{months[month]} {year}</h4>
 	<Arrow on:click={toNext} />
 	<button style="position: fixed; left: 2em;" on:click={() => toDate(today_month, today_year)}>Today</button>
-	<EventsDropdown right />
+	<EventsDropdown right calendar on:jumptoEvent={jumptoEvent} />
 	<GoToDateModal bind:showGoToDateModal bind:gotoMonth bind:gotoYear on:gotoDate={() => {toDate(gotoMonth, gotoYear)}}/>
 </header>
 
