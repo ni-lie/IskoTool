@@ -69,7 +69,12 @@
 
 <header>
 	<h4>Week Planner</h4>
+	<EventsDropdown right />
 </header>
+
+<!-- <div>
+	<EventsDropdown />
+</div> -->
 
 <div class="week">
 	{#each labels as txt, idx (txt)}
@@ -89,10 +94,6 @@
 		</span>
 	{/each}
 </div>
-
-<footer>
-    <EventsDropdown />
-</footer>
 
 {#if eventToView !== null}
 	<ViewEventDialog bind:showModal>

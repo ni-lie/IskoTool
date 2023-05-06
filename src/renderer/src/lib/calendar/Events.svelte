@@ -4,6 +4,8 @@
     import EditEventModal from './EditEventModal.svelte';
     import Svelecte from 'svelecte';
 
+    export let right = false;
+
     let showEditEventModal = false;
     let selectedID: string | null = null;
     let event: Event = {
@@ -31,9 +33,16 @@
     }
 </script>
 
-<section>
+<section class:right>
     <Svelecte options={$eventStore} bind:value={selectedID} valueField="id" labelField="name" placeholder="Select (or search for) an event..."></Svelecte>
     <button class="fadedtext" disabled={selectedID === null} on:click={() => (showEditEventModal = true)}>Edit Event</button>
     <EditEventModal bind:showEditEventModal bind:event on:editExistingEvent={editEvent} />
     <button disabled={selectedID === null} on:click={deleteEvent}>Delete</button>
 </section>
+
+<style>
+    section.right {
+        position: fixed; 
+        right: 2em;
+    }
+</style>

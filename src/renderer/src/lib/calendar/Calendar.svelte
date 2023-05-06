@@ -95,15 +95,16 @@
     }
 </script>
 
-<div>
+<!-- <div>
 	<EventsDropdown />
-</div>
+</div> -->
 
 <header>
 	<Arrow left on:click={toPrev} />
 	<h4>{months[month]} {year}</h4>
 	<Arrow on:click={toNext} />
-	<button style="position: fixed; right: 2em; z-index: 5;" on:click={toToday}>Today</button>
+	<button style="position: fixed; left: 2em;" on:click={toToday}>Today</button>
+	<EventsDropdown right />
 </header>
 
 <div class="month">
