@@ -3,6 +3,7 @@
 	import EventsDropdown from './Events.svelte';
 	import type { Event } from '../../types/event';
 	import ViewEventDialog from '../global-components/DialogBox.svelte';
+	import EditEventModal from './EditEventModal.svelte';
 	import { isInRange } from '../isInRange';
 
 	const today = new Date();
@@ -60,11 +61,22 @@
 	}
 	
 	let showModal = false;
+	let showEditEventModal: boolean = false;
 	let eventToView: Event | null = null;
 
 	function isToday(day) {
 		return today && today_year === year && today_month === month && today_day === day;
 	}
+
+	function editEvent(e) {
+        eventStore.saveEvent(e.detail);
+    }
+
+    function deleteEvent() {
+        if (confirm('Are you sure you want to delete this event?')) {
+			eventStore.deleteEvent(eventToView.id);
+		}
+    }
 </script>
 
 <header>
@@ -107,6 +119,9 @@
 			{:else}
 				<p> End date: {months[new Date(eventToView.endTime).getMonth()]} {new Date(eventToView.endTime).getDate()}, {new Date(eventToView.endTime).getFullYear()}</p>
 			{/if}
+			<button style="position: relative; right: 30em;" on:click={() => (showEditEventModal = true)}>Edit</button>
+			<EditEventModal bind:showEditEventModal bind:event={eventToView} on:editExistingEvent={editEvent} />
+			<button style="position: relative; right: 2em;" on:click={deleteEvent}>Delete</button>
 		</div>
 		
 	</ViewEventDialog>
