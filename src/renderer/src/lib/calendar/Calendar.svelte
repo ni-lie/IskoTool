@@ -78,6 +78,10 @@
 	}
 </script>
 
+<div>
+	<EventsDropdown />
+</div>
+
 <header>
 	<Arrow left on:click={toPrev} />
 	<h4>{months[month]} {year}</h4>
@@ -112,10 +116,6 @@
 		{/if}
 	{/each}
 </div>
-
-<footer>
-    <EventsDropdown />
-</footer>
 
 {#if eventToView !== null}
 	<ViewEventDialog bind:showModal>
