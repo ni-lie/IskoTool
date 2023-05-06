@@ -76,6 +76,15 @@
 		
 		next = calendarize(new Date(year, month+1), offset);
 	}
+
+	function toToday() {
+		month = today_month;
+		year = today_year;
+		
+		prev = calendarize(new Date(year, month-1), offset);
+		current = calendarize(new Date(year, month), offset);
+		next = calendarize(new Date(year, month+1), offset);
+	}
 	
 	function isToday(day) {
 		return today && today_year === year && today_month === month && today_day === day;
@@ -94,6 +103,7 @@
 	<Arrow left on:click={toPrev} />
 	<h4>{months[month]} {year}</h4>
 	<Arrow on:click={toNext} />
+	<button style="position: fixed; right: 2em; z-index: 5;" on:click={toToday}>Today</button>
 </header>
 
 <div class="month">
@@ -126,7 +136,7 @@
 </div>
 
 <footer>
-	<button class="add-note" on:click={() => (showAddEventModal = true)}><img class="white-plus" src={addButtonFilePath} alt="Add note"/></button>
+	<button class="add-event" on:click={() => (showAddEventModal = true)}><img class="white-plus" src={addButtonFilePath} alt="Add note"/></button>
 	<AddEventModal bind:showAddEventModal on:addNewEvent={addEvent} />
 </footer>
 
@@ -210,7 +220,7 @@
 		color: #60bfac;
 	}
 
-	.add-note {
+	.add-event {
         color: white;
         margin: auto;
         height: 4rem;
@@ -231,7 +241,7 @@
         transition: background 0.25s ease-in-out, border 0.25s ease-in-out;
     }
 
-    .add-note:hover {
+    .add-event:hover {
         background: var(--orange-faded);
         border-color: var(--orange-faded);
     }
