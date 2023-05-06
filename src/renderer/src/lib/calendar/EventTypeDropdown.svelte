@@ -5,6 +5,7 @@
 <select bind:value={select}>
     <option value="General">General</option>
     <option value="Birthday">Birthday</option>
+    <option value="Holiday">Holiday</option>
     <option value="Appointment">Appointment</option>
 </select>
 

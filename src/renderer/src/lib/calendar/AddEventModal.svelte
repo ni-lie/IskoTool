@@ -45,8 +45,10 @@
             <EventTypeDropdown bind:select={eventType} />
 			<h3 class="pop-up">Start Time</h3>
 			<input type="datetime-local" bind:value={startTime}><br>
-            <h3 class="pop-up">End Time</h3>
-			<input type="datetime-local" bind:value={endTime}><br>
+			{#if ["General", "Appointment"].includes(eventType)}
+            	<h3 class="pop-up">End Time</h3>
+				<input type="datetime-local" bind:value={endTime}><br>
+			{/if}
 			<input type="submit" value="Confirm" />
 		</form>
 	</div>
