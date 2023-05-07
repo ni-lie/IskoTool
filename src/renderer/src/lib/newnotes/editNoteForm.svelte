@@ -49,7 +49,7 @@
     
     <br>
     <div>
-        {words} words, {selectedNoteId.noteContent.length} characters
+        {words} words, {Array.from(selectedNoteId.noteContent).length} characters
     </div>
     <Button type="primary">Save note</Button>
 </form>
