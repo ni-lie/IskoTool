@@ -64,12 +64,14 @@
 </script>
 
 <h3> Add a new note </h3>
+<EmojiSelector on:emoji={emojiOnTitle} {autoClose} />
+<EmojiSelector on:emoji={emojiOnNote} {autoClose}/>
 <form on:submit|preventDefault={handleSubmit}>
     <input type="text" placeholder="Title" bind:value={title}>
-    <EmojiSelector on:emoji={emojiOnTitle} {autoClose} />
+    
     <div class="errors"> { errors.title }</div>
     <textarea placeholder= "Type your note" cols="30" rows="10" bind:value={noteContent}></textarea><br>
-    <EmojiSelector on:emoji={emojiOnNote} {autoClose}/>
+    
     <div class="errors">{ errors.noteContent }</div>
     <br>
     <div>
