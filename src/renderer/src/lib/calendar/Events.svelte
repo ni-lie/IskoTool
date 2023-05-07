@@ -64,6 +64,7 @@
     section.right {
         position: fixed; 
         right: 2em;
+        z-index: 4;
     }
 
     .add-event {
