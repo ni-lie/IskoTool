@@ -24,11 +24,11 @@
     };
 
     function emojiOnTitle(event) {
-        title += event.detail
+        selectedNoteId.title += event.detail
     }
 
     function emojiOnNote(event) {
-        noteContent += event.detail
+        selectedNoteId.noteContent += event.detail
     }
 
     let words = 0;
