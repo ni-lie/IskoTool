@@ -5,6 +5,8 @@
 	import EventsDropdown from './Events.svelte';
 	import type { Event } from '../../types/event';
 	import ViewEventDialog from '../global-components/DialogBox.svelte';
+	import GoToDateModal from './GoToDateModal.svelte';
+	import EditEventModal from './EditEventModal.svelte';
 	import { isInRange } from '../isInRange';
 
 	export let today = new Date();
@@ -22,7 +24,7 @@
 	let prev = calendarize(new Date(year, month-1), offset);
 	let current = calendarize(new Date(year, month), offset);
 	let next = calendarize(new Date(year, month+1), offset);
-	
+
 	function displayEvent(events: Event[], day) {
 		for (const e of events) {
 			const start = new Date(e.startTime);
@@ -51,6 +53,11 @@
 	let showModal = false;
 	let eventToView: Event | null = null;
 
+	let showEditEventModal: boolean = false;
+	let showGoToDateModal: boolean = false;
+	let gotoMonth: number = 0;
+	let gotoYear: number = today.getFullYear();
+
 	function toPrev() {
 		[current, next] = [prev, current];
 		
@@ -72,16 +79,51 @@
 		
 		next = calendarize(new Date(year, month+1), offset);
 	}
+
+	function toDate(gotoMonth, gotoYear) {
+		month = gotoMonth;
+		year = gotoYear;
+
+		prev = calendarize(new Date(year, month-1), offset);
+		current = calendarize(new Date(year, month), offset);
+		next = calendarize(new Date(year, month+1), offset);
+	}
+
+	function jumptoEvent(e) {
+		const event = new Date(e.detail.startTime);
+		let event_month = event.getMonth();
+		let event_year = event.getFullYear();
+
+		toDate(event_month, event_year);
+	}
 	
 	function isToday(day) {
 		return today && today_year === year && today_month === month && today_day === day;
 	}
+
+	function editEvent(e) {
+        eventStore.saveEvent(e.detail);
+    }
+
+    function deleteEvent() {
+        if (confirm('Are you sure you want to delete this event?')) {
+			eventStore.deleteEvent(eventToView.id);
+		}
+    }
 </script>
+
+<!-- <div>
+	<EventsDropdown />
+</div> -->
 
 <header>
 	<Arrow left on:click={toPrev} />
-	<h4>{months[month]} {year}</h4>
+	<!-- svelte-ignore a11y-click-events-have-key-events -->
+	<h4 on:click={() => (showGoToDateModal = true)}>{months[month]} {year}</h4>
 	<Arrow on:click={toNext} />
+	<button style="position: fixed; left: 2em;" on:click={() => toDate(today_month, today_year)}>Today</button>
+	<EventsDropdown right calendar on:jumptoEvent={jumptoEvent} />
+	<GoToDateModal bind:showGoToDateModal bind:gotoMonth bind:gotoYear on:gotoDate={() => {toDate(gotoMonth, gotoYear)}}/>
 </header>
 
 <div class="month">
@@ -113,10 +155,6 @@
 	{/each}
 </div>
 
-<footer>
-    <EventsDropdown />
-</footer>
-
 {#if eventToView !== null}
 	<ViewEventDialog bind:showModal>
 		<h2 slot="header" class="pop-up">Event details</h2>
@@ -129,6 +167,9 @@
 			{:else}
 				<p> End date: {months[new Date(eventToView.endTime).getMonth()]} {new Date(eventToView.endTime).getDate()}, {new Date(eventToView.endTime).getFullYear()}</p>
 			{/if}
+			<button style="position: relative; right: 30em;" on:click={() => (showEditEventModal = true)}>Edit</button>
+			<EditEventModal bind:showEditEventModal bind:event={eventToView} on:editExistingEvent={editEvent} />
+			<button style="position: relative; right: 2em;" on:click={deleteEvent}>Delete</button>
 		</div>
 		
 	</ViewEventDialog>
@@ -151,6 +192,11 @@
 		margin: 0 1rem;
 	}
 	
+	h4:hover {
+		outline: 2px solid gray;
+		border-radius: 2px;
+	}
+
 	.month {
 		display: grid;
 		grid-template-columns: repeat(7, 1fr);

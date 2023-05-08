@@ -1,57 +1,40 @@
 <script lang="ts">
 	import { createEventDispatcher } from "svelte";
-    import EventTypeDropdown from "./EventTypeDropdown.svelte";
-	import type { Event } from "../../types/event";
+    import MonthDropdown from "./MonthDropdown.svelte";
 
-	export let showAddEventModal: boolean;
+	export let showGoToDateModal: boolean;
+    export let gotoMonth: number;
+    export let gotoYear: number;
+    
 	let dialog: HTMLDialogElement;
-
 	let dispatch = createEventDispatcher();
-    let name = "New Event";
-    let eventType: string;
-    let startTime: string;
-    let endTime: string;
 	
-	$: if (dialog && showAddEventModal) dialog.showModal();
+	$: if (dialog && showGoToDateModal) dialog.showModal();
 
 	function handleSubmit() {
 		// Close the modal for good
 		dialog.close();
 		// Forward the form data to all event listeners
-        dispatch('addNewEvent', {
-			name,
-            eventType,
-			startTime,
-			endTime,
-			id: crypto.randomUUID(),
-		} satisfies Event);
+        dispatch('gotoDate');
     }
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <dialog
 	bind:this={dialog}
-	on:close={() => (showAddEventModal = false)}
+	on:close={() => (showGoToDateModal = false)}
 	on:click|self={() => dialog.close()}
 >
 	<div on:click|stopPropagation>
 		<!-- svelte-ignore a11y-autofocus -->
 		<button autofocus on:click={() => dialog.close()}>x</button>
-		<h2 class="pop-up">Create New Event</h2>
+		<h2 class="pop-up">Go To...</h2>
 		<form on:submit|preventDefault={handleSubmit}>
-			<h3 class="pop-up">Event Name</h3>
-			<input type="text" class="transparent-bg" bind:value={name}><br>
-            <h3 class="pop-up">Event Type</h3>
-            <EventTypeDropdown bind:select={eventType} />
-			<h3 class="pop-up">Start Time</h3>
-			{#if ["General", "Appointment"].includes(eventType)}
-				<input type="datetime-local" bind:value={startTime}><br>
-            	<h3 class="pop-up">End Time</h3>
-				<input type="datetime-local" bind:value={endTime}><br>
-			{:else}
-				<input type="date" bind:value={startTime}><br>
-			{/if}
-			<input type="submit" value="Confirm" />
+			<h3 class="pop-up">Month</h3>
+			<MonthDropdown bind:month={gotoMonth} />
+			<h3 class="pop-up">Year</h3>
+			<input type="number" min=0 max=9999 bind:value={gotoYear}><br>
+			<input type="submit" value="Go">
 		</form>
 	</div>
 </dialog>
