@@ -227,7 +227,8 @@
 	}
 	
 	.date {
-		height: 50px;
+		min-height: 85px;
+		display: table;
 		font-size: 16px;
 		letter-spacing: -1px;
 		border: 1px solid #e6e4e4;
@@ -246,6 +247,7 @@
 	}
 
 	.eventdisplay {
+		display: table-row;
 		font-weight: 600;
 		text-align: center;
 		color: #1c8d76;
