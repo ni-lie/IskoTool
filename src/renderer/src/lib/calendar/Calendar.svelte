@@ -145,7 +145,7 @@
 				{#if current[idxw][idxd] != 0}
 					<span class="date" class:today={isToday(current[idxw][idxd])}>
 						{ current[idxw][idxd] }
-						{#each (getEventsOnDay($eventStore, current[idxw][idxd])) as ev}
+						{#each (getEventsOnDay($eventStore, current[idxw][idxd]).slice(0, 3)) as ev}
 							<div class="eventdisplay"
 							on:keydown
 							on:click={() => { 
@@ -155,6 +155,14 @@
 							{ ev != null ? ev.name : ''}
 							</div>
 						{/each}
+						{#if (getEventsOnDay($eventStore, current[idxw][idxd]).length) > 3}
+							<div class="see-more"
+							on:keydown
+							on:click={() => {
+								showDayEventsModal = true;
+								dayToExpand = new Date(year, month, current[idxw][idxd]);
+							}}> See more... </div>
+						{/if}
 					</span>
 				{:else if (idxw < 1)}
 					<span class="date other">{ prev[prev.length - 1][idxd] }</span>
@@ -258,4 +266,16 @@
 	.eventdisplay:hover {
 		color: #60bfac;
 	}
+
+	.see-more {
+		font-style: italic;
+		font-weight: lighter;
+		color: grey;
+	}
+
+	.see-more:hover {
+		color: rgb(169, 168, 168);
+		user-select: none;
+	}
+
 </style>
