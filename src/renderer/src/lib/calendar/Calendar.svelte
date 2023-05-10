@@ -26,13 +26,22 @@
 	let next = calendarize(new Date(year, month+1), offset);
 
 	let viewEventDialog: HTMLDialogElement;
+	let viewDayEventsDialog: HTMLDialogElement;
 	let gotoDateDialog: HTMLDialogElement;
 	let editEventDialog: HTMLDialogElement;
+	let showDayEventsModal: boolean = false;
 	let showViewEventModal: boolean = false;
 	let showGotoDateModal: boolean = false;
 	let showEditEventModal: boolean = false;
 
 	// let displayWidth = 0;
+	let dayToExpand: Date;
+	let dateDisplayOptions = {
+		month: "long",
+		day: "2-digit",
+		year: "numeric",
+	};
+
 	let eventToView: Event | null = null;
 	function getEventsOnDay(allEvents: Event[], day) {
 		let eventsOnDay: Event[] | null = [];
@@ -192,6 +201,25 @@
 				<EditEventForm slot="contents" bind:event={eventToView} on:editExistingEvent={editEvent} />
 			</DialogBox>
 			<button style="position: relative; right: 2em;" on:click={deleteEvent}>Delete</button>
+		</div>
+		
+	</DialogBox>
+{/if}
+
+{#if dayToExpand !== undefined }
+	<DialogBox bind:showModal={showDayEventsModal} bind:dialog={viewDayEventsDialog}>
+		<h2 slot="header" class="pop-up">Events on { dayToExpand.toLocaleDateString("en-US", dateDisplayOptions) }</h2>
+		<div slot="contents">
+			{#each getEventsOnDay($eventStore, dayToExpand.getDate()) as ev}
+				<div class="eventdisplay"
+				on:keydown
+				on:click={() => {
+					showViewEventModal = true;
+					eventToView = ev;
+					}}>
+				{ ev.name }
+				</div>
+			{/each}
 		</div>
 		
 	</DialogBox>
