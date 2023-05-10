@@ -2,16 +2,19 @@
     import { createEventDispatcher } from "svelte";
     import { eventStore } from './CalendarStore';
     import type { Event } from '../../types/event';
+    import DialogBox from '../global-components/DialogBox.svelte';
     import EditEventModal from './EditEventModal.svelte';
-    import AddEventModal from './AddEventModal.svelte';
+    import AddEventForm from './AddEventForm.svelte';
 	import addButtonFilePath from '../../images/white_plus_resized.png';
     import Svelecte from 'svelecte';
 
     export let right = false;
     export let calendar = false;
 
-    let showAddEventModal = false;
-    let showEditEventModal = false;
+    let showAddEventModal: boolean = false;
+    let showEditEventModal: boolean = false;
+    let addEventDialog: HTMLDialogElement;
+    let editEventDialog: HTMLDialogElement;
     let selectedID: string | null = null;
     let event: Event = {
 		name: '',
@@ -29,6 +32,7 @@
 	}
 
     function addEvent(e) {
+        addEventDialog.close();
         eventStore.addEvent(e.detail);
     }
 
@@ -51,7 +55,10 @@
 <section class:right>
     <Svelecte options={$eventStore} bind:value={selectedID} valueField="id" labelField="name" placeholder="Select (or search for) an event..."></Svelecte>
     <button class="add-event" on:click={() => (showAddEventModal = true)}><img class="white-plus" src={addButtonFilePath} alt="Add note"/></button>
-	<AddEventModal bind:showAddEventModal on:addNewEvent={addEvent} />
+    <DialogBox bind:showModal={showAddEventModal} bind:dialog={addEventDialog}>
+        <h2 slot="header" class="pop-up">Create New Event</h2>
+        <AddEventForm slot="contents" on:addNewEvent={addEvent} />
+    </DialogBox>
     <button class="fadedtext" disabled={selectedID === null} on:click={() => (showEditEventModal = true)}>Edit Event</button>
     <EditEventModal bind:showEditEventModal bind:event on:editExistingEvent={editEvent} />
     <button disabled={selectedID === null} on:click={deleteEvent}>Delete</button>
