@@ -145,13 +145,16 @@
 				{#if current[idxw][idxd] != 0}
 					<span class="date" class:today={isToday(current[idxw][idxd])}>
 						{ current[idxw][idxd] }
-						<div class="eventdisplay" on:keydown
+						{#each (getEventsOnDay($eventStore, current[idxw][idxd])) as ev}
+							<div class="eventdisplay"
+							on:keydown
 							on:click={() => { 
 								showViewEventModal = true;
-								eventToView = displayEvent($eventStore, current[idxw][idxd]);
+								eventToView = ev;
 								}}>
-							{ displayEvent($eventStore, current[idxw][idxd]) != null ? displayEvent($eventStore, current[idxw][idxd]).name : ''}
-						</div>
+							{ ev != null ? ev.name : ''}
+							</div>
+						{/each}
 					</span>
 				{:else if (idxw < 1)}
 					<span class="date other">{ prev[prev.length - 1][idxd] }</span>
