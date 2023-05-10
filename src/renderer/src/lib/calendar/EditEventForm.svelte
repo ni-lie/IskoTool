@@ -13,6 +13,9 @@
 	};
 	
 	function handleSubmit() {
+		if (["Birthday", "Holiday"].includes(event.eventType)) {
+			event.endTime = undefined;
+		}
 		// Forward the form data to all event listeners
         dispatch('editExistingEvent', event satisfies Event);
     }
