@@ -2,8 +2,8 @@
 	import { eventStore } from './CalendarStore';
 	import EventsDropdown from './Events.svelte';
 	import type { Event } from '../../types/event';
-	import ViewEventDialog from '../global-components/DialogBox.svelte';
-	import EditEventModal from './EditEventModal.svelte';
+	import DialogBox from '../global-components/DialogBox.svelte';
+	import EditEventForm from './EditEventForm.svelte';
 	import { isInRange } from '../isInRange';
 
 	const today = new Date();
@@ -18,6 +18,9 @@
 	$: today_month = today && today.getMonth();
 	$: today_year = today && today.getFullYear();
 	$: today_day = today && today.getDate();
+
+	let viewEventDialog: HTMLDialogElement;
+	let editEventDialog: HTMLDialogElement;
 
 	// Populate the currentWeek array with dates relative to today's date.
 	let currentWeek: Date[] = [];
@@ -69,12 +72,14 @@
 	}
 
 	function editEvent(e) {
+		editEventDialog.close();
         eventStore.saveEvent(e.detail);
     }
 
     function deleteEvent() {
         if (confirm('Are you sure you want to delete this event?')) {
 			eventStore.deleteEvent(eventToView.id);
+			viewEventDialog.close();
 		}
     }
 </script>
@@ -108,7 +113,7 @@
 </div>
 
 {#if eventToView !== null}
-	<ViewEventDialog bind:showModal>
+	<DialogBox bind:showModal bind:dialog={viewEventDialog}>
 		<h2 slot="header" class="pop-up">Event details</h2>
 		<div slot="contents">
 			<p> Name: {eventToView.name} </p>
@@ -120,11 +125,14 @@
 				<p> End date: {months[new Date(eventToView.endTime).getMonth()]} {new Date(eventToView.endTime).getDate()}, {new Date(eventToView.endTime).getFullYear()}</p>
 			{/if}
 			<button style="position: relative; right: 30em;" on:click={() => (showEditEventModal = true)}>Edit</button>
-			<EditEventModal bind:showEditEventModal bind:event={eventToView} on:editExistingEvent={editEvent} />
+			<DialogBox bind:showModal={showEditEventModal} bind:dialog={editEventDialog}>
+				<h2 slot="header" class="pop-up">Edit Event</h2>
+				<EditEventForm slot="contents" bind:event={eventToView} on:editExistingEvent={editEvent} />
+			</DialogBox>
 			<button style="position: relative; right: 2em;" on:click={deleteEvent}>Delete</button>
 		</div>
 		
-	</ViewEventDialog>
+	</DialogBox>
 {/if}
 
 <style>

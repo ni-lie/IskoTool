@@ -4,9 +4,9 @@
 	import Arrow from './Arrow.svelte';
 	import EventsDropdown from './Events.svelte';
 	import type { Event } from '../../types/event';
-	import ViewEventDialog from '../global-components/DialogBox.svelte';
-	import GoToDateModal from './GoToDateModal.svelte';
-	import EditEventModal from './EditEventModal.svelte';
+	import DialogBox from '../global-components/DialogBox.svelte';
+	import GotoDateForm from './GotoDateForm.svelte';
+	import EditEventForm from './EditEventForm.svelte';
 	import { isInRange } from '../isInRange';
 
 	export let today = new Date();
@@ -24,6 +24,10 @@
 	let prev = calendarize(new Date(year, month-1), offset);
 	let current = calendarize(new Date(year, month), offset);
 	let next = calendarize(new Date(year, month+1), offset);
+
+	let viewEventDialog: HTMLDialogElement;
+	let gotoDateDialog: HTMLDialogElement;
+	let editEventDialog: HTMLDialogElement;
 
 	function displayEvent(events: Event[], day) {
 		for (const e of events) {
@@ -50,11 +54,10 @@
 		return null;
 	}
 	
-	let showModal = false;
+	let showViewEventModal = false;
 	let eventToView: Event | null = null;
-
 	let showEditEventModal: boolean = false;
-	let showGoToDateModal: boolean = false;
+	let showGotoDateModal: boolean = false;
 	let gotoMonth: number = 0;
 	let gotoYear: number = today.getFullYear();
 
@@ -102,12 +105,14 @@
 	}
 
 	function editEvent(e) {
+		editEventDialog.close();
         eventStore.saveEvent(e.detail);
     }
 
     function deleteEvent() {
         if (confirm('Are you sure you want to delete this event?')) {
 			eventStore.deleteEvent(eventToView.id);
+			viewEventDialog.close();
 		}
     }
 </script>
@@ -119,11 +124,14 @@
 <header>
 	<Arrow left on:click={toPrev} />
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
-	<h4 on:click={() => (showGoToDateModal = true)}>{months[month]} {year}</h4>
+	<h4 on:click={() => (showGotoDateModal = true)}>{months[month]} {year}</h4>
 	<Arrow on:click={toNext} />
 	<button style="position: fixed; left: 2em;" on:click={() => toDate(today_month, today_year)}>Today</button>
 	<EventsDropdown right calendar on:jumptoEvent={jumptoEvent} />
-	<GoToDateModal bind:showGoToDateModal bind:gotoMonth bind:gotoYear on:gotoDate={() => {toDate(gotoMonth, gotoYear)}}/>
+	<DialogBox bind:showModal={showGotoDateModal} bind:dialog={gotoDateDialog}>
+		<GotoDateForm slot="contents" bind:gotoMonth bind:gotoYear 
+		on:gotoDate={() => {toDate(gotoMonth, gotoYear); gotoDateDialog.close()}} />
+	</DialogBox>
 </header>
 
 <div class="month">
@@ -139,7 +147,7 @@
 						{ current[idxw][idxd] }
 						<div class="eventdisplay" on:keydown
 							on:click={() => { 
-								showModal = true;
+								showViewEventModal = true;
 								eventToView = displayEvent($eventStore, current[idxw][idxd]);
 								}}>
 							{ displayEvent($eventStore, current[idxw][idxd]) != null ? displayEvent($eventStore, current[idxw][idxd]).name : ''}
@@ -156,7 +164,7 @@
 </div>
 
 {#if eventToView !== null}
-	<ViewEventDialog bind:showModal>
+	<DialogBox bind:showModal={showViewEventModal} bind:dialog={viewEventDialog}>
 		<h2 slot="header" class="pop-up">Event details</h2>
 		<div slot="contents">
 			<p> Name: {eventToView.name} </p>
@@ -168,11 +176,14 @@
 				<p> End date: {months[new Date(eventToView.endTime).getMonth()]} {new Date(eventToView.endTime).getDate()}, {new Date(eventToView.endTime).getFullYear()}</p>
 			{/if}
 			<button style="position: relative; right: 30em;" on:click={() => (showEditEventModal = true)}>Edit</button>
-			<EditEventModal bind:showEditEventModal bind:event={eventToView} on:editExistingEvent={editEvent} />
+			<DialogBox bind:showModal={showEditEventModal} bind:dialog={editEventDialog}>
+				<h2 slot="header" class="pop-up">Edit Event</h2>
+				<EditEventForm slot="contents" bind:event={eventToView} on:editExistingEvent={editEvent} />
+			</DialogBox>
 			<button style="position: relative; right: 2em;" on:click={deleteEvent}>Delete</button>
 		</div>
 		
-	</ViewEventDialog>
+	</DialogBox>
 {/if}
 
 <style>
