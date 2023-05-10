@@ -26,7 +26,9 @@
 </script>
 
 <Card showModal={showModal} toggleEdit={toggleEdit} showAddNoteForm={showAddNoteForm} on:click={() => handleCardClick(note)}>
+    
     <div class="note">
+        <div class="{note.pinned ? '' : 'unpinned'}">📌</div>
         <h4>{note.title}</h4>
         <p>{note.noteContent}</p>
         <div class = "delete">
@@ -66,6 +68,10 @@
         flex-basis: 75%;
         flex-shrink: 1;
     }
+    .unpinned {
+        display: none;
+    }
+
     /* .note.title, .note-content{
         background: #fafafa;
         cursor: pointer;
