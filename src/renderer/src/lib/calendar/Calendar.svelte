@@ -5,7 +5,7 @@
 	import EventsDropdown from './Events.svelte';
 	import type { Event } from '../../types/event';
 	import DialogBox from '../global-components/DialogBox.svelte';
-	import GoToDateModal from './GoToDateModal.svelte';
+	import GotoDateForm from './GotoDateForm.svelte';
 	import EditEventModal from './EditEventModal.svelte';
 	import { isInRange } from '../isInRange';
 
@@ -53,11 +53,10 @@
 		return null;
 	}
 	
-	let showModal = false;
+	let showViewEventModal = false;
 	let eventToView: Event | null = null;
-
 	let showEditEventModal: boolean = false;
-	let showGoToDateModal: boolean = false;
+	let showGotoDateModal: boolean = false;
 	let gotoMonth: number = 0;
 	let gotoYear: number = today.getFullYear();
 
@@ -123,11 +122,14 @@
 <header>
 	<Arrow left on:click={toPrev} />
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
-	<h4 on:click={() => (showGoToDateModal = true)}>{months[month]} {year}</h4>
+	<h4 on:click={() => (showGotoDateModal = true)}>{months[month]} {year}</h4>
 	<Arrow on:click={toNext} />
 	<button style="position: fixed; left: 2em;" on:click={() => toDate(today_month, today_year)}>Today</button>
 	<EventsDropdown right calendar on:jumptoEvent={jumptoEvent} />
-	<GoToDateModal bind:showGoToDateModal bind:gotoMonth bind:gotoYear on:gotoDate={() => {toDate(gotoMonth, gotoYear)}}/>
+	<DialogBox bind:showModal={showGotoDateModal} bind:dialog={gotoDateDialog}>
+		<GotoDateForm slot="contents" bind:gotoMonth bind:gotoYear 
+		on:gotoDate={() => {toDate(gotoMonth, gotoYear); gotoDateDialog.close()}} />
+	</DialogBox>
 </header>
 
 <div class="month">
@@ -143,7 +145,7 @@
 						{ current[idxw][idxd] }
 						<div class="eventdisplay" on:keydown
 							on:click={() => { 
-								showModal = true;
+								showViewEventModal = true;
 								eventToView = displayEvent($eventStore, current[idxw][idxd]);
 								}}>
 							{ displayEvent($eventStore, current[idxw][idxd]) != null ? displayEvent($eventStore, current[idxw][idxd]).name : ''}
@@ -160,7 +162,7 @@
 </div>
 
 {#if eventToView !== null}
-	<DialogBox bind:showModal bind:dialog={viewEventDialog}>
+	<DialogBox bind:showModal={showViewEventModal} bind:dialog={viewEventDialog}>
 		<h2 slot="header" class="pop-up">Event details</h2>
 		<div slot="contents">
 			<p> Name: {eventToView.name} </p>
