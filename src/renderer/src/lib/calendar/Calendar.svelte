@@ -4,7 +4,7 @@
 	import Arrow from './Arrow.svelte';
 	import EventsDropdown from './Events.svelte';
 	import type { Event } from '../../types/event';
-	import ViewEventDialog from '../global-components/DialogBox.svelte';
+	import DialogBox from '../global-components/DialogBox.svelte';
 	import GoToDateModal from './GoToDateModal.svelte';
 	import EditEventModal from './EditEventModal.svelte';
 	import { isInRange } from '../isInRange';
@@ -24,6 +24,9 @@
 	let prev = calendarize(new Date(year, month-1), offset);
 	let current = calendarize(new Date(year, month), offset);
 	let next = calendarize(new Date(year, month+1), offset);
+
+	let viewEventDialog: HTMLDialogElement;
+	let gotoDateDialog: HTMLDialogElement;
 
 	function displayEvent(events: Event[], day) {
 		for (const e of events) {
@@ -108,6 +111,7 @@
     function deleteEvent() {
         if (confirm('Are you sure you want to delete this event?')) {
 			eventStore.deleteEvent(eventToView.id);
+			viewEventDialog.close();
 		}
     }
 </script>
@@ -156,7 +160,7 @@
 </div>
 
 {#if eventToView !== null}
-	<ViewEventDialog bind:showModal>
+	<DialogBox bind:showModal bind:dialog={viewEventDialog}>
 		<h2 slot="header" class="pop-up">Event details</h2>
 		<div slot="contents">
 			<p> Name: {eventToView.name} </p>
@@ -172,7 +176,7 @@
 			<button style="position: relative; right: 2em;" on:click={deleteEvent}>Delete</button>
 		</div>
 		
-	</ViewEventDialog>
+	</DialogBox>
 {/if}
 
 <style>

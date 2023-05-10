@@ -2,7 +2,7 @@
 	import { eventStore } from './CalendarStore';
 	import EventsDropdown from './Events.svelte';
 	import type { Event } from '../../types/event';
-	import ViewEventDialog from '../global-components/DialogBox.svelte';
+	import DialogBox from '../global-components/DialogBox.svelte';
 	import EditEventModal from './EditEventModal.svelte';
 	import { isInRange } from '../isInRange';
 
@@ -18,6 +18,8 @@
 	$: today_month = today && today.getMonth();
 	$: today_year = today && today.getFullYear();
 	$: today_day = today && today.getDate();
+
+	let viewEventDialog: HTMLDialogElement;
 
 	// Populate the currentWeek array with dates relative to today's date.
 	let currentWeek: Date[] = [];
@@ -75,6 +77,7 @@
     function deleteEvent() {
         if (confirm('Are you sure you want to delete this event?')) {
 			eventStore.deleteEvent(eventToView.id);
+			viewEventDialog.close();
 		}
     }
 </script>
@@ -108,7 +111,7 @@
 </div>
 
 {#if eventToView !== null}
-	<ViewEventDialog bind:showModal>
+	<DialogBox bind:showModal bind:dialog={viewEventDialog}>
 		<h2 slot="header" class="pop-up">Event details</h2>
 		<div slot="contents">
 			<p> Name: {eventToView.name} </p>
@@ -124,7 +127,7 @@
 			<button style="position: relative; right: 2em;" on:click={deleteEvent}>Delete</button>
 		</div>
 		
-	</ViewEventDialog>
+	</DialogBox>
 {/if}
 
 <style>
