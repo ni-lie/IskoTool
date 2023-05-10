@@ -6,7 +6,7 @@
 	import type { Event } from '../../types/event';
 	import DialogBox from '../global-components/DialogBox.svelte';
 	import GotoDateForm from './GotoDateForm.svelte';
-	import EditEventModal from './EditEventModal.svelte';
+	import EditEventForm from './EditEventForm.svelte';
 	import { isInRange } from '../isInRange';
 
 	export let today = new Date();
@@ -27,6 +27,7 @@
 
 	let viewEventDialog: HTMLDialogElement;
 	let gotoDateDialog: HTMLDialogElement;
+	let editEventDialog: HTMLDialogElement;
 
 	function displayEvent(events: Event[], day) {
 		for (const e of events) {
@@ -104,6 +105,7 @@
 	}
 
 	function editEvent(e) {
+		editEventDialog.close();
         eventStore.saveEvent(e.detail);
     }
 
@@ -174,7 +176,10 @@
 				<p> End date: {months[new Date(eventToView.endTime).getMonth()]} {new Date(eventToView.endTime).getDate()}, {new Date(eventToView.endTime).getFullYear()}</p>
 			{/if}
 			<button style="position: relative; right: 30em;" on:click={() => (showEditEventModal = true)}>Edit</button>
-			<EditEventModal bind:showEditEventModal bind:event={eventToView} on:editExistingEvent={editEvent} />
+			<DialogBox bind:showModal={showEditEventModal} bind:dialog={editEventDialog}>
+				<h2 slot="header" class="pop-up">Edit Event</h2>
+				<EditEventForm slot="contents" bind:event={eventToView} on:editExistingEvent={editEvent} />
+			</DialogBox>
 			<button style="position: relative; right: 2em;" on:click={deleteEvent}>Delete</button>
 		</div>
 		

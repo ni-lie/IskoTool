@@ -3,7 +3,7 @@
     import { eventStore } from './CalendarStore';
     import type { Event } from '../../types/event';
     import DialogBox from '../global-components/DialogBox.svelte';
-    import EditEventModal from './EditEventModal.svelte';
+    import EditEventForm from './EditEventForm.svelte';
     import AddEventForm from './AddEventForm.svelte';
 	import addButtonFilePath from '../../images/white_plus_resized.png';
     import Svelecte from 'svelecte';
@@ -15,6 +15,7 @@
     let showEditEventModal: boolean = false;
     let addEventDialog: HTMLDialogElement;
     let editEventDialog: HTMLDialogElement;
+    
     let selectedID: string | null = null;
     let event: Event = {
 		name: '',
@@ -37,6 +38,7 @@
     }
 
     function editEvent(e) {
+        editEventDialog.close();
         eventStore.saveEvent(e.detail);
     }
 
@@ -60,7 +62,10 @@
         <AddEventForm slot="contents" on:addNewEvent={addEvent} />
     </DialogBox>
     <button class="fadedtext" disabled={selectedID === null} on:click={() => (showEditEventModal = true)}>Edit Event</button>
-    <EditEventModal bind:showEditEventModal bind:event on:editExistingEvent={editEvent} />
+    <DialogBox bind:showModal={showEditEventModal} bind:dialog={editEventDialog}>
+        <h2 slot="header" class="pop-up">Edit Event</h2>
+        <EditEventForm slot="contents" bind:event on:editExistingEvent={editEvent} />
+    </DialogBox>
     <button disabled={selectedID === null} on:click={deleteEvent}>Delete</button>
     {#if calendar}
         <button class="fadedtext" disabled={selectedID === null} on:click={jumptoEvent}>Jump to Event</button>

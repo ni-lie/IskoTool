@@ -3,7 +3,7 @@
 	import EventsDropdown from './Events.svelte';
 	import type { Event } from '../../types/event';
 	import DialogBox from '../global-components/DialogBox.svelte';
-	import EditEventModal from './EditEventModal.svelte';
+	import EditEventForm from './EditEventForm.svelte';
 	import { isInRange } from '../isInRange';
 
 	const today = new Date();
@@ -20,6 +20,7 @@
 	$: today_day = today && today.getDate();
 
 	let viewEventDialog: HTMLDialogElement;
+	let editEventDialog: HTMLDialogElement;
 
 	// Populate the currentWeek array with dates relative to today's date.
 	let currentWeek: Date[] = [];
@@ -71,6 +72,7 @@
 	}
 
 	function editEvent(e) {
+		editEventDialog.close();
         eventStore.saveEvent(e.detail);
     }
 
@@ -123,7 +125,10 @@
 				<p> End date: {months[new Date(eventToView.endTime).getMonth()]} {new Date(eventToView.endTime).getDate()}, {new Date(eventToView.endTime).getFullYear()}</p>
 			{/if}
 			<button style="position: relative; right: 30em;" on:click={() => (showEditEventModal = true)}>Edit</button>
-			<EditEventModal bind:showEditEventModal bind:event={eventToView} on:editExistingEvent={editEvent} />
+			<DialogBox bind:showModal={showEditEventModal} bind:dialog={editEventDialog}>
+				<h2 slot="header" class="pop-up">Edit Event</h2>
+				<EditEventForm slot="contents" bind:event={eventToView} on:editExistingEvent={editEvent} />
+			</DialogBox>
 			<button style="position: relative; right: 2em;" on:click={deleteEvent}>Delete</button>
 		</div>
 		
