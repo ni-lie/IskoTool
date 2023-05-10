@@ -117,10 +117,6 @@
     }
 </script>
 
-<!-- <div>
-	<EventsDropdown />
-</div> -->
-
 <header>
 	<Arrow left on:click={toPrev} />
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -139,9 +135,9 @@
 		<span class="label">{ labels[(idx + offset) % 7] }</span>
 	{/each}
 
-	{#each { length:6 } as w,idxw (idxw)}
+	{#each { length:6 } as _,idxw (idxw)}
 		{#if current[idxw]}
-			{#each { length:7 } as d,idxd (idxd)}
+			{#each { length:7 } as _,idxd (idxd)}
 				{#if current[idxw][idxd] != 0}
 					<span class="date" class:today={isToday(current[idxw][idxd])}>
 						{ current[idxw][idxd] }
@@ -228,7 +224,6 @@
 		font-size: 16px;
 		letter-spacing: -1px;
 		border: 1px solid #e6e4e4;
-		padding-right: 4px;
 		font-weight: 700;
 		padding: 0.5rem;
 	}
@@ -247,6 +242,7 @@
 		font-weight: 600;
 		text-align: center;
 		color: #1c8d76;
+		border-radius: 4px;
 		user-select: none;
 	}
 
