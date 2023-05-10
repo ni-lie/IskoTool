@@ -28,8 +28,12 @@
 	let viewEventDialog: HTMLDialogElement;
 	let gotoDateDialog: HTMLDialogElement;
 	let editEventDialog: HTMLDialogElement;
+	let showViewEventModal: boolean = false;
+	let showGotoDateModal: boolean = false;
+	let showEditEventModal: boolean = false;
 
 	// let displayWidth = 0;
+	let eventToView: Event | null = null;
 	function getEventsOnDay(allEvents: Event[], day) {
 		let eventsOnDay: Event[] | null = [];
 
@@ -58,13 +62,6 @@
 		return eventsOnDay;
 	}
 	
-	let showViewEventModal = false;
-	let eventToView: Event | null = null;
-	let showEditEventModal: boolean = false;
-	let showGotoDateModal: boolean = false;
-	let gotoMonth: number = 0;
-	let gotoYear: number = today.getFullYear();
-
 	function toPrev() {
 		[current, next] = [prev, current];
 		
@@ -86,6 +83,9 @@
 		
 		next = calendarize(new Date(year, month+1), offset);
 	}
+
+	let gotoMonth: number = 0;
+	let gotoYear: number = today.getFullYear();
 
 	function toDate(gotoMonth, gotoYear) {
 		month = gotoMonth;
