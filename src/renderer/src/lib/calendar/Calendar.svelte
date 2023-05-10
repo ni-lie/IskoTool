@@ -29,8 +29,11 @@
 	let gotoDateDialog: HTMLDialogElement;
 	let editEventDialog: HTMLDialogElement;
 
-	function displayEvent(events: Event[], day) {
-		for (const e of events) {
+	// let displayWidth = 0;
+	function getEventsOnDay(allEvents: Event[], day) {
+		let eventsOnDay: Event[] | null = [];
+
+		for (const e of allEvents) {
 			const start = new Date(e.startTime);
 			const startYr = start.getFullYear();
 			const startMth = start.getMonth()+1;
@@ -43,15 +46,16 @@
 				const endMth = end.getMonth()+1;
 				const endDay = end.getDate();
 				if (isInRange(year, startYr, endYr) && isInRange(month+1, startMth, endMth) && isInRange(day, startDay, endDay)) {
-					return e;
+					eventsOnDay.push(e);
 				}
 			}
 			// Display a one-day event
-			if (startYr == year && startMth == month+1 && startDay == day) {
-				return e;
+			else if (startYr == year && startMth == month+1 && startDay == day) {
+				// displayWidth = (new Date(e.endTime).getDate() - startDay) + 1;
+				eventsOnDay.push(e);
 			}
 		}
-		return null;
+		return eventsOnDay;
 	}
 	
 	let showViewEventModal = false;
