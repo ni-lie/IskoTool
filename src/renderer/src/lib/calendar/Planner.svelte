@@ -95,7 +95,7 @@
 
 <div class="week">
 	{#each labels as txt, idx (txt)}
-		<span class="label">{ labels[(idx + offset) % 7] }</span>
+		<span class="label" class:today={idx==weekday}>{ labels[(idx + offset) % 7] }</span>
 	{/each}
 
 	{#each { length:7 } as d,idxd (idxd)}
@@ -185,10 +185,8 @@
 		border-bottom: 0px;
 	}
 
-	.date.today {
-		color: #5286fa;
-		background: #c4d9fd;
-		border-color: currentColor;
+	.label.today {
+		color: #DFA46D;
 	}
 
 	.eventdisplay {
