@@ -21,7 +21,7 @@
         <option value="Holiday">Holiday</option>
         <option value="Appointment">Appointment</option>
     </select>
-    <img class="arrow" class:expanded={active} src={test} alt='ff'>
+    <img class="arrow" class:expanded={active} src={dropdownArrow} alt='ff'>
 </div>
 
 <style>
