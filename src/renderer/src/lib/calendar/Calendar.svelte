@@ -124,7 +124,7 @@
 <header>
 	<Arrow left on:click={toPrev} />
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
-	<h4 on:click={() => (showGotoDateModal = true)}>{months[month]} {year}</h4>
+	<h4 class="date-display" on:click={() => (showGotoDateModal = true)}>{months[month]} {year}</h4>
 	<Arrow on:click={toNext} />
 	<button style="position: fixed; left: 2em;" on:click={() => toDate(today_month, today_year)}>Today</button>
 	<EventsDropdown right calendar on:jumptoEvent={jumptoEvent} />
@@ -209,6 +209,7 @@
 	}
 
 	.month {
+		height: 100%;
 		display: grid;
 		grid-template-columns: repeat(7, 1fr);
 		text-align: right;
@@ -217,20 +218,27 @@
 	
 	.label {
 		font-weight: 300;
-		text-align: center;
+		text-align: left;
 		text-transform: uppercase;
 		margin-bottom: 0.5rem;
 		opacity: 0.6;
 	}
 	
 	.date {
-		height: 50px;
+		height: 6rem;
 		font-size: 16px;
 		letter-spacing: -1px;
-		border: 1px solid #e6e4e4;
+		text-align: left;
+		/*border: 1px solid #e6e4e4;*/
 		padding-right: 4px;
-		font-weight: 700;
+		font-weight: 500;
 		padding: 0.5rem;
+		font-family: 'Space Grotesk';
+	}
+
+	.date-display {
+		color: var(--evergreen-dark);
+		width: 9em;
 	}
 	
 	.date.today {

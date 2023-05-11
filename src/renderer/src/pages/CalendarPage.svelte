@@ -6,3 +6,7 @@
 <main>
     <Calendar />
 </main>
+
+<style>
+    
+</style>
