@@ -306,16 +306,17 @@
 	.eventdisplay {
 		display: grid;
 		margin: 1.75px;
-		font-weight: 600;
+		padding: 1%;
+		font-weight: 200;
 		text-align: center;
-		color: #1c8d76;
-		background-color: white;
+		background-color: #1c8d76;
+		color: white;
 		border-radius: 4px;
 		user-select: none;
 	}
 
 	.eventdisplay:hover {
-		color: #60bfac;
+		background-color: #60bfac;
 	}
 
 	.see-more {
