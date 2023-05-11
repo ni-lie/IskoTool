@@ -147,8 +147,7 @@
 	h4 {
 		display: block;
 		text-align: center;
-		text-transform: uppercase;
-		font-size: 140%;
+		font-size: 240%;
 		margin: 0 1rem;
 	}
 	
