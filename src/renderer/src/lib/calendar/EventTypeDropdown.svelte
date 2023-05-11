@@ -1,6 +1,6 @@
 <script lang="ts">
     export let select: string;
-    import test from '../../images/placeholder.png';
+    import dropdownArrow from '../../images/green_arrow.png';
 
     let active = false;
 	
