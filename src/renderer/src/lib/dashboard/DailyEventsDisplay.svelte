@@ -7,6 +7,7 @@
     let today_day = today.getDate();
     let today_month = today.getMonth();
     let today_year = today.getFullYear();
+    let eventTime;
 
     for (const event of $eventStore) {
         const start = new Date(event.startTime);
@@ -51,12 +52,12 @@
                 <div class="event">
                     <h3>{event.name}</h3>
                 
-                    {#if getEventTime(event) != null}
+                    {#if (eventTime = getEventTime(event)) != null}
                         <p class="time">
-                            {getEventTime(event)[0]}
+                            {eventTime[0]}
                         
-                            {#if getEventTime(event)[1] != null}
-                                - {getEventTime(event)[1]}
+                            {#if eventTime[1] != null}
+                                - {eventTime[1]}
                             {/if}
                         </p>
                     {/if}
