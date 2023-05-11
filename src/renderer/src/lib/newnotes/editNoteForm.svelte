@@ -2,13 +2,13 @@
     import NotesStore from "./stores/NotesStore";
     import { createEventDispatcher } from "svelte";
     import Button from "./Button.svelte";
-    
+    import EmojiSelector from 'svelte-emoji-selector';
     export let selectedNoteId;
 
     let dispatch = createEventDispatcher();
 
-    console.log(selectedNoteId)
-    const handleEdit = (event) => {
+    const autoClose = false;
+    const handleEdit = () => {
         NotesStore.update(currentNotes => {
             let copiedNotes = [...currentNotes];
             let noteToBeEdited = copiedNotes.find(note => note.id == selectedNoteId.id);
@@ -22,14 +22,35 @@
         dispatch('editNote');
         // console.log(selectedNoteId)
     };
+
+    function emojiOnTitle(event) {
+        selectedNoteId.title += event.detail
+    }
+
+    function emojiOnNote(event) {
+        selectedNoteId.noteContent += event.detail
+    }
+
+    let words = 0;
+    $: if (selectedNoteId.noteContent.trim().length > 0) {
+        words = selectedNoteId.noteContent.trim().split(' ').length;
+    }
+
+    
 </script>
 
-
+<EmojiSelector on:emoji={emojiOnTitle} {autoClose} />
+<EmojiSelector on:emoji={emojiOnNote} {autoClose}/>
 <h3> Edit Note </h3>
 <form on:submit|preventDefault={handleEdit}>
     <input type="text" placeholder="Title" bind:value={selectedNoteId.title}>
-    <textarea placeholder= "Type your note" cols="30" rows="10" bind:value={selectedNoteId.noteContent}></textarea>
+    
+    <textarea placeholder= "Type your note" cols="30" rows="10" bind:value={selectedNoteId.noteContent}></textarea><br>
+    
     <br>
+    <div>
+        {words} words, {Array.from(selectedNoteId.noteContent).length} characters
+    </div>
     <Button type="primary">Save note</Button>
 </form>
 

@@ -2,6 +2,7 @@
     import NotesStore from "./stores/NotesStore";
     import { createEventDispatcher } from "svelte";
     import Button from "./Button.svelte";
+    import EmojiSelector from 'svelte-emoji-selector';
 
     let dispatch = createEventDispatcher();
 
@@ -9,9 +10,9 @@
     let noteContent = '';
 
     let valid = false;
-    // let fields = { title: '', noteContent: ''};
     let errors = { title: '', noteContent: ''};
 
+    const autoClose = false;
 
     const handleSubmit = () => {
         valid = true;
@@ -47,16 +48,39 @@
             dispatch('addNote');
         }
     };
+
+    function emojiOnTitle(event) {
+        title += event.detail
+    }
+
+    function emojiOnNote(event) {
+        noteContent += event.detail
+    }
+
+    let words = 0;
+    $: if (noteContent.trim().length > 0) {
+        words = noteContent.trim().split(' ').length;
+    }
 </script>
 
 <h3> Add a new note </h3>
+<EmojiSelector on:emoji={emojiOnTitle} {autoClose} />
+<EmojiSelector on:emoji={emojiOnNote} {autoClose}/>
 <form on:submit|preventDefault={handleSubmit}>
     <input type="text" placeholder="Title" bind:value={title}>
+    
     <div class="errors"> { errors.title }</div>
-    <textarea placeholder= "Type your note" cols="30" rows="10" bind:value={noteContent}></textarea>
+    <textarea placeholder= "Type your note" cols="30" rows="10" bind:value={noteContent}></textarea><br>
+    
     <div class="errors">{ errors.noteContent }</div>
     <br>
-    <Button type="primary">Save note</Button>
+    <div>
+        {words} words, {noteContent.length} characters
+    </div>
+    <div>
+        <Button type="primary">Save note</Button>
+    </div>
+    
 </form>
 
 <style>
