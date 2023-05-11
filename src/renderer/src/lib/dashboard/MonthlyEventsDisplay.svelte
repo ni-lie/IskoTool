@@ -27,21 +27,20 @@
 </script>
 
 <div class="display">
-    <h2>Upcoming events</h2>
+    <h2 style="color: var(--evergreen-dark);">Upcoming events</h2>
 
-    <div class="events">
-        {#if monthlyEvents.length === 0}
-            <h2>No more events this month</h2>
-        {:else}
+    {#if monthlyEvents.length === 0}
+        <h2 class="no-events">No more events this month</h2>
+    {:else}
+        <div class="events">
             {#each monthlyEvents as event}
                 <div class="event">
                     <h2 class="event-header">{getEventDate(event)}</h2>
-                
                     <p>{event.name}</p>
                 </div>
             {/each}
-        {/if}
-    </div>
+        </div>
+    {/if}
 </div>
 
 <style>
@@ -51,6 +50,11 @@
         width: 45%;
         margin-right: 2em;
         float: right;
+    }
+
+    .no-events{
+        padding: 1em;
+        background-color: white;
     }
 
     .events {

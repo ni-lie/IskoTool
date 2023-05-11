@@ -41,7 +41,7 @@
 </script>
 
 <div class="display">
-    <h2>Tasks for today</h2>
+    <h2 style="color: var(--orange-dark);">Tasks for today</h2>
 
     <div class="events">
         {#if dailyEvents.length === 0}
@@ -96,6 +96,7 @@
     }
 
     .time {
+        color: var(--orange-light);
         position: relative;
         float: right;
         bottom: 3.5em;
