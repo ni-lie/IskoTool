@@ -4,6 +4,8 @@
 	import type { Event } from '../../types/event';
 	import DialogBox from '../global-components/DialogBox.svelte';
 	import EditEventForm from './EditEventForm.svelte';
+	import timeDisplayOptions from '../calendar/Calendar.svelte'
+	import { timeAscending } from './timeAscending';
 	import { isInRange } from '../isInRange';
 
 	const today = new Date();
@@ -34,7 +36,9 @@
 		currentWeek.push(new Date(today.setDate(day + 1)));
 	}
 
-	function displayEvent(events: Event[], currDate: Date) {
+	function getEventsOnDay(events: Event[], currDate: Date) {
+		let eventsOnDay: Event[] | null = [];
+
 		const currYear = currDate.getFullYear();
 		const currMth = currDate.getMonth()+1;
 		const currDay = currDate.getDate();
@@ -52,15 +56,16 @@
 				const endMth = end.getMonth()+1;
 				const endDay = end.getDate();
 				if (isInRange(currYear, startYr, endYr) && isInRange(currMth, startMth, endMth) && isInRange(currDay, startDay, endDay)) {
-					return e;
+					eventsOnDay.push(e);
 				}
 			}
 			// Display a one-day event
-			if (startYr == currYear && startMth == currMth && startDay == currDay) {
-				return e;
+			else if (startYr == currYear && startMth == currMth && startDay == currDay) {
+				eventsOnDay.push(e);
 			}
 		}
-		return null;
+		eventsOnDay = eventsOnDay.sort(timeAscending);
+		return eventsOnDay;
 	}
 	
 	let showModal = false;
