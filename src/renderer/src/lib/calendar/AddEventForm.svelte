@@ -8,16 +8,29 @@
     let eventType: string;
     let startTime: string;
     let endTime: string;
+
+	$: {console.log(endTime)};//
 	
 	function handleSubmit() {
 		// Forward the form data to all event listeners
-        dispatch('addNewEvent', {
+		if (['Birthday', 'Holiday'].includes(eventType)) {
+			dispatch('addNewEvent', {
+			name,
+            eventType,
+			startTime,
+			endTime: null,
+			id: crypto.randomUUID(),
+			} satisfies Event);
+		}
+		else {
+			dispatch('addNewEvent', {
 			name,
             eventType,
 			startTime,
 			endTime,
 			id: crypto.randomUUID(),
-		} satisfies Event);
+			} satisfies Event);
+		}
     }
 </script>
 
