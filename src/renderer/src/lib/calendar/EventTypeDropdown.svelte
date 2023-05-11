@@ -44,12 +44,10 @@ select {
     font-family: 'Space Grotesk';
     font-size: 15px;
     padding: 7px 10px;
-    width: 100%;
-    /*margin: 20px 20px 20px 2rem;*/
+    width: 60%;
     border: solid var(--evergreen-dark) 1px;
     border-radius: 3px;
     background-color: white;
-    transition: 0.2s;
   }
 
 .expanded {
@@ -65,9 +63,5 @@ select {
     vertical-align: middle;
     pointer-events: none;
     transition: 0.2s;
-}
-
-.expanded {
-    transform: rotate(90deg);
 }
 </style>
