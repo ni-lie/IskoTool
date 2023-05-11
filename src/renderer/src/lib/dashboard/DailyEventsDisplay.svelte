@@ -41,9 +41,11 @@
     }
 </script>
 
-<div class="display">
-    <h2 style="color: var(--orange-dark);">Tasks for today</h2>
-
+<div style="width:35%;">
+    <span class="button-space">
+        <h2 style="color: var(--orange-dark);">Tasks for today</h2>
+        <a class="btn" href="#/calendar">Go to Planner</a>
+    </span>
     <div class="events">
         {#if dailyEvents.length === 0}
             <h2>No events for today</h2>
@@ -69,15 +71,8 @@
     </div>
 </div>
 
-<style>
-    .display {
-		border-radius: 2px;
-        max-height: 30rem;
-        width: 45%;
-        margin-left: 2em;
-        float: left;
-    }
 
+<style>
     .events {
         height: 25em;
         overflow-y: auto;
@@ -101,5 +96,22 @@
         position: relative;
         float: right;
         bottom: 3.5em;
+    }
+
+    .button-space {
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .btn {
+    text-align: center;
+    background-color: var(--orange-dark);
+    color: white;
+    font-family: 'Rubik';
+    font-weight: bold;
+    max-height: 1.5em;
+    padding: 10px;
+    margin-inline-start: 30px;
+    border-radius: 4px;
     }
 </style>
