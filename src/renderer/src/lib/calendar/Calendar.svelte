@@ -7,6 +7,7 @@
 	import DialogBox from '../global-components/DialogBox.svelte';
 	import GotoDateForm from './GotoDateForm.svelte';
 	import EditEventForm from './EditEventForm.svelte';
+	import { timeAscending } from './timeAscending';
 	import { isInRange } from '../isInRange';
 
 	export let today = new Date();
@@ -26,11 +27,33 @@
 	let next = calendarize(new Date(year, month+1), offset);
 
 	let viewEventDialog: HTMLDialogElement;
+	let viewDayEventsDialog: HTMLDialogElement;
 	let gotoDateDialog: HTMLDialogElement;
 	let editEventDialog: HTMLDialogElement;
+	let showDayEventsModal: boolean = false;
+	let showViewEventModal: boolean = false;
+	let showGotoDateModal: boolean = false;
+	let showEditEventModal: boolean = false;
 
-	function displayEvent(events: Event[], day) {
-		for (const e of events) {
+	// let displayWidth = 0;
+	let dayToExpand: Date;
+	let dateDisplayOptions = {
+		month: "long",
+		day: "2-digit",
+		year: "numeric",
+	};
+	let timeDisplayOptions = {
+		hour: "2-digit",
+		minute: "2-digit",
+		hour12: true,
+
+	}
+
+	let eventToView: Event | null = null;
+	function getEventsOnDay(allEvents: Event[], day) {
+		let eventsOnDay: Event[] | null = [];
+
+		for (const e of allEvents) {
 			const start = new Date(e.startTime);
 			const startYr = start.getFullYear();
 			const startMth = start.getMonth()+1;
@@ -43,24 +66,19 @@
 				const endMth = end.getMonth()+1;
 				const endDay = end.getDate();
 				if (isInRange(year, startYr, endYr) && isInRange(month+1, startMth, endMth) && isInRange(day, startDay, endDay)) {
-					return e;
+					eventsOnDay.push(e);
 				}
 			}
 			// Display a one-day event
-			if (startYr == year && startMth == month+1 && startDay == day) {
-				return e;
+			else if (startYr == year && startMth == month+1 && startDay == day) {
+				// displayWidth = (new Date(e.endTime).getDate() - startDay) + 1;
+				eventsOnDay.push(e);
 			}
 		}
-		return null;
+		eventsOnDay = eventsOnDay.sort(timeAscending);
+		return eventsOnDay;
 	}
 	
-	let showViewEventModal = false;
-	let eventToView: Event | null = null;
-	let showEditEventModal: boolean = false;
-	let showGotoDateModal: boolean = false;
-	let gotoMonth: number = 0;
-	let gotoYear: number = today.getFullYear();
-
 	function toPrev() {
 		[current, next] = [prev, current];
 		
@@ -82,6 +100,9 @@
 		
 		next = calendarize(new Date(year, month+1), offset);
 	}
+
+	let gotoMonth: number = 0;
+	let gotoYear: number = today.getFullYear();
 
 	function toDate(gotoMonth, gotoYear) {
 		month = gotoMonth;
@@ -117,10 +138,6 @@
     }
 </script>
 
-<!-- <div>
-	<EventsDropdown />
-</div> -->
-
 <header>
 	<Arrow left on:click={toPrev} />
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -139,19 +156,30 @@
 		<span class="label">{ labels[(idx + offset) % 7] }</span>
 	{/each}
 
-	{#each { length:6 } as w,idxw (idxw)}
+	{#each { length:6 } as _,idxw (idxw)}
 		{#if current[idxw]}
-			{#each { length:7 } as d,idxd (idxd)}
+			{#each { length:7 } as _,idxd (idxd)}
 				{#if current[idxw][idxd] != 0}
 					<span class="date" class:today={isToday(current[idxw][idxd])}>
 						{ current[idxw][idxd] }
-						<div class="eventdisplay" on:keydown
+						{#each (getEventsOnDay($eventStore, current[idxw][idxd]).slice(0, 3)) as ev}
+							<div class="eventdisplay"
+							on:keydown
 							on:click={() => { 
 								showViewEventModal = true;
-								eventToView = displayEvent($eventStore, current[idxw][idxd]);
+								eventToView = ev;
 								}}>
-							{ displayEvent($eventStore, current[idxw][idxd]) != null ? displayEvent($eventStore, current[idxw][idxd]).name : ''}
-						</div>
+							{ ev != null ? ev.name : ''}
+							</div>
+						{/each}
+						{#if (getEventsOnDay($eventStore, current[idxw][idxd]).length) > 3}
+							<div class="see-more"
+							on:keydown
+							on:click={() => {
+								showDayEventsModal = true;
+								dayToExpand = new Date(year, month, current[idxw][idxd]);
+							}}> See more... </div>
+						{/if}
 					</span>
 				{:else if (idxw < 1)}
 					<span class="date other">{ prev[prev.length - 1][idxd] }</span>
@@ -181,6 +209,27 @@
 				<EditEventForm slot="contents" bind:event={eventToView} on:editExistingEvent={editEvent} />
 			</DialogBox>
 			<button style="position: relative; right: 2em;" on:click={deleteEvent}>Delete</button>
+		</div>
+		
+	</DialogBox>
+{/if}
+
+{#if dayToExpand !== undefined }
+	<DialogBox bind:showModal={showDayEventsModal} bind:dialog={viewDayEventsDialog}>
+		<h2 slot="header" class="pop-up">Events on { dayToExpand.toLocaleDateString("en-US", dateDisplayOptions) }</h2>
+		<div slot="contents">
+			{#each getEventsOnDay($eventStore, dayToExpand.getDate()) as ev}
+				<li>
+					<span class="clickable-li" style="user-select:none"
+					on:keydown
+					on:click={() => {
+						showViewEventModal = true;
+						eventToView = ev;
+						}}>
+					{new Date(ev.startTime).toLocaleTimeString("en-US", timeDisplayOptions)} — { ev.name }
+					</span>
+				</li>
+			{/each}
 		</div>
 		
 	</DialogBox>
@@ -224,11 +273,10 @@
 	}
 	
 	.date {
-		height: 50px;
+		min-height: 85px;
 		font-size: 16px;
 		letter-spacing: -1px;
 		border: 1px solid #e6e4e4;
-		padding-right: 4px;
 		font-weight: 700;
 		padding: 0.5rem;
 	}
@@ -244,13 +292,33 @@
 	}
 
 	.eventdisplay {
+		display: grid;
+		margin: 1.75px;
 		font-weight: 600;
 		text-align: center;
 		color: #1c8d76;
+		background-color: white;
+		border-radius: 4px;
 		user-select: none;
 	}
 
 	.eventdisplay:hover {
 		color: #60bfac;
 	}
+
+	.see-more {
+		font-style: italic;
+		font-weight: lighter;
+		color: grey;
+	}
+
+	.see-more:hover {
+		color: rgb(169, 168, 168);
+		user-select: none;
+	}
+
+	.clickable-li:hover {
+		color: rgb(169, 168, 168);
+	}
+
 </style>
