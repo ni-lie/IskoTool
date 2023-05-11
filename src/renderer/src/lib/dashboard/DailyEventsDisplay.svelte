@@ -8,7 +8,6 @@
     let today_month = today.getMonth();
     let today_year = today.getFullYear();
 
-    console.log("new:\n") // <-------- DELETE THIS -------->
     for (const event of $eventStore) {
         const start = new Date(event.startTime);
         const start_day = start.getDate();
@@ -39,31 +38,33 @@
 
         return [eventStartTime, eventEndTime];
     }
-
-    console.log(dailyEvents); // <-------- DELETE THIS -------->
 </script>
 
 <div class="display">
     <h2>Tasks for today</h2>
 
     <div class="events">
-        {#each dailyEvents as event}
-            <div class="event">
-                <h3>{event.name}</h3>
-
-                {#if getEventTime(event) != null}
-                    <p class="time">
-                        {getEventTime(event)[0]}
-
-                        {#if getEventTime(event)[1] != null}
-                            - {getEventTime(event)[1]}
-                        {/if}
-                    </p>
-                {/if}
-
-                <p class="event-type">{event.eventType}</p>
-            </div>
-        {/each}
+        {#if dailyEvents.length === 0}
+            <h2>No events for today</h2>
+        {:else}
+            {#each dailyEvents as event}
+                <div class="event">
+                    <h3>{event.name}</h3>
+                
+                    {#if getEventTime(event) != null}
+                        <p class="time">
+                            {getEventTime(event)[0]}
+                        
+                            {#if getEventTime(event)[1] != null}
+                                - {getEventTime(event)[1]}
+                            {/if}
+                        </p>
+                    {/if}
+                    
+                    <p class="event-type">{event.eventType}</p>
+                </div>
+            {/each}
+        {/if}
     </div>
 </div>
 
@@ -94,6 +95,6 @@
     .time {
         position: relative;
         float: right;
-        bottom: 3em;
+        bottom: 3.5em;
     }
 </style>
