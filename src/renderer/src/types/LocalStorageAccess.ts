@@ -12,12 +12,12 @@ export function setCustomModes(customModes: CustomMode[]) {
 }
 
 export function loadNotes(): Note[] {
-    const value = localStorage.getItem('userNotes');
+    const value = localStorage.getItem('notes');
     return value === null ? [] : JSON.parse(value);
 }
 
 export function setNotes(notes: Note[]) {
-    localStorage.setItem('userNotes', JSON.stringify(notes));
+    localStorage.setItem('notes', JSON.stringify(notes));
 }
 
 export function loadEvents(): Event[] {

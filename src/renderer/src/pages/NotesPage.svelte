@@ -1,12 +1,13 @@
-<script>
-    import Modal from '../lib/newnotes/modal.svelte';
-    import AddnoteForm from '../lib/newnotes/addnoteForm.svelte';
-    import NotesList from '../lib/newnotes/notesList.svelte';
-    import EditNoteForm from '../lib/newnotes/editNoteForm.svelte';
+<script lang="ts">
+    import type { Note } from '../types/note';
+    import Modal from '../lib/notes/modal.svelte';
+    import AddnoteForm from '../lib/notes/addnoteForm.svelte';
+    import NotesList from '../lib/notes/notesList.svelte';
+    import EditNoteForm from '../lib/notes/editNoteForm.svelte';
 
     import addButtonFilePath from '../images/white_plus_resized.png';
 
-    let selectedNoteId = null;
+    let selectedNote: Note | null = null;
 
     let searchTerm = '';
 
@@ -14,7 +15,7 @@
     let showAddNoteForm = true;
 
     const noteSelection = (e) => {
-        selectedNoteId = e.detail;
+        selectedNote = e.detail;
     }
     
     const toggleNote = () => {
@@ -32,7 +33,7 @@
 
     const editNote = (e) => {
         showModal = false;
-        selectedNoteId = null;
+        selectedNote = null;
     };
 
     function handleInput(event) {
@@ -40,15 +41,14 @@
         console.log(searchTerm);
     };
 
-    // console.log(selectedNoteId);
 </script>
 
 <Modal {showModal} on:click={toggleNote}>
     {#if showAddNoteForm}
         <AddnoteForm on:addNote={addNote} /> 
     {:else}
-        {#if selectedNoteId !== null}
-            <EditNoteForm selectedNoteId={selectedNoteId} on:editNote={editNote}/>
+        {#if selectedNote !== null}
+            <EditNoteForm selectedNote={selectedNote} on:editNote={editNote}/>
         {:else}
             <p>Note not found</p>
         {/if}

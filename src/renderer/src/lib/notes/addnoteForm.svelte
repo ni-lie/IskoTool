@@ -1,5 +1,6 @@
-<script>
+<script lang="ts">
     import NotesStore from "./stores/NotesStore";
+    import type { Note } from "../../types/note";
     import { createEventDispatcher } from "svelte";
     import Button from "./Button.svelte";
     import EmojiSelector from 'svelte-emoji-selector';
@@ -10,7 +11,7 @@
     let noteContent = '';
 
     let valid = false;
-    let errors = { title: '', noteContent: ''};
+    let errors = { inTitle: '', inNoteContent: ''};
 
     const autoClose = false;
 
@@ -20,32 +21,31 @@
         // validate title
         if (title.trim().length < 1){
             valid = false;
-            errors.title = 'Title must be at least 1 character long';
+            errors.inTitle = "Title must be at least 1 character long";
         } else {
-            errors.title = '';
+            errors.inTitle = '';
         }
         // validate noteContent
         if (noteContent.trim().length < 1){
             valid = false;
-            errors.noteContent = 'Note cannot be empty';
+            errors.inNoteContent = "Note cannot be empty";
         } else {
-            errors.noteContent = '';
+            errors.inNoteContent = '';
         }
 
         // add new note, if valid
 
         if (valid) {
-            const note = {
+            const note: Note = {
             title,
             noteContent,
-            id: Math.random(),
+            id: crypto.randomUUID(),
             pinned: false,
             };
             // save note to NoteStore
             NotesStore.update(currentNotes => {
                 return [note, ...currentNotes];
             });
-            console.log("new note ID: ", note.id)
             dispatch('addNote');
         }
     };
@@ -70,10 +70,10 @@
 <form on:submit|preventDefault={handleSubmit}>
     <input type="text" placeholder="Title" bind:value={title}>
     
-    <div class="errors"> { errors.title }</div>
+    <div class="errors"> { errors.inTitle }</div>
     <textarea placeholder= "Type your note" cols="30" rows="10" bind:value={noteContent}></textarea><br>
     
-    <div class="errors">{ errors.noteContent }</div>
+    <div class="errors">{ errors.inNoteContent }</div>
     <br>
     <div>
         {words} words, {noteContent.length} characters
