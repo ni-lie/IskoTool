@@ -1,8 +1,6 @@
 <script>
     import Card from "./Card.svelte";
     import NotesStore from "./stores/NotesStore";
-    import Modal from "./modal.svelte";
-    import EditNoteForm from "./editNoteForm.svelte";
     import Button from "./Button.svelte";
     import { createEventDispatcher } from "svelte";
 
@@ -13,7 +11,6 @@
     export let toggleEdit;
     export let showAddNoteForm;
 
-    // delete a poll
     const handleDelete = (id) => {
         NotesStore.update(notes => {
             return notes.filter(note => note.id != id)
