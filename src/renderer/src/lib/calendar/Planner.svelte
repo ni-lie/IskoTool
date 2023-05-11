@@ -156,7 +156,9 @@
 		display: grid;
 		grid-template-columns: repeat(7, 1fr);
 		text-align: center;
-		grid-gap: 4px;
+		grid-gap: 0px;
+		margin-left: 3%;
+		margin-right: 3%;
 	}
 	
 	.label {
