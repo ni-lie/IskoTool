@@ -85,7 +85,7 @@
 </script>
 
 <header>
-	<h4>Week Planner</h4>
+	<h1>Week Planner</h1>
 	<EventsDropdown right />
 </header>
 
@@ -144,7 +144,7 @@
 		user-select: none;
 	}
 	
-	h4 {
+	h1 {
 		display: block;
 		text-align: center;
 		font-size: 240%;
