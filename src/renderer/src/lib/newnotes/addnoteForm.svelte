@@ -38,7 +38,8 @@
             const note = {
             title,
             noteContent,
-            id: Math.random()
+            id: Math.random(),
+            pinned: false,
             };
             // save note to NoteStore
             NotesStore.update(currentNotes => {

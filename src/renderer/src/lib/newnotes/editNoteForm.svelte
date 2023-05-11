@@ -17,12 +17,17 @@
 
             noteToBeEdited.title = selectedNoteId.title;
             noteToBeEdited.noteContent = selectedNoteId.noteContent;
+            noteToBeEdited.pinned = selectedNoteId.pinned;
             return copiedNotes;
         });
         dispatch('editNote');
         // console.log(selectedNoteId)
     };
 
+    function togglePin(noteToPin) {
+        console.log(noteToPin.title);//
+        noteToPin.pinned = !noteToPin.pinned;
+    }
     function emojiOnTitle(event) {
         selectedNoteId.title += event.detail
     }
@@ -39,9 +44,11 @@
     
 </script>
 
+<h3> Edit Note </h3>
 <EmojiSelector on:emoji={emojiOnTitle} {autoClose} />
 <EmojiSelector on:emoji={emojiOnNote} {autoClose}/>
-<h3> Edit Note </h3>
+<button type="button" on:click={togglePin(selectedNoteId)}>Toggle pin</button>
+
 <form on:submit|preventDefault={handleEdit}>
     <input type="text" placeholder="Title" bind:value={selectedNoteId.title}>
     

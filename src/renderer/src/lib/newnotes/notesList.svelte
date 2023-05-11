@@ -13,8 +13,18 @@
         dispatch('selectedNote', selectedNoteId);
     };
 
+    function pinnedFirst(a,b) {
+        if (a.pinned && !b.pinned) {
+            return -1;
+        }
+        if (!a.pinned && b.title) {
+            return 1;
+        }
+        return 0;
+    }
+
     $: filteredNotes = $NotesStore.filter(note => note.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
-            note.noteContent.toLowerCase().includes(searchTerm.toLowerCase()));
+            note.noteContent.toLowerCase().includes(searchTerm.toLowerCase())).sort(pinnedFirst);
 
 </script>
 
