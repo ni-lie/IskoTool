@@ -162,11 +162,13 @@
 	}
 	
 	.label {
-		font-weight: 300;
+		font-weight: 500;
+		font-size: 25px;
 		text-align: center;
 		text-transform: uppercase;
 		margin-bottom: 0.5rem;
 		opacity: 0.6;
+		color: #1C8D76;
 	}
 	
 	.date {
