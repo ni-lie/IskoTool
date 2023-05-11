@@ -85,7 +85,7 @@
 </script>
 
 <header>
-	<h4>Week Planner</h4>
+	<h1>Week Planner</h1>
 	<EventsDropdown right />
 </header>
 
@@ -95,13 +95,13 @@
 
 <div class="week">
 	{#each labels as txt, idx (txt)}
-		<span class="label">{ labels[(idx + offset) % 7] }</span>
+		<span class="label" class:today={idx==weekday}>{ labels[(idx + offset) % 7] }</span>
 	{/each}
 
 	{#each { length:7 } as d,idxd (idxd)}
 		<span class="date" class:today={idxd==weekday}>
 			{months[currentWeek[idxd].getMonth()]} {currentWeek[idxd].getDate()}
-			<div class="eventdisplay" on:keydown
+			<div class="eventdisplay" class:noevent={displayEvent($eventStore, currentWeek[idxd]) == null } on:keydown
 				on:click={() => { 
 					showModal = true;
 					eventToView = displayEvent($eventStore, currentWeek[idxd]);
@@ -144,11 +144,10 @@
 		user-select: none;
 	}
 	
-	h4 {
+	h1 {
 		display: block;
 		text-align: center;
-		text-transform: uppercase;
-		font-size: 140%;
+		font-size: 240%;
 		margin: 0 1rem;
 	}
 	
@@ -156,42 +155,53 @@
 		display: grid;
 		grid-template-columns: repeat(7, 1fr);
 		text-align: center;
-		grid-gap: 4px;
+		grid-gap: 0px;
+		margin-left: 3%;
+		margin-right: 3%;
 	}
 	
 	.label {
-		font-weight: 300;
+		font-weight: 500;
+		font-size: 25px;
 		text-align: center;
 		text-transform: uppercase;
 		margin-bottom: 0.5rem;
 		opacity: 0.6;
+		color: #1C8D76;
 	}
 	
 	.date {
 		height: 400px;
 		font-size: 16px;
 		letter-spacing: -1px;
-		border: 1px solid #e6e4e4;
 		padding-right: 4px;
 		font-weight: 700;
 		padding: 0.5rem;
+		color: #1C8D76;
+		border-top: 2px solid #A7D7CD;
+		border-left: 0px;
+		border-right: 0px;
+		border-bottom: 0px;
 	}
 
-	.date.today {
-		color: #5286fa;
-		background: #c4d9fd;
-		border-color: currentColor;
+	.label.today {
+		color: #DFA46D;
 	}
 
 	.eventdisplay {
 		font-weight: 600;
 		padding-top: 2em;
 		text-align: center;
-		color: #1c8d76;
+		color: #000000;
 		user-select: none;
+		border: outset 1px;
+	}
+
+	.eventdisplay.noevent{
+		border: 0px;
 	}
 
 	.eventdisplay:hover {
-		color: #60bfac;
+		color: #6E7ED3;
 	}
 </style>
