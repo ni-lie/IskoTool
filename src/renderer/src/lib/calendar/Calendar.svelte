@@ -7,6 +7,7 @@
 	import DialogBox from '../global-components/DialogBox.svelte';
 	import GotoDateForm from './GotoDateForm.svelte';
 	import EditEventForm from './EditEventForm.svelte';
+	import { timeAscending } from './timeAscending';
 	import { isInRange } from '../isInRange';
 
 	export let today = new Date();
@@ -74,6 +75,7 @@
 				eventsOnDay.push(e);
 			}
 		}
+		eventsOnDay = eventsOnDay.sort(timeAscending);
 		return eventsOnDay;
 	}
 	
