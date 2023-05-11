@@ -70,11 +70,11 @@
 
 <style>
     .display {
-        /* outline: 2px solid gray; */
 		border-radius: 2px;
-        height: 30rem;
-        max-width: 45%;
+        max-height: 30rem;
+        width: 45%;
         margin-left: 2em;
+        float: left;
     }
 
     .events {
