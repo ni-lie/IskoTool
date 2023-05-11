@@ -213,24 +213,28 @@
 		grid-template-columns: repeat(7, 1fr);
 		text-align: right;
 		grid-gap: 4px;
+		margin: 0 2em 0;
+		padding: 1em;
+		background-color: white;
+		box-shadow: 2px 2px 4px #8f8f8f
 	}
 	
 	.label {
 		font-weight: 300;
 		text-align: left;
 		text-transform: uppercase;
-		margin-bottom: 0.5rem;
+		margin: 0 0 0.5rem 0.5rem;
 		opacity: 0.6;
 	}
 	
 	.date {
-		height: 6rem;
+		min-height: 85px;
 		font-size: 16px;
 		letter-spacing: -1px;
 		text-align: left;
 		/*border: 1px solid #e6e4e4;*/
 		padding-right: 4px;
-		font-weight: 500;
+		font-weight: 700;
 		padding: 0.5rem;
 		font-family: 'Space Grotesk';
 	}
