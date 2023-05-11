@@ -122,10 +122,12 @@
 			<p> Name: {eventToView.name} </p>
 			<p> Event type: {eventToView.eventType} </p>
 			<p> Start date: {months[new Date(eventToView.startTime).getMonth()]} {new Date(eventToView.startTime).getDate()}, {new Date(eventToView.startTime).getFullYear()}</p>
+			<p> Start time: {new Date(eventToView.startTime).toLocaleTimeString("en-US", timeDisplayOptions)} </p>
 			{#if eventToView.endTime == null}
 				<p> End date: {months[new Date(eventToView.startTime).getMonth()]} {new Date(eventToView.startTime).getDate()}, {new Date(eventToView.startTime).getFullYear()}</p>
 			{:else}
 				<p> End date: {months[new Date(eventToView.endTime).getMonth()]} {new Date(eventToView.endTime).getDate()}, {new Date(eventToView.endTime).getFullYear()}</p>
+				<p> End time: {new Date(eventToView.endTime).toLocaleTimeString("en-US", timeDisplayOptions)} </p>
 			{/if}
 			<button style="position: relative; right: 30em;" on:click={() => (showEditEventModal = true)}>Edit</button>
 			<DialogBox bind:showModal={showEditEventModal} bind:dialog={editEventDialog}>
