@@ -73,7 +73,7 @@
         /* outline: 2px solid gray; */
 		border-radius: 2px;
         height: 30rem;
-        max-width: 50%;
+        max-width: 45%;
         margin-left: 2em;
     }
 
@@ -85,6 +85,9 @@
     .event {
         background-color: white;
         border-radius: 2px;
+        margin: 10px 5px;
+        padding: 5px 10px;
+        box-shadow: 2px 2px 4px #8f8f8f;
     }
 
     .event-type {
