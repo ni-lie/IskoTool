@@ -37,12 +37,12 @@
 
 	// let displayWidth = 0;
 	let dayToExpand: Date;
-	let dateDisplayOptions = {
+	const dateDisplayOptions = {
 		month: "long",
 		day: "2-digit",
 		year: "numeric",
 	};
-	let timeDisplayOptions = {
+	export const timeDisplayOptions = {
 		hour: "2-digit",
 		minute: "2-digit",
 		hour12: true,
