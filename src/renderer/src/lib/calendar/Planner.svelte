@@ -175,10 +175,14 @@
 		height: 400px;
 		font-size: 16px;
 		letter-spacing: -1px;
-		border: 1px solid #e6e4e4;
 		padding-right: 4px;
 		font-weight: 700;
 		padding: 0.5rem;
+		color: #1C8D76;
+		border-top: 2px solid #A7D7CD;
+		border-left: 0px;
+		border-right: 0px;
+		border-bottom: 0px;
 	}
 
 	.date.today {
