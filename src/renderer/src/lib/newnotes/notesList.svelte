@@ -1,16 +1,17 @@
-<script>
+<script lang="ts">
     import NotesDetails from "./notesDetails.svelte";
     import NotesStore from "./stores/NotesStore";
+    import type { Note } from "../../types/note";
     import { createEventDispatcher } from 'svelte';
-
 
     const dispatch = createEventDispatcher();
     export let showModal, toggleEdit, showAddNoteForm, searchTerm;
-    let selectedNoteId = null;
+
+    let selectedNote: Note | null = null;
 
     const noteSelection = (e) => {
-        selectedNoteId = e.detail;
-        dispatch('selectedNote', selectedNoteId);
+        selectedNote = e.detail;
+        dispatch('selectedNote', selectedNote);
     };
 
     function pinnedFirst(a,b) {
@@ -29,7 +30,7 @@
 </script>
 
 <div class="notes-list">
-    {#each filteredNotes as note (note.id)}    <!-- {#each $NotesStore as note (note.id)} -->
+    {#each filteredNotes as note (note.id)}
     <div class = "card-container">
         <NotesDetails note={note} showModal={showModal} toggleEdit={toggleEdit} showAddNoteForm={showAddNoteForm} on:cardClick={noteSelection}/> 
     </div>

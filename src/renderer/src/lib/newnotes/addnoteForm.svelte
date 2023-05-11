@@ -1,5 +1,6 @@
-<script>
+<script lang="ts">
     import NotesStore from "./stores/NotesStore";
+    import type { Note } from "../../types/note";
     import { createEventDispatcher } from "svelte";
     import Button from "./Button.svelte";
     import EmojiSelector from 'svelte-emoji-selector';
@@ -35,7 +36,7 @@
         // add new note, if valid
 
         if (valid) {
-            const note = {
+            const note: Note = {
             title,
             noteContent,
             id: crypto.randomUUID(),

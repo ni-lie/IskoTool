@@ -9,7 +9,7 @@ let sampleNote: Note = {
 }
 
 // Load the initial notes from local storage, or use a default value
-const initialNotes = JSON.parse(localStorage.getItem("notes")) || 
+const initialNotes: Note[] = JSON.parse(localStorage.getItem("notes")) ||
 [sampleNote];
 
 // Create a writable store with the initial notes
