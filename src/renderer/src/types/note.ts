@@ -1,6 +1,7 @@
 export interface Note {
     /** Unique ID assigned to this note. */
-    id: number;
     title: string;
-    text: string;
+    noteContent: string;
+    id: number;
+    pinned: boolean;
 }
