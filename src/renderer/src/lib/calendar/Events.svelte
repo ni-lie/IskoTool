@@ -52,6 +52,8 @@
     function jumptoEvent() {
         dispatch('jumptoEvent', {startTime: event.startTime});
     }
+
+
 </script>
 
 <section class:right>
