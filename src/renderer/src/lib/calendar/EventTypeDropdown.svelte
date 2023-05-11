@@ -26,17 +26,15 @@
 
 <style>
 
-.select-holder {
-    min-width: 0;
+div.select-holder {
+    min-width: 286px;
     min-height: 0;
-    /*remove above later it's just currently affected by some css elsewhere that I can't be bothered to find rn*/
-    width: 286px;
+    margin-bottom: 10px;
     display: flex;
     position: relative;
     align-items: center;
-    justify-content: center;
-    margin-bottom: 10px;
-    }
+}
+
 select {
     appearance: none;
     text-align: left;
