@@ -101,7 +101,7 @@
 	{#each { length:7 } as d,idxd (idxd)}
 		<span class="date" class:today={idxd==weekday}>
 			{months[currentWeek[idxd].getMonth()]} {currentWeek[idxd].getDate()}
-			<div class="eventdisplay" on:keydown
+			<div class="eventdisplay" class:noevent={displayEvent($eventStore, currentWeek[idxd]) == null } on:keydown
 				on:click={() => { 
 					showModal = true;
 					eventToView = displayEvent($eventStore, currentWeek[idxd]);
@@ -193,11 +193,16 @@
 		font-weight: 600;
 		padding-top: 2em;
 		text-align: center;
-		color: #1c8d76;
+		color: #000000;
 		user-select: none;
+		border: outset 1px;
+	}
+
+	.eventdisplay.noevent{
+		border: 0px;
 	}
 
 	.eventdisplay:hover {
-		color: #60bfac;
+		color: #6E7ED3;
 	}
 </style>
