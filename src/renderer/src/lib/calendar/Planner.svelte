@@ -94,16 +94,12 @@
 	<EventsDropdown right />
 </header>
 
-<!-- <div>
-	<EventsDropdown />
-</div> -->
-
 <div class="week">
 	{#each labels as txt, idx (txt)}
 		<span class="label" class:today={idx==weekday}>{ labels[(idx + offset) % 7] }</span>
 	{/each}
 
-	{#each { length:7 } as d,idxd (idxd)}
+	{#each { length:7 } as _,idxd (idxd)}
 		<span class="date" class:today={idxd==weekday}>
 			{months[currentWeek[idxd].getMonth()]} {currentWeek[idxd].getDate()}
 			<div class="eventdisplay" class:noevent={displayEvent($eventStore, currentWeek[idxd]) == null } on:keydown
