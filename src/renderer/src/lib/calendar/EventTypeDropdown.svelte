@@ -54,10 +54,9 @@ select {
 
 .arrow {
     position: absolute;
-    z-index: 5;
-    right: 10px;
-    height: 60%;
-    width: 12%;
+    left: 55%;
+    top: 35%;
+    width: 4%;
     vertical-align: middle;
     pointer-events: none;
     transition: 0.2s;
