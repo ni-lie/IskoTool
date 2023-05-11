@@ -26,9 +26,11 @@
     }
 </script>
 
-<div class="display">
-    <h2 style="color: var(--evergreen-dark);">Upcoming events</h2>
-
+<div style="width:50%">
+    <span class="button-space">
+        <h2 style="color: var(--evergreen-dark);">Upcoming events</h2>
+        <a class="btn" href="#/calendar">Go to Calendar</a>
+    </span>
     {#if monthlyEvents.length === 0}
         <h2 class="no-events">No more events this month</h2>
     {:else}
@@ -41,17 +43,10 @@
             {/each}
         </div>
     {/if}
+    
 </div>
 
 <style>
-    .display {
-		border-radius: 2px;
-        max-height: 30rem;
-        width: 45%;
-        margin-right: 2em;
-        float: right;
-    }
-
     .no-events{
         padding: 1em;
         background-color: white;
@@ -82,5 +77,22 @@
         background-color: var(--evergreen-dark);
         color: white;
         padding: 5px;
+    }
+
+    .button-space {
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .btn {
+    text-align: center;
+    background-color: var(--evergreen-dark);
+    color: white;
+    font-family: 'Rubik';
+    font-weight: bold;
+    max-height: 1.5em;
+    padding: 10px;
+    margin-inline-start: 30px;
+    border-radius: 4px;
     }
 </style>
