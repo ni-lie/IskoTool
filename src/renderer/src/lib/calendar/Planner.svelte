@@ -102,13 +102,15 @@
 	{#each { length:7 } as _,idxd (idxd)}
 		<span class="date" class:today={idxd==weekday}>
 			{months[currentWeek[idxd].getMonth()]} {currentWeek[idxd].getDate()}
-			<div class="eventdisplay" class:noevent={displayEvent($eventStore, currentWeek[idxd]) == null } on:keydown
-				on:click={() => { 
-					showModal = true;
-					eventToView = displayEvent($eventStore, currentWeek[idxd]);
-					}}>
-				{ displayEvent($eventStore, currentWeek[idxd]) != null ? displayEvent($eventStore, currentWeek[idxd]).name : ''}
-			</div>
+			{#each (getEventsOnDay($eventStore, currentWeek[idxd]).slice(0, 10)) as ev}
+				<div class="eventdisplay" class:noevent={getEventsOnDay($eventStore, currentWeek[idxd]) == null } on:keydown
+					on:click={() => {
+						showModal = true;
+						eventToView = ev;
+						}}>
+					{ ev != null ? ev.name : ''}
+				</div>
+			{/each}
 		</span>
 	{/each}
 </div>
