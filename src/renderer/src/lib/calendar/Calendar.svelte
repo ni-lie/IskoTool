@@ -41,6 +41,12 @@
 		day: "2-digit",
 		year: "numeric",
 	};
+	let timeDisplayOptions = {
+		hour: "2-digit",
+		minute: "2-digit",
+		hour12: true,
+
+	}
 
 	let eventToView: Event | null = null;
 	function getEventsOnDay(allEvents: Event[], day) {
@@ -211,14 +217,16 @@
 		<h2 slot="header" class="pop-up">Events on { dayToExpand.toLocaleDateString("en-US", dateDisplayOptions) }</h2>
 		<div slot="contents">
 			{#each getEventsOnDay($eventStore, dayToExpand.getDate()) as ev}
-				<div class="eventdisplay"
-				on:keydown
-				on:click={() => {
-					showViewEventModal = true;
-					eventToView = ev;
-					}}>
-				{ ev.name }
-				</div>
+				<li>
+					<span class="clickable-li" style="user-select:none"
+					on:keydown
+					on:click={() => {
+						showViewEventModal = true;
+						eventToView = ev;
+						}}>
+					{new Date(ev.startTime).toLocaleTimeString("en-US", timeDisplayOptions)} — { ev.name }
+					</span>
+				</li>
 			{/each}
 		</div>
 		
@@ -264,7 +272,6 @@
 	
 	.date {
 		min-height: 85px;
-		display: table;
 		font-size: 16px;
 		letter-spacing: -1px;
 		border: 1px solid #e6e4e4;
@@ -283,10 +290,12 @@
 	}
 
 	.eventdisplay {
-		display: table-row;
+		display: grid;
+		margin: 1.75px;
 		font-weight: 600;
 		text-align: center;
 		color: #1c8d76;
+		background-color: white;
 		border-radius: 4px;
 		user-select: none;
 	}
@@ -304,6 +313,10 @@
 	.see-more:hover {
 		color: rgb(169, 168, 168);
 		user-select: none;
+	}
+
+	.clickable-li:hover {
+		color: rgb(169, 168, 168);
 	}
 
 </style>
