@@ -1,9 +1,9 @@
 <script lang="ts">
     import type { Note } from '../types/note';
-    import Modal from '../lib/newnotes/modal.svelte';
-    import AddnoteForm from '../lib/newnotes/addnoteForm.svelte';
-    import NotesList from '../lib/newnotes/notesList.svelte';
-    import EditNoteForm from '../lib/newnotes/editNoteForm.svelte';
+    import Modal from '../lib/notes/modal.svelte';
+    import AddnoteForm from '../lib/notes/addnoteForm.svelte';
+    import NotesList from '../lib/notes/notesList.svelte';
+    import EditNoteForm from '../lib/notes/editNoteForm.svelte';
 
     import addButtonFilePath from '../images/white_plus_resized.png';
 
