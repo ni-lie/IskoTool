@@ -2,6 +2,6 @@ export interface Note {
     /** Unique ID assigned to this note. */
     title: string;
     noteContent: string;
-    id: number;
+    id: string;
     pinned: boolean;
 }

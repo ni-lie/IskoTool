@@ -4,7 +4,7 @@ import type { Note } from '../../../types/note'
 let sampleNote: Note = {
     title: 'first note',
     noteContent: 'this is the first note',
-    id: 1,
+    id: '0',
     pinned: false
 }
 

@@ -38,7 +38,7 @@
             const note = {
             title,
             noteContent,
-            id: Math.random(),
+            id: crypto.randomUUID(),
             pinned: false,
             };
             // save note to NoteStore
