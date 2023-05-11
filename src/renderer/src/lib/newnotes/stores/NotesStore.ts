@@ -1,5 +1,6 @@
 import { writable } from "svelte/store";
 import type { Note } from '../../../types/note'
+import { loadNotes, setNotes } from '../../../types/LocalStorageAccess';
 
 let sampleNote: Note = {
     title: 'first note',
@@ -9,7 +10,7 @@ let sampleNote: Note = {
 }
 
 // Load the initial notes from local storage, or use a default value
-const initialNotes: Note[] = JSON.parse(localStorage.getItem("notes")) ||
+const initialNotes: Note[] = loadNotes() ||
 [sampleNote];
 
 // Create a writable store with the initial notes
@@ -17,7 +18,7 @@ const NotesStore = writable(initialNotes);
 
 // Subscribe to changes in the store and save them to local storage
 NotesStore.subscribe(notes => {
-    localStorage.setItem("notes", JSON.stringify(notes));
+    setNotes(notes);
 });
 
 export default NotesStore;
