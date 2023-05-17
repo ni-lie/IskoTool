@@ -5,8 +5,9 @@
     import DialogBox from '../global-components/DialogBox.svelte';
     import EditEventForm from './EditEventForm.svelte';
     import AddEventForm from './AddEventForm.svelte';
-	import addButtonFilePath from '../../images/white_plus_resized.png';
     import Svelecte from 'svelecte';
+    import Button from "../global-components/Button.svelte";
+    import addButtonFilePath from '../../images/white_plus_resized.png';
     import { timeAscending } from "./timeAscending";
 
     export let right = false;
@@ -66,14 +67,14 @@
         <h2 slot="header" class="pop-up">Create New Event</h2>
         <AddEventForm slot="contents" on:addNewEvent={addEvent} />
     </DialogBox>
-    <button class="fadedtext" disabled={selectedID === null} on:click={() => (showEditEventModal = true)}>Edit Event</button>
+    <Button type="primary" disabled={selectedID === null} on:click={() => (showEditEventModal = true)}>Edit Event</Button>
     <DialogBox bind:showModal={showEditEventModal} bind:dialog={editEventDialog}>
         <h2 slot="header" class="pop-up">Edit Event</h2>
         <EditEventForm slot="contents" bind:event on:editExistingEvent={editEvent} />
     </DialogBox>
-    <button disabled={selectedID === null} on:click={deleteEvent}>Delete</button>
+    <Button type="secondary" disabled={selectedID === null} on:click={deleteEvent}>Delete</Button>
     {#if calendar}
-        <button class="fadedtext" disabled={selectedID === null} on:click={jumptoEvent}>Jump to Event</button>
+        <Button type="primary" disabled={selectedID === null} on:click={jumptoEvent}>Jump to Event</Button>
     {/if}
 </section>
 
