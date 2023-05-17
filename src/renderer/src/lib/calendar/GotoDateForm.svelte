@@ -13,7 +13,7 @@
     }
 </script>
 
-<h2 class="pop-up">Go To...</h2>
+<h2 class="pop-up">Go to</h2>
 <form on:submit|preventDefault={handleSubmit}>
 	<h3 class="pop-up">Month</h3>
 	<MonthDropdown bind:month={gotoMonth} />
