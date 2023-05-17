@@ -76,9 +76,8 @@
 
 <style>
     section.right {
-        position: fixed; 
+        position: absolute; 
         right: 2em;
-        z-index: 4;
     }
 
     .add-event {
