@@ -7,6 +7,7 @@
 	import DialogBox from '../global-components/DialogBox.svelte';
 	import GotoDateForm from './GotoDateForm.svelte';
 	import EditEventForm from './EditEventForm.svelte';
+	import Button from '../global-components/Button.svelte';
 	import { timeAscending } from './timeAscending';
 	import { isInRange } from '../isInRange';
 
@@ -139,7 +140,7 @@
 </script>
 
 <header>
-	<button style="position: absolute; left: 3em;" on:click={() => toDate(today_month, today_year)}>Today</button>
+	<Button type="primary" style="position: absolute; left: 3em;" on:click={() => toDate(today_month, today_year)}>Today</Button>
 	<Arrow left on:click={toPrev} />
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<h4 class="monthandyear" on:click={() => (showGotoDateModal = true)}>{months[month]} {year}</h4>
