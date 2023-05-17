@@ -139,11 +139,11 @@
 </script>
 
 <header>
+	<button style="position: absolute; left: 3em;" on:click={() => toDate(today_month, today_year)}>Today</button>
 	<Arrow left on:click={toPrev} />
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<h4 class="monthandyear" on:click={() => (showGotoDateModal = true)}>{months[month]} {year}</h4>
 	<Arrow on:click={toNext} />
-	<button style="position: fixed; left: 2em;" on:click={() => toDate(today_month, today_year)}>Today</button>
 	<EventsDropdown right calendar on:jumptoEvent={jumptoEvent} />
 	<DialogBox bind:showModal={showGotoDateModal} bind:dialog={gotoDateDialog}>
 		<GotoDateForm slot="contents" bind:gotoMonth bind:gotoYear 
