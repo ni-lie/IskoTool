@@ -27,12 +27,20 @@
         background: var(--evergreen-light);
     }
 
+    .primary:hover {
+        background: var(--evergreen-light);
+    }
+
     .secondary{
         background: red;
         color: white;
     }
 
     .secondary:disabled {
+        background: lightcoral;
+    }
+
+    .secondary:hover {
         background: lightcoral;
     }
 </style>
