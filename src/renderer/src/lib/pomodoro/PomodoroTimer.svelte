@@ -2,7 +2,8 @@
   import { onMount } from 'svelte';
 
   import {loadCustomModes, setCustomModes} from '../../types/LocalStorageAccess';
-  import AddCustomModeModal from './CustomTimerModal.svelte';
+  import DialogBox from '../global-components/DialogBox.svelte';
+  import CustomModeForm from './CustomModeForm.svelte';
   import type { CustomMode } from '../../types/customtimer';
 
   import { mode } from './PomodoroModeChoice';
@@ -21,6 +22,8 @@
   const pomodoroDuration = minutesToSeconds(25);
   const shortBreakDuration = minutesToSeconds(5); 
   const longBreakDuration = minutesToSeconds(20);
+
+  let customModeDialog: HTMLDialogElement;
   
   let currentState = State.Idle;
   let baseDuration: number;
@@ -181,7 +184,9 @@
         </div>
       {/each}
       <button class="fadedtext" on:click={() => (showModal = true)} disabled={currentState === State.InProgress || currentState === State.Pause}>+ Custom Mode</button>
-      <AddCustomModeModal bind:showModal on:addCustomMode={addCustomMode} />
+      <DialogBox bind:showModal bind:dialog={customModeDialog}>
+        <CustomModeForm slot="contents" on:addCustomMode={addCustomMode} />
+      </DialogBox>
     </div>
   </div>
 </section>
