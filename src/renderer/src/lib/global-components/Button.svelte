@@ -1,8 +1,9 @@
 <script>
     export let type = 'primary';
+    export let style = '';
 </script>
 
-<button class={type} on:click>
+<button class={type} style={style} on:click>
     <slot></slot>
 </button>
 
