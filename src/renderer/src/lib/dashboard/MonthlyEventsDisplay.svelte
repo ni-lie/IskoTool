@@ -1,6 +1,7 @@
 <script lang="ts">
     import { eventStore } from "../calendar/CalendarStore";
     import type { Event } from "../../types/event";
+    import { timeAscending } from "../calendar/timeAscending";
 
     let monthlyEvents: Event[] = [];
     let today = new Date();
@@ -18,6 +19,8 @@
             monthlyEvents.push(event);
         }
     }
+
+    $: monthlyEvents.sort(timeAscending);
 
     function getEventDate(event: Event) {
         const eventStart = new Date(event.startTime);

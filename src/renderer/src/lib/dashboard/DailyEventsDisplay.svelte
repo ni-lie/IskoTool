@@ -1,6 +1,7 @@
 <script lang="ts">
     import { eventStore } from "../calendar/CalendarStore";
     import type { Event } from "../../types/event";
+    import { timeAscending } from "../calendar/timeAscending";
 
     let dailyEvents: Event[] = [];
     let today = new Date();
@@ -19,6 +20,8 @@
             dailyEvents.push(event);
         }
     }
+
+    $: dailyEvents.sort(timeAscending);
 
     function getEventTime(event: Event) {
         if (["Birthday", "Holiday"].includes(event.eventType)) {
