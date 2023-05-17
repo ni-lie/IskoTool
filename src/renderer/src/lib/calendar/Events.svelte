@@ -7,6 +7,7 @@
     import AddEventForm from './AddEventForm.svelte';
 	import addButtonFilePath from '../../images/white_plus_resized.png';
     import Svelecte from 'svelecte';
+    import { timeAscending } from "./timeAscending";
 
     export let right = false;
     export let calendar = false;
@@ -26,6 +27,8 @@
 	};
 
     let dispatch = createEventDispatcher();
+
+    $: sortedEvents = $eventStore.sort(timeAscending);
 
     $: {
 		const found = $eventStore.find(event => event.id === selectedID);
@@ -57,7 +60,7 @@
 </script>
 
 <section class:right>
-    <Svelecte options={$eventStore} bind:value={selectedID} valueField="id" labelField="name" placeholder="Select (or search for) an event..."></Svelecte>
+    <Svelecte options={sortedEvents} bind:value={selectedID} valueField="id" labelField="name" placeholder="Select (or search for) an event..."></Svelecte>
     <button class="add-event" on:click={() => (showAddEventModal = true)}><img class="white-plus" src={addButtonFilePath} alt="Add note"/></button>
     <DialogBox bind:showModal={showAddEventModal} bind:dialog={addEventDialog}>
         <h2 slot="header" class="pop-up">Create New Event</h2>
