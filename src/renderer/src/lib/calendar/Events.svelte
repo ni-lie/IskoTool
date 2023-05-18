@@ -8,6 +8,7 @@
     import Svelecte from 'svelecte';
     import Button from "../global-components/Button.svelte";
     import addButtonFilePath from '../../images/white_plus_resized.png';
+    import searchButtonPath from '../../images/search_icon.png';
     import { timeAscending } from "./timeAscending";
     import { clickOutside } from "./clickOutside";
 
@@ -65,12 +66,12 @@
 </script>
 
 {#if !searching}
-    <button class="right" on:click={() => (searching = true)}>Search</button>
+    <button class="search" on:click={() => (searching = true)}><img class="search-icon" src={searchButtonPath} alt="Search"/></button>
 {/if}
 
 {#if searching}
     <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <section class="right" use:clickOutside on:click_outside={() => (searching = false)}>
+    <section class:right use:clickOutside on:click_outside={() => (searching = false)}>
         <Svelecte options={sortedEvents} bind:value={selectedID} valueField="id" labelField="name" placeholder="Select (or search for) an event..." />
 
         {#if calendar}
@@ -125,5 +126,21 @@
     }
     .white-plus {
         height: 50%;
+    }
+
+    .search {
+        position: absolute; 
+        right: 2em;
+        border: none;
+        height: 3rem;
+        background: transparent;
+    }
+
+    .search-icon {
+        height: 100%;
+    }
+
+    .search-icon:hover {
+        opacity: 0.5;
     }
 </style>
