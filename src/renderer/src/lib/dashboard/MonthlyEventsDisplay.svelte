@@ -57,11 +57,13 @@
 
     .events {
         background-color: white;
-        height: 25em;
+        border-radius: 3px;
+        box-shadow: 0px 2px 4px #8f8f8f;
+        max-height: 25rem;
+        padding: 1.5em;
         display: grid;
-        grid-template-columns: repeat(auto-fill, 8em);
-        grid-template-rows: repeat(auto-fill, 8em);
-        grid-row-gap: .5em;
+        grid-template-columns: repeat(auto-fill, minmax(8em, 1fr));
+        grid-row-gap: 1.5em;
         overflow-y: auto;
     }
 
@@ -69,7 +71,6 @@
         background-color: white;
         border: 3px solid var(--evergreen-dark);
         border-radius: 10px;
-        margin: 1em 1em;
         height: 7em;
         width: 7em;
         text-align: center;
