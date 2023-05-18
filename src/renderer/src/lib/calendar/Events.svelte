@@ -9,6 +9,7 @@
     import Button from "../global-components/Button.svelte";
     import addButtonFilePath from '../../images/white_plus_resized.png';
     import { timeAscending } from "./timeAscending";
+    import { clickOutside } from "./clickOutside";
 
     export let right = false;
     export let calendar = false;
@@ -17,7 +18,9 @@
     let showEditEventModal: boolean = false;
     let addEventDialog: HTMLDialogElement;
     let editEventDialog: HTMLDialogElement;
-    
+
+    let searching: boolean = false;
+
     let selectedID: string | null = null;
     let event: Event = {
 		name: '',
@@ -47,6 +50,7 @@
     }
 
     function deleteEvent() {
+        searching = false;
         if (confirm('Are you sure you want to delete this event?')) {
 			eventStore.deleteEvent(selectedID);
 			selectedID = null;
@@ -54,36 +58,42 @@
     }
 
     function jumptoEvent() {
+        searching = false;
         dispatch('jumptoEvent', {startTime: event.startTime});
     }
 
-
 </script>
 
-<section class:right>
-    <Svelecte options={sortedEvents} bind:value={selectedID} valueField="id" labelField="name" placeholder="Select (or search for) an event..."></Svelecte>
-    <button class="add-event" on:click={() => (showAddEventModal = true)}><img class="white-plus" src={addButtonFilePath} alt="Add note"/></button>
+{#if !searching}
+    <button class="right" on:click={() => (searching = true)}>Search</button>
+{/if}
 
-    {#if calendar}
-        <Button type="primary" style="margin: 4px 2px; float: right;" disabled={selectedID === null} on:click={jumptoEvent}>Jump to Event</Button>
-    {/if}
+{#if searching}
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
+    <section class="right" use:clickOutside on:click_outside={() => (searching = false)}>
+        <Svelecte options={sortedEvents} bind:value={selectedID} valueField="id" labelField="name" placeholder="Select (or search for) an event..." />
 
-    <Button type="secondary" style="margin: 4px 2px; float: right;" disabled={selectedID === null} on:click={deleteEvent}>Delete</Button>
-    <Button type="primary" style="margin: 4px 2px; float: right;" disabled={selectedID === null} on:click={() => (showEditEventModal = true)}>Edit Event</Button>
+        {#if calendar}
+            <Button type="primary" style="margin: 4px 2px; float: right;" disabled={selectedID === null} on:click={jumptoEvent}>Jump to Event</Button>
+        {/if}
 
-    <DialogBox bind:showModal={showAddEventModal} bind:dialog={addEventDialog}>
-        <h2 slot="header" class="pop-up">Create New Event</h2>
-        <AddEventForm slot="contents" on:addNewEvent={addEvent} />
-    </DialogBox>
+        <Button type="secondary" style="margin: 4px 2px; float: right;" disabled={selectedID === null} on:click={deleteEvent}>Delete</Button>
+        <Button type="primary" style="margin: 4px 2px; float: right;" disabled={selectedID === null} on:click={() => {showEditEventModal = true; searching = false;}}>Edit Event</Button>
+    </section>
+{/if}
 
-    <DialogBox bind:showModal={showEditEventModal} bind:dialog={editEventDialog}>
-        <h2 slot="header" class="pop-up">Edit Event</h2>
-        <EditEventForm slot="contents" bind:event on:editExistingEvent={editEvent} />
-    </DialogBox>
-</section>
+<button class="add-event" on:click={() => (showAddEventModal = true)}><img class="white-plus" src={addButtonFilePath} alt="Add note"/></button>
+<DialogBox bind:showModal={showAddEventModal} bind:dialog={addEventDialog}>
+    <h2 slot="header" class="pop-up">Create New Event</h2>
+    <AddEventForm slot="contents" on:addNewEvent={addEvent} />
+</DialogBox>
+<DialogBox bind:showModal={showEditEventModal} bind:dialog={editEventDialog}>
+    <h2 slot="header" class="pop-up">Edit Event</h2>
+    <EditEventForm slot="contents" bind:event on:editExistingEvent={editEvent} />
+</DialogBox>
 
 <style>
-    section.right {
+    .right {
         position: absolute; 
         right: 2em;
     }
