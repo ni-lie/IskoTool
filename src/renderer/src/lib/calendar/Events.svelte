@@ -63,19 +63,23 @@
 <section class:right>
     <Svelecte options={sortedEvents} bind:value={selectedID} valueField="id" labelField="name" placeholder="Select (or search for) an event..."></Svelecte>
     <button class="add-event" on:click={() => (showAddEventModal = true)}><img class="white-plus" src={addButtonFilePath} alt="Add note"/></button>
+
+    {#if calendar}
+        <Button type="primary" style="margin: 4px 2px; float: right;" disabled={selectedID === null} on:click={jumptoEvent}>Jump to Event</Button>
+    {/if}
+
+    <Button type="secondary" style="margin: 4px 2px; float: right;" disabled={selectedID === null} on:click={deleteEvent}>Delete</Button>
+    <Button type="primary" style="margin: 4px 2px; float: right;" disabled={selectedID === null} on:click={() => (showEditEventModal = true)}>Edit Event</Button>
+
     <DialogBox bind:showModal={showAddEventModal} bind:dialog={addEventDialog}>
         <h2 slot="header" class="pop-up">Create New Event</h2>
         <AddEventForm slot="contents" on:addNewEvent={addEvent} />
     </DialogBox>
-    <Button type="primary" disabled={selectedID === null} on:click={() => (showEditEventModal = true)}>Edit Event</Button>
+
     <DialogBox bind:showModal={showEditEventModal} bind:dialog={editEventDialog}>
         <h2 slot="header" class="pop-up">Edit Event</h2>
         <EditEventForm slot="contents" bind:event on:editExistingEvent={editEvent} />
     </DialogBox>
-    <Button type="secondary" disabled={selectedID === null} on:click={deleteEvent}>Delete</Button>
-    {#if calendar}
-        <Button type="primary" disabled={selectedID === null} on:click={jumptoEvent}>Jump to Event</Button>
-    {/if}
 </section>
 
 <style>
