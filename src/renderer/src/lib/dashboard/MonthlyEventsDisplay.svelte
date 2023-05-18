@@ -40,8 +40,12 @@
         <div class="events">
             {#each monthlyEvents as event}
                 <div class="event">
-                    <h2 class="event-header">{getEventDate(event)}</h2>
-                    <p>{event.name}</p>
+                    <div class="event-header">
+                        <h2 style="margin: 0px;">{getEventDate(event)}</h2>
+                    </div>
+                    <div class="event-content">
+                        <p style="margin: 0px;">{event.name}</p>
+                    </div>
                 </div>
             {/each}
         </div>
@@ -71,16 +75,25 @@
         background-color: white;
         border: 3px solid var(--evergreen-dark);
         border-radius: 10px;
-        height: 7em;
-        width: 7em;
+        height: 7.5em;
+        width: 7.2em;
         text-align: center;
     }
 
     .event-header {
-        margin: 0;
         background-color: var(--evergreen-dark);
         color: white;
-        padding: 5px;
+        padding: 6px;
+        font-size: 1.1em;
+    }
+
+    .event-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 3.5em;
+        font-size: 1.2em; 
+        padding: 5px 5px;
     }
 
     .button-space {
