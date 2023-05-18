@@ -29,7 +29,7 @@
     }
 </script>
 
-<div style="width:50%">
+<div>
     <span class="button-space">
         <h2 style="color: var(--evergreen-dark);">Upcoming events</h2>
         <a class="btn" href="#/calendar">Go to Calendar</a>
@@ -57,6 +57,8 @@
     .no-events{
         padding: 1em;
         background-color: white;
+        border-radius: 3px;
+        box-shadow: 0px 2px 4px #8f8f8f;
     }
 
     .events {
