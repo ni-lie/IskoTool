@@ -47,7 +47,7 @@
 <div style="width:35%;">
     <span class="button-space">
         <h2 style="color: var(--orange-dark);">Tasks for today</h2>
-        <a class="btn" href="#/calendar">Go to Planner</a>
+        <a class="btn" href="#/planner">Go to Planner</a>
     </span>
     <div class="events">
         {#if dailyEvents.length === 0}
