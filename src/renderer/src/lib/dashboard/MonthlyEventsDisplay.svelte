@@ -63,7 +63,7 @@
         background-color: white;
         border-radius: 3px;
         box-shadow: 0px 2px 4px #8f8f8f;
-        max-height: 25rem;
+        max-height: 27.5rem;
         padding: 1.5em;
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(8em, 1fr));

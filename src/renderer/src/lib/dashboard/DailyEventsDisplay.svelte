@@ -78,7 +78,7 @@
 <style>
     .events {
         display: flexbox;
-        max-height: 25rem;
+        max-height: 27.5rem;
         overflow-y: auto;
     }
 
