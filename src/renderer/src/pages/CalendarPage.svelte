@@ -1,9 +1,9 @@
 <script>
-    let title = "CALENDAR";
 	import Calendar from '../lib/calendar/Calendar.svelte';
 </script>
 
 <main>
+    <a href="#/">Back to Dashboard</a>
     <Calendar />
 </main>
 
