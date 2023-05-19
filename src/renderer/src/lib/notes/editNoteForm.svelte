@@ -3,13 +3,12 @@
     import type { Note } from "../../types/note";
     import { createEventDispatcher } from "svelte";
     import Button from "./Button.svelte";
-    import EmojiSelector from 'svelte-emoji-selector';
+    import EmojiPicker from "./EmojiPicker.svelte";
 
     export let selectedNote: Note;
 
     let dispatch = createEventDispatcher();
 
-    const autoClose = false;
     const handleEdit = () => {
         NotesStore.update(currentNotes => {
             let copiedNotes: Note[] = [...currentNotes];
@@ -26,12 +25,13 @@
     function togglePin(noteToPin) {
         noteToPin.pinned = !noteToPin.pinned;
     }
-    function emojiOnTitle(event) {
-        selectedNote.title += event.detail
+
+    function onEmojiChange_title(event) {
+        selectedNote.title = (selectedNote.title).concat(event.detail.emoji);
     }
 
-    function emojiOnNote(event) {
-        selectedNote.noteContent += event.detail
+    function onEmojiChange_text(event) {
+        selectedNote.noteContent = (selectedNote.noteContent).concat(event.detail.emoji);
     }
 
     let words = 0;
@@ -43,14 +43,16 @@
 </script>
 
 <h3> Edit Note </h3>
-<EmojiSelector on:emoji={emojiOnTitle} {autoClose} />
-<EmojiSelector on:emoji={emojiOnNote} {autoClose}/>
-<button type="button" on:click={() => togglePin(selectedNote)}>Toggle pin</button>
+
 
 <form on:submit|preventDefault={handleEdit}>
     <input type="text" placeholder="Title" bind:value={selectedNote.title}>
+    <EmojiPicker on:change={onEmojiChange_title}/>
+    <button type="button" on:click={() => togglePin(selectedNote)}>📌</button>
     
-    <textarea placeholder= "Type your note" cols="30" rows="10" bind:value={selectedNote.noteContent}></textarea><br>
+    <textarea placeholder= "Type your note" cols="30" rows="10" bind:value={selectedNote.noteContent}></textarea>
+    <br>
+    <EmojiPicker on:change={onEmojiChange_text}/>
     
     <br>
     <div>
