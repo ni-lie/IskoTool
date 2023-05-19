@@ -15,7 +15,10 @@
 
     const autoClose = false;
 
-    const handleSubmit = () => {
+    const handleSubmit = (event) => {
+        if (event.target.tagName === 'Button') {
+            return; // Do not proceed with form submission
+        }
         valid = true;
         
         // validate title
@@ -65,14 +68,14 @@
 </script>
 
 <h3> Add a new note </h3>
-<EmojiSelector on:emoji={emojiOnTitle} {autoClose} />
-<EmojiSelector on:emoji={emojiOnNote} {autoClose}/>
+
+
 <form on:submit|preventDefault={handleSubmit}>
-    <input type="text" placeholder="Title" bind:value={title}>
-    
+    <input type="text" placeholder="Title" bind:value={title}> 
+    <EmojiSelector on:emoji={emojiOnTitle} {autoClose} />
     <div class="errors"> { errors.inTitle }</div>
     <textarea placeholder= "Type your note" cols="30" rows="10" bind:value={noteContent}></textarea><br>
-    
+    <EmojiSelector on:emoji={emojiOnNote} {autoClose}/>
     <div class="errors">{ errors.inNoteContent }</div>
     <br>
     <div>
@@ -81,7 +84,6 @@
     <div>
         <Button type="primary">Save note</Button>
     </div>
-    
 </form>
 
 <style>

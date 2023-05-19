@@ -19,9 +19,9 @@
   "dependencies": {
     "@electron-toolkit/preload": "^1.0.3",
     "@electron-toolkit/utils": "^1.0.2",
+    "@joeattardi/emoji-button": "^4.6.4",
     "calendarize": "^1.1.1",
-    "svelecte": "^3.16.0",
-    "svelte-emoji-selector": "^1.0.1",
+    "svelecte": "^3.16.1",
     "svelte-spa-router": "^3.3.0"
   },
   "devDependencies": {
@@ -32,7 +32,7 @@
     "@typescript-eslint/eslint-plugin": "^5.57.0",
     "@typescript-eslint/parser": "^5.57.0",
     "electron": "^22.3.4",
-    "electron-builder": "^23.6.0",
+    "electron-builder": "^24.4.0",
     "electron-vite": "^1.0.22",
     "eslint": "^8.36.0",
     "eslint-plugin-svelte3": "^4.0.0",
