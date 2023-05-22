@@ -3,7 +3,7 @@
     import type { Note } from "../../types/note";
     import { createEventDispatcher } from "svelte";
     import Button from "../global-components/Button.svelte";
-    import EmojiSelector from 'svelte-emoji-selector';
+    import EmojiPicker from "./EmojiPicker.svelte";
 
     let dispatch = createEventDispatcher();
 
@@ -12,8 +12,6 @@
 
     let valid = false;
     let errors = { inTitle: '', inNoteContent: ''};
-
-    const autoClose = false;
 
     const handleSubmit = () => {
         valid = true;
@@ -50,14 +48,14 @@
         }
     };
 
-    function emojiOnTitle(event) {
-        title += event.detail
+    function onEmojiChange_title(event) {
+        title = (title).concat(event.detail.emoji);
     }
 
-    function emojiOnNote(event) {
-        noteContent += event.detail
+    function onEmojiChange_text(event) {
+        noteContent = (noteContent).concat(event.detail.emoji);
     }
-
+    
     let words = 0;
     $: if (noteContent.trim().length > 0) {
         words = noteContent.trim().split(' ').length;
@@ -65,13 +63,14 @@
 </script>
 
 <h3> Add a new note </h3>
-<EmojiSelector on:emoji={emojiOnTitle} {autoClose} />
-<EmojiSelector on:emoji={emojiOnNote} {autoClose}/>
 <form on:submit|preventDefault={handleSubmit}>
     <input type="text" placeholder="Title" bind:value={title}>
+    <EmojiPicker on:change={onEmojiChange_title}/>
     
     <div class="errors"> { errors.inTitle }</div>
-    <textarea placeholder= "Type your note" cols="30" rows="10" bind:value={noteContent}></textarea><br>
+    <textarea placeholder= "Type your note" cols="30" rows="10" bind:value={noteContent}></textarea>
+    <br>
+    <EmojiPicker on:change={onEmojiChange_text}/>
     
     <div class="errors">{ errors.inNoteContent }</div>
     <br>
