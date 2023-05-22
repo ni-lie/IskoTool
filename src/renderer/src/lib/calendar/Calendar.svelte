@@ -7,6 +7,7 @@
 	import DialogBox from '../global-components/DialogBox.svelte';
 	import GotoDateForm from './GotoDateForm.svelte';
 	import EditEventForm from './EditEventForm.svelte';
+	import Button from '../global-components/Button.svelte';
 	import { timeAscending } from './timeAscending';
 	import { isInRange } from '../isInRange';
 
@@ -139,11 +140,11 @@
 </script>
 
 <header>
+	<Button type="primary" style="position: absolute; left: 3em;" on:click={() => toDate(today_month, today_year)}>Today</Button>
 	<Arrow left on:click={toPrev} />
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<h4 class="monthandyear" on:click={() => (showGotoDateModal = true)}>{months[month]} {year}</h4>
 	<Arrow on:click={toNext} />
-	<button style="position: fixed; left: 2em;" on:click={() => toDate(today_month, today_year)}>Today</button>
 	<EventsDropdown right calendar on:jumptoEvent={jumptoEvent} />
 	<DialogBox bind:showModal={showGotoDateModal} bind:dialog={gotoDateDialog}>
 		<GotoDateForm slot="contents" bind:gotoMonth bind:gotoYear 
@@ -203,12 +204,12 @@
 			{:else}
 				<p> End date: {months[new Date(eventToView.endTime).getMonth()]} {new Date(eventToView.endTime).getDate()}, {new Date(eventToView.endTime).getFullYear()}</p>
 			{/if}
-			<button style="position: relative; right: 30em;" on:click={() => (showEditEventModal = true)}>Edit</button>
+			<Button type="primary" style="float: left; width: 5em;" on:click={() => (showEditEventModal = true)}>Edit</Button>
 			<DialogBox bind:showModal={showEditEventModal} bind:dialog={editEventDialog}>
 				<h2 slot="header" class="pop-up">Edit Event</h2>
 				<EditEventForm slot="contents" bind:event={eventToView} on:editExistingEvent={editEvent} />
 			</DialogBox>
-			<button style="position: relative; right: 2em;" on:click={deleteEvent}>Delete</button>
+			<Button type="secondary" style="float: right; width: 5em;" on:click={deleteEvent}>Delete</Button>
 		</div>
 		
 	</DialogBox>

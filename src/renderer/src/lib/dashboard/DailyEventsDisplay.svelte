@@ -1,6 +1,7 @@
 <script lang="ts">
     import { eventStore } from "../calendar/CalendarStore";
     import type { Event } from "../../types/event";
+    import { timeAscending } from "../calendar/timeAscending";
 
     let dailyEvents: Event[] = [];
     let today = new Date();
@@ -19,6 +20,8 @@
             dailyEvents.push(event);
         }
     }
+
+    $: dailyEvents.sort(timeAscending);
 
     function getEventTime(event: Event) {
         if (["Birthday", "Holiday"].includes(event.eventType)) {
@@ -44,7 +47,7 @@
 <div style="width:35%;">
     <span class="button-space">
         <h2 style="color: var(--orange-dark);">Tasks for today</h2>
-        <a class="btn" href="#/calendar">Go to Planner</a>
+        <a class="btn" href="#/planner">Go to Planner</a>
     </span>
     <div class="events">
         {#if dailyEvents.length === 0}
@@ -52,16 +55,16 @@
         {:else}
             {#each dailyEvents as event}
                 <div class="event">
-                    <h3>{event.name}</h3>
+                    <h3 style="font-size: 1.5em; display: inline;">{event.name}</h3>
                 
                     {#if (eventTime = getEventTime(event)) != null}
-                        <p class="time">
+                        <span class="time">
                             {eventTime[0]}
                         
                             {#if eventTime[1] != null}
                                 - {eventTime[1]}
                             {/if}
-                        </p>
+                        </span>
                     {/if}
                     
                     <p class="event-type">{event.eventType}</p>
@@ -74,28 +77,30 @@
 
 <style>
     .events {
-        height: 25em;
+        display: flexbox;
+        max-height: 27.5rem;
         overflow-y: auto;
     }
 
     .event {
         background-color: white;
         border-radius: 2px;
-        margin: 10px 5px;
-        padding: 5px 10px;
-        box-shadow: 2px 2px 4px #8f8f8f;
+        margin: 0px 4px 15px;
+        padding: 1.2em 1em 1em;
+        box-shadow: 0px 2px 4px #8f8f8f;
     }
 
     .event-type {
+        margin: 5px 0px;
+        font-family: 'Space Grotesk';
         font-size: 1em;
-        font-weight: 300;
+        font-weight: 400;
+        color: gray;
     }
 
     .time {
         color: var(--orange-light);
-        position: relative;
         float: right;
-        bottom: 3.5em;
     }
 
     .button-space {

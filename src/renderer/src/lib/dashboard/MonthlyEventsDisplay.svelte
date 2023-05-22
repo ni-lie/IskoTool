@@ -1,6 +1,7 @@
 <script lang="ts">
     import { eventStore } from "../calendar/CalendarStore";
     import type { Event } from "../../types/event";
+    import { timeAscending } from "../calendar/timeAscending";
 
     let monthlyEvents: Event[] = [];
     let today = new Date();
@@ -19,6 +20,8 @@
         }
     }
 
+    $: monthlyEvents.sort(timeAscending);
+
     function getEventDate(event: Event) {
         const eventStart = new Date(event.startTime);
         const eventDate = new Intl.DateTimeFormat('en-US', {month: 'short', day: '2-digit'}).format(eventStart);
@@ -26,7 +29,7 @@
     }
 </script>
 
-<div style="width:50%">
+<div>
     <span class="button-space">
         <h2 style="color: var(--evergreen-dark);">Upcoming events</h2>
         <a class="btn" href="#/calendar">Go to Calendar</a>
@@ -37,8 +40,12 @@
         <div class="events">
             {#each monthlyEvents as event}
                 <div class="event">
-                    <h2 class="event-header">{getEventDate(event)}</h2>
-                    <p>{event.name}</p>
+                    <div class="event-header">
+                        <h2 style="margin: 0px;">{getEventDate(event)}</h2>
+                    </div>
+                    <div class="event-content">
+                        <p style="margin: 0px;">{event.name}</p>
+                    </div>
                 </div>
             {/each}
         </div>
@@ -50,15 +57,19 @@
     .no-events{
         padding: 1em;
         background-color: white;
+        border-radius: 3px;
+        box-shadow: 0px 2px 4px #8f8f8f;
     }
 
     .events {
         background-color: white;
-        height: 25em;
+        border-radius: 3px;
+        box-shadow: 0px 2px 4px #8f8f8f;
+        max-height: 27.5rem;
+        padding: 1.5em;
         display: grid;
-        grid-template-columns: repeat(auto-fill, 8em);
-        grid-template-rows: repeat(auto-fill, 8em);
-        grid-row-gap: .5em;
+        grid-template-columns: repeat(auto-fill, minmax(8em, 1fr));
+        grid-row-gap: 1.5em;
         overflow-y: auto;
     }
 
@@ -66,17 +77,25 @@
         background-color: white;
         border: 3px solid var(--evergreen-dark);
         border-radius: 10px;
-        margin: 1em 1em;
-        height: 7em;
-        width: 7em;
+        height: 7.5em;
+        width: 7.2em;
         text-align: center;
     }
 
     .event-header {
-        margin: 0;
         background-color: var(--evergreen-dark);
         color: white;
-        padding: 5px;
+        padding: 6px;
+        font-size: 1.1em;
+    }
+
+    .event-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 3.5em;
+        font-size: 1.2em; 
+        padding: 5px 5px;
     }
 
     .button-space {

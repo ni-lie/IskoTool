@@ -1,7 +1,7 @@
 <script>
     import Card from "./Card.svelte";
     import NotesStore from "./stores/NotesStore";
-    import Button from "./Button.svelte";
+    import Button from "../global-components/Button.svelte";
     import { createEventDispatcher } from "svelte";
 
     let dispatch = createEventDispatcher();

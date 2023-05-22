@@ -9,11 +9,13 @@
         <DateTimeDisplay />
         <div class="display-box">
             <DailyEventsDisplay />
-            <MonthlyEventsDisplay />
-        </div>
-        <div class="button-group">
-            <a href="#/pomodoro">Start a Pomodoro session</a>
-            <a href="#/notes">View your notes</a>
+            <div style="width: 50%;">
+                <MonthlyEventsDisplay />
+                <div class="button-group">
+                    <a href="#/pomodoro">Start a Pomodoro session</a>
+                    <a href="#/notes">View your notes</a>
+                </div>
+            </div>
         </div>
     </section>
 </main>
@@ -23,7 +25,7 @@
         display: flex;
         margin: 0px;
         justify-content: space-evenly;
-        max-height: 30rem;
+        /* max-height: 30rem; */
     }
 
     .button-group {

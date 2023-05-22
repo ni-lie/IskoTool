@@ -2,7 +2,7 @@
     import NotesStore from "./stores/NotesStore";
     import type { Note } from "../../types/note";
     import { createEventDispatcher } from "svelte";
-    import Button from "./Button.svelte";
+    import Button from "../global-components/Button.svelte";
     import EmojiPicker from "./EmojiPicker.svelte";
 
     let dispatch = createEventDispatcher();

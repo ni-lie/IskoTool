@@ -29,9 +29,7 @@ export const eventStore  = {
     },
     deleteEvent(id: string) {
         update(events => {
-            let deleteIdx = events.findIndex(event => event.id == id);
-            delete events[deleteIdx];
-            events = events.filter(Boolean);
+            events = events.filter(event => event.id != id);
 
             setEvents(events);
             return events;

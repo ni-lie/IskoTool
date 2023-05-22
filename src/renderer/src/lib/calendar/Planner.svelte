@@ -4,6 +4,7 @@
 	import type { Event } from '../../types/event';
 	import DialogBox from '../global-components/DialogBox.svelte';
 	import EditEventForm from './EditEventForm.svelte';
+	import Button from '../global-components/Button.svelte';
 	import timeDisplayOptions from '../calendar/Calendar.svelte'
 	import { timeAscending } from './timeAscending';
 	import { isInRange } from '../isInRange';
@@ -129,12 +130,12 @@
 				<p> End date: {months[new Date(eventToView.endTime).getMonth()]} {new Date(eventToView.endTime).getDate()}, {new Date(eventToView.endTime).getFullYear()}</p>
 				<p> End time: {new Date(eventToView.endTime).toLocaleTimeString("en-US", timeDisplayOptions)} </p>
 			{/if}
-			<button style="position: relative; right: 30em;" on:click={() => (showEditEventModal = true)}>Edit</button>
+			<Button type="primary" style="float: left; width: 5em;" on:click={() => (showEditEventModal = true)}>Edit</Button>
 			<DialogBox bind:showModal={showEditEventModal} bind:dialog={editEventDialog}>
 				<h2 slot="header" class="pop-up">Edit Event</h2>
 				<EditEventForm slot="contents" bind:event={eventToView} on:editExistingEvent={editEvent} />
 			</DialogBox>
-			<button style="position: relative; right: 2em;" on:click={deleteEvent}>Delete</button>
+			<Button type="secondary" style="float: right; width: 5em;" on:click={deleteEvent}>Delete</Button>
 		</div>
 		
 	</DialogBox>
