@@ -18,7 +18,8 @@ html, body, #app {
 
 .title {
   margin: 20px 0px;
-  font-size: 2.5rem;
+  font-size: 3rem;
+  font-weight: 500;
 }
 
 h1 {

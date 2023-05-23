@@ -14,6 +14,7 @@
         <DateTimeDisplay />
         <div class="display-box">
             <DailyEventsDisplay />
+            <div class="vertical-line"></div>
             <div style="width: 50%;">
                 <MonthlyEventsDisplay />
                 <div class="button-group">
@@ -41,6 +42,10 @@
         margin: 0px;
         justify-content: space-evenly;
         /* max-height: 30rem; */
+    }
+
+    .vertical-line {
+        border-left: 2px solid #d7d7d7;
     }
 
     .button-group {
