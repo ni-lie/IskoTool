@@ -50,21 +50,20 @@ input[type=submit] {
   font-size: 15px;
   color: white;
   background-color: var(--evergreen-dark);
-  padding: 4px 0px;
+  padding: 0.5em;
   width: 40%;
-  border: solid var(--evergreen-dark);
+  border: transparent;
   border-radius: 3px;
   margin: 30px 0px;
   
   position: relative;
   left: 50%;
   transform: translateX(-50%);
-  transition: background 0.25s ease-in-out, border 0.25s ease-in-out;
+  transition: background 0.25s ease-in-out;
 }
 
 input[type=submit]:hover {
   background-color: var(--evergreen-light);
-  border-color: var(--evergreen-light);
 }
 
 input[type=text] {
