@@ -10,7 +10,7 @@
     import addButtonFilePath from '../../images/white_plus_resized.png';
     import searchButtonPath from '../../images/search_icon.png';
     import { timeAscending } from "./timeAscending";
-    import { clickOutside } from "./clickOutside";
+    import { clickOutside } from "../global-components/clickOutside";
 
     export let right = false;
     export let calendar = false;
