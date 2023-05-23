@@ -1,7 +1,12 @@
 <script>
-    import DateTimeDisplay from '../lib/dashboard/DashboardDateTimeDisplay.svelte'
+    import { push } from 'svelte-spa-router';
+    import DateTimeDisplay from '../lib/dashboard/DashboardDateTimeDisplay.svelte';
     import DailyEventsDisplay from '../lib/dashboard/DailyEventsDisplay.svelte';
     import MonthlyEventsDisplay from '../lib/dashboard/MonthlyEventsDisplay.svelte';
+    import Button from '../lib/global-components/Button.svelte';
+
+    import Tomato from '../../src/images/Tomato.png';
+    import Notes from '../../src/images/Notesheet.png';
 </script>
   
 <main>
@@ -12,8 +17,18 @@
             <div style="width: 50%;">
                 <MonthlyEventsDisplay />
                 <div class="button-group">
-                    <a href="#/pomodoro">Start a Pomodoro session</a>
-                    <a href="#/notes">View your notes</a>
+                    <Button type="primary" on:click={() => push("#/pomodoro")}>
+                        <span>
+                            <img class="icon" src={Tomato} alt="Pomodoro icon"/>
+                            <t class="longbutton">Start a Pomodoro session</t>
+                        </span>
+                    </Button>
+                    <Button type="primary" on:click={() => push("#/notes")}>
+                        <span>
+                            <img class="icon" src={Notes} alt="Note icon"/>
+                            <t class="longbutton">View your notes</t>
+                        </span>
+                    </Button>
                 </div>
             </div>
         </div>
@@ -29,23 +44,30 @@
     }
 
     .button-group {
-        margin: 2em 5em 0 0;
+        margin: 2em;
+        height: 7em;
         display: flex;
         flex-direction: column;
+        justify-content: space-between;
         align-items: center;
-        float: right;
     }
 
-    a {
-    text-align: center;
-    background-color: var(--evergreen-dark);
-    color: white;
-    font-family: 'Rubik';
-    font-weight: bold;
-    width: 250px;
-    padding: 12px 0px;
-    margin: 4px;
-    border-radius: 12px;
+    .longbutton {
+        padding: 0.5rem 1rem;
+        font-size: 17px;
+        width: 13em;
+        text-align: left;
+    }
+
+    span {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    img {
+        height: 28px;
+        widows: 28px;
     }
 
 </style>
