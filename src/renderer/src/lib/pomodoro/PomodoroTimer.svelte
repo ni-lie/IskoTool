@@ -199,7 +199,7 @@
     padding: 1rem;
     display: flex;
     justify-content: center;
-    height: 100vh;
+    min-height: 100%;
   }
 
   time {
