@@ -102,6 +102,37 @@ input[type=datetime-local] {
 	font-size: 15px;
 }
 
+.select-holder {
+  margin-bottom: 10px;
+  /**/
+}
+
+select {
+  appearance: none;
+  text-align: left;
+  color: black;
+  font-family: 'Space Grotesk';
+  font-size: 15px;
+  padding: 7px 10px;
+  width: 60%;
+  border: solid var(--evergreen-dark) 1px;
+  border-radius: 3px;
+  background-color: white;
+}
+
+.expanded {
+  transform: rotate(90deg);
+  }
+
+.arrow {
+  position: relative;
+  left: -30px;
+  width: 4%;
+  vertical-align: middle;
+  pointer-events: none;
+  transition: 0.2s;
+}
+
 dialog div {
   min-height: 250px;
   min-width: 480px;
