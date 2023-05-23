@@ -147,6 +147,7 @@
 	<Arrow on:click={toNext} />
 	<EventsDropdown right calendar on:jumptoEvent={jumptoEvent} />
 	<DialogBox bind:showModal={showGotoDateModal} bind:dialog={gotoDateDialog}>
+		<h2 slot="header" class="pop-up">Go to...</h2>
 		<GotoDateForm slot="contents" bind:gotoMonth bind:gotoYear 
 		on:gotoDate={() => {toDate(gotoMonth, gotoYear); gotoDateDialog.close()}} />
 	</DialogBox>
