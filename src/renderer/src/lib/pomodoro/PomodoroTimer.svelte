@@ -185,6 +185,7 @@
       {/each}
       <button class="fadedtext" on:click={() => (showModal = true)} disabled={currentState === State.InProgress || currentState === State.Pause}>+ Custom Mode</button>
       <DialogBox bind:showModal bind:dialog={customModeDialog}>
+        <h2 slot="header" class="pop-up">Create Custom Timer</h2>
         <CustomModeForm slot="contents" on:addCustomMode={addCustomMode} />
       </DialogBox>
     </div>
