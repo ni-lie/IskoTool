@@ -87,6 +87,22 @@ input[type=number] {
 	font-weight: bold;
 }
 
+input[type=date] {
+	border: solid var(--evergreen-dark) 1px;
+  border-radius: 3px;
+  padding: 1px 10px;
+  font-family: 'Space Grotesk';
+	font-size: 15px;
+}
+
+input[type=datetime-local] {
+	border: solid var(--evergreen-dark) 1px;
+  border-radius: 3px;
+  padding: 1px 10px;
+  font-family: 'Space Grotesk';
+	font-size: 15px;
+}
+
 dialog div {
   min-height: 250px;
   min-width: 480px;
