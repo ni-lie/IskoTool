@@ -16,15 +16,12 @@
 
             noteToBeEdited.title = selectedNote.title;
             noteToBeEdited.noteContent = selectedNote.noteContent;
+            
             noteToBeEdited.pinned = selectedNote.pinned;
             return copiedNotes;
         });
         dispatch('editNote');
     };
-
-    function togglePin(noteToPin) {
-        noteToPin.pinned = !noteToPin.pinned;
-    }
 
     function onEmojiChange_title(event) {
         selectedNote.title = (selectedNote.title).concat(event.detail.emoji);
@@ -48,7 +45,12 @@
 <form on:submit|preventDefault={handleEdit}>
     <input type="text" placeholder="Title" bind:value={selectedNote.title}>
     <EmojiPicker on:change={onEmojiChange_title}/>
-    <button type="button" on:click={() => togglePin(selectedNote)}>📌</button>
+
+    <button type="button" class:pinBtnActive={selectedNote.pinned}
+        on:click={() => {
+            selectedNote.pinned = !selectedNote.pinned;
+            }
+        }>📌</button>
     
     <textarea placeholder= "Type your note" cols="30" rows="10" bind:value={selectedNote.noteContent}></textarea>
     <br>
@@ -68,4 +70,10 @@
     textarea {
 		resize: none;
 	}
+
+    .pinBtnActive {
+        background-color: var(--orange-faded);
+        border-radius: 2.5px;
+        border-color: rgb(90, 90, 90);
+    }
 </style>
