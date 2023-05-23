@@ -1,7 +1,9 @@
 <script lang="ts">
+    import { push } from "svelte-spa-router";
     import { eventStore } from "../calendar/CalendarStore";
     import type { Event } from "../../types/event";
     import { timeAscending } from "../calendar/timeAscending";
+    import Button from "../global-components/Button.svelte";
 
     let dailyEvents: Event[] = [];
     let today = new Date();
@@ -47,7 +49,7 @@
 <div style="width:35%;">
     <span class="button-space">
         <h2 style="color: var(--orange-dark);">Tasks for today</h2>
-        <a class="btn" href="#/planner">Go to Planner</a>
+        <Button type="secondary" on:click={() => push("#/planner")}>Go to Planner</Button>
     </span>
     <div class="events">
         {#if dailyEvents.length === 0}
@@ -104,19 +106,9 @@
     }
 
     .button-space {
-        display: inline-flex;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
         align-items: center;
-    }
-
-    .btn {
-    text-align: center;
-    background-color: var(--orange-dark);
-    color: white;
-    font-family: 'Rubik';
-    font-weight: bold;
-    max-height: 1.5em;
-    padding: 10px;
-    margin-inline-start: 30px;
-    border-radius: 4px;
     }
 </style>

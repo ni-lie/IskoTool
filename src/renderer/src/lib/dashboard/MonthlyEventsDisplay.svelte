@@ -1,7 +1,9 @@
 <script lang="ts">
+    import { push } from "svelte-spa-router";
     import { eventStore } from "../calendar/CalendarStore";
     import type { Event } from "../../types/event";
     import { timeAscending } from "../calendar/timeAscending";
+    import Button from "../global-components/Button.svelte";
 
     let monthlyEvents: Event[] = [];
     let today = new Date();
@@ -32,7 +34,7 @@
 <div>
     <span class="button-space">
         <h2 style="color: var(--evergreen-dark);">Upcoming events</h2>
-        <a class="btn" href="#/calendar">Go to Calendar</a>
+        <Button type="primary" on:click={() => push("#/calendar")}>Go to Calendar</Button>
     </span>
     {#if monthlyEvents.length === 0}
         <h2 class="no-events">No more events this month</h2>
@@ -99,19 +101,9 @@
     }
 
     .button-space {
-        display: inline-flex;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
         align-items: center;
-    }
-
-    .btn {
-    text-align: center;
-    background-color: var(--evergreen-dark);
-    color: white;
-    font-family: 'Rubik';
-    font-weight: bold;
-    max-height: 1.5em;
-    padding: 10px;
-    margin-inline-start: 30px;
-    border-radius: 4px;
     }
 </style>
