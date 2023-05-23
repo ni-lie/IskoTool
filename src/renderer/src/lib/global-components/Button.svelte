@@ -21,16 +21,29 @@
     }
 
     .primary {
-        background: #1c8d76;
+        background: var(--evergreen-dark);
         color: white;
     }
     
     .primary:disabled {
+        background: var(--evergreen-faded);
+    }
+
+    .primary:hover:not([disabled]) {
         background: var(--evergreen-light);
     }
 
-    .primary:hover {
-        background: var(--evergreen-light);
+    .secondary {
+        background: var(--orange-dark);
+        color: white;
+    }
+
+    .secondary:disabled {
+        background: var(--orange-faded);
+    }
+
+    .secondary:hover {
+        background: var(--orange-light);
     }
 
     .danger {
@@ -39,10 +52,10 @@
     }
 
     .danger:disabled {
-        background: lightcoral;
+        background: rgb(240, 158, 158);
     }
 
-    .danger:hover {
+    .danger:hover:not([disabled]) {
         background: lightcoral;
     }
 </style>
