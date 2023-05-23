@@ -29,7 +29,7 @@
         <h4>{note.title}</h4>
         <p>{note.noteContent}</p>
         <div class = "delete">
-            <Button type="secondary" on:click={() => handleDelete(note.id)}>Delete</Button>
+            <Button type="danger" on:click={() => handleDelete(note.id)}>Delete</Button>
         </div>
     </div>    
 </Card>

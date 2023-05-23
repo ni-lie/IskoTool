@@ -209,7 +209,7 @@
 				<h2 slot="header" class="pop-up">Edit Event</h2>
 				<EditEventForm slot="contents" bind:event={eventToView} on:editExistingEvent={editEvent} />
 			</DialogBox>
-			<Button type="secondary" style="float: right; width: 5em;" on:click={deleteEvent}>Delete</Button>
+			<Button type="danger" style="float: right; width: 5em;" on:click={deleteEvent}>Delete</Button>
 		</div>
 		
 	</DialogBox>

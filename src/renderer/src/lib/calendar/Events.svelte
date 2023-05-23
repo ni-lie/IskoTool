@@ -78,7 +78,7 @@
             <Button type="primary" style="margin: 4px 2px; float: right;" disabled={selectedID === null} on:click={jumptoEvent}>Jump to Event</Button>
         {/if}
 
-        <Button type="secondary" style="margin: 4px 2px; float: right;" disabled={selectedID === null} on:click={deleteEvent}>Delete</Button>
+        <Button type="danger" style="margin: 4px 2px; float: right;" disabled={selectedID === null} on:click={deleteEvent}>Delete</Button>
         <Button type="primary" style="margin: 4px 2px; float: right;" disabled={selectedID === null} on:click={() => {showEditEventModal = true; searching = false;}}>Edit Event</Button>
     </section>
 {/if}
