@@ -3,12 +3,18 @@
 </script>
 
 <main>
-  <a href="#/">Back to Dashboard</a>
+  <a class="navbar" href="#/">Back to Dashboard</a>
   <PomodoroTimer />
 </main>
 
 <style>
   main {
-    height: 100vh;
+    height: 100%;
+  }
+
+  .navbar { /*temp just so I can remove the scrollbar*/
+    position: fixed;
+    text-decoration: none;
+    color: white;
   }
 </style>

@@ -17,6 +17,15 @@
   
 </script>
 
-<main>
+<main class="mainapp">
   <Router {routes} />
 </main>
+
+<style>
+  * {
+    box-sizing: border-box;
+  }
+  .mainapp {
+    height: 100%;
+  }
+</style>
