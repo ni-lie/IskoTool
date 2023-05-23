@@ -23,6 +23,7 @@
 
 <style>
 	input[type=number] {
-		font-size: 1.25em;
+		font-size: 1.2em;
+		font-weight: 200;
 	}
 </style>
