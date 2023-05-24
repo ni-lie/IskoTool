@@ -8,8 +8,6 @@
     let eventType: string;
     let startTime: string;
     let endTime: string;
-
-	$: {console.log(endTime)};//
 	
 	function handleSubmit() {
 		// Forward the form data to all event listeners

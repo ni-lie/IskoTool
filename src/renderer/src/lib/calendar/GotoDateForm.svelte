@@ -13,7 +13,6 @@
     }
 </script>
 
-<h2 class="pop-up">Go To...</h2>
 <form on:submit|preventDefault={handleSubmit}>
 	<h3 class="pop-up">Month</h3>
 	<MonthDropdown bind:month={gotoMonth} />
@@ -21,3 +20,10 @@
 	<input type="number" min=0 max=9999 bind:value={gotoYear}><br>
 	<input type="submit" value="Go">
 </form>
+
+<style>
+	input[type=number] {
+		font-size: 1.2em;
+		font-weight: 200;
+	}
+</style>

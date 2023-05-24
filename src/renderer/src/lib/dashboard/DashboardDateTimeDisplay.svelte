@@ -30,13 +30,13 @@
   
   .small-green-text {
     color: var(--evergreen-dark);
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: 300;
   }
   
   .bold-green-text {
     color: var(--evergreen-dark);
-    font-size: 2rem;
+    font-size: 2.25rem;
   }
   
   </style>

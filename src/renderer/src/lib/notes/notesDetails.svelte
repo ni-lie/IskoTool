@@ -1,7 +1,7 @@
 <script>
     import Card from "./Card.svelte";
     import NotesStore from "./stores/NotesStore";
-    import Button from "./Button.svelte";
+    import Button from "../global-components/Button.svelte";
     import { createEventDispatcher } from "svelte";
 
     let dispatch = createEventDispatcher();
@@ -29,7 +29,7 @@
         <h4>{note.title}</h4>
         <p>{note.noteContent}</p>
         <div class = "delete">
-            <Button type="secondary" on:click={() => handleDelete(note.id)}>Delete</Button>
+            <Button type="danger" on:click={() => handleDelete(note.id)}>Delete</Button>
         </div>
     </div>    
 </Card>

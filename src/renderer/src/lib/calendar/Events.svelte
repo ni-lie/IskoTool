@@ -5,8 +5,12 @@
     import DialogBox from '../global-components/DialogBox.svelte';
     import EditEventForm from './EditEventForm.svelte';
     import AddEventForm from './AddEventForm.svelte';
-	import addButtonFilePath from '../../images/white_plus_resized.png';
     import Svelecte from 'svelecte';
+    import Button from "../global-components/Button.svelte";
+    import addButtonFilePath from '../../images/white_plus_resized.png';
+    import searchButtonPath from '../../images/search_icon.png';
+    import { timeAscending } from "./timeAscending";
+    import { clickOutside } from "../global-components/clickOutside";
 
     export let right = false;
     export let calendar = false;
@@ -15,7 +19,9 @@
     let showEditEventModal: boolean = false;
     let addEventDialog: HTMLDialogElement;
     let editEventDialog: HTMLDialogElement;
-    
+
+    let searching: boolean = false;
+
     let selectedID: string | null = null;
     let event: Event = {
 		name: '',
@@ -26,6 +32,8 @@
 	};
 
     let dispatch = createEventDispatcher();
+
+    $: sortedEvents = $eventStore.sort(timeAscending);
 
     $: {
 		const found = $eventStore.find(event => event.id === selectedID);
@@ -43,6 +51,7 @@
     }
 
     function deleteEvent() {
+        searching = false;
         if (confirm('Are you sure you want to delete this event?')) {
 			eventStore.deleteEvent(selectedID);
 			selectedID = null;
@@ -50,35 +59,44 @@
     }
 
     function jumptoEvent() {
+        searching = false;
         dispatch('jumptoEvent', {startTime: event.startTime});
     }
 
-
 </script>
 
-<section class:right>
-    <Svelecte options={$eventStore} bind:value={selectedID} valueField="id" labelField="name" placeholder="Select (or search for) an event..."></Svelecte>
-    <button class="add-event" on:click={() => (showAddEventModal = true)}><img class="white-plus" src={addButtonFilePath} alt="Add note"/></button>
-    <DialogBox bind:showModal={showAddEventModal} bind:dialog={addEventDialog}>
-        <h2 slot="header" class="pop-up">Create New Event</h2>
-        <AddEventForm slot="contents" on:addNewEvent={addEvent} />
-    </DialogBox>
-    <button class="fadedtext" disabled={selectedID === null} on:click={() => (showEditEventModal = true)}>Edit Event</button>
-    <DialogBox bind:showModal={showEditEventModal} bind:dialog={editEventDialog}>
-        <h2 slot="header" class="pop-up">Edit Event</h2>
-        <EditEventForm slot="contents" bind:event on:editExistingEvent={editEvent} />
-    </DialogBox>
-    <button disabled={selectedID === null} on:click={deleteEvent}>Delete</button>
-    {#if calendar}
-        <button class="fadedtext" disabled={selectedID === null} on:click={jumptoEvent}>Jump to Event</button>
-    {/if}
-</section>
+{#if !searching}
+    <button class="search" on:click={() => (searching = true)}><img class="search-icon" src={searchButtonPath} alt="Search"/></button>
+{/if}
+
+{#if searching}
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
+    <section class:right use:clickOutside on:click_outside={() => (searching = false)}>
+        <Svelecte options={sortedEvents} bind:value={selectedID} valueField="id" labelField="name" placeholder="Select (or search for) an event..." />
+
+        {#if calendar}
+            <Button type="primary" style="margin: 4px 2px; float: right;" disabled={selectedID === null} on:click={jumptoEvent}>Jump to Event</Button>
+        {/if}
+
+        <Button type="danger" style="margin: 4px 2px; float: right;" disabled={selectedID === null} on:click={deleteEvent}>Delete</Button>
+        <Button type="primary" style="margin: 4px 2px; float: right;" disabled={selectedID === null} on:click={() => {showEditEventModal = true; searching = false;}}>Edit Event</Button>
+    </section>
+{/if}
+
+<button class="add-event" on:click={() => (showAddEventModal = true)}><img class="white-plus" src={addButtonFilePath} alt="Add note"/></button>
+<DialogBox bind:showModal={showAddEventModal} bind:dialog={addEventDialog}>
+    <h2 slot="header" class="pop-up">Create New Event</h2>
+    <AddEventForm slot="contents" on:addNewEvent={addEvent} />
+</DialogBox>
+<DialogBox bind:showModal={showEditEventModal} bind:dialog={editEventDialog}>
+    <h2 slot="header" class="pop-up">Edit Event</h2>
+    <EditEventForm slot="contents" bind:event on:editExistingEvent={editEvent} />
+</DialogBox>
 
 <style>
-    section.right {
-        position: fixed; 
+    .right {
+        position: absolute; 
         right: 2em;
-        z-index: 4;
     }
 
     .add-event {
@@ -108,5 +126,21 @@
     }
     .white-plus {
         height: 50%;
+    }
+
+    .search {
+        position: absolute; 
+        right: 2em;
+        border: none;
+        height: 3rem;
+        background: transparent;
+    }
+
+    .search-icon {
+        height: 100%;
+    }
+
+    .search-icon:hover {
+        opacity: 0.5;
     }
 </style>
