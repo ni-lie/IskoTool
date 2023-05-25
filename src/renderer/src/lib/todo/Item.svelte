@@ -10,11 +10,7 @@
     }
 
     function handleDoubleClick() {
-        const yes = confirm("Are you sure you wish to delete this item?");
-
-        if (yes) {
-            dispatch("delete", id);
-        }
+        dispatch("delete", id);
     }
 </script>
 

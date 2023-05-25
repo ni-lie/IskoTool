@@ -83,10 +83,8 @@
     }
 
     function deleteEvent() {
-        if (confirm('Are you sure you want to delete this event?')) {
-			eventStore.deleteEvent(eventToView.id);
-			viewEventDialog.close();
-		}
+		eventStore.deleteEvent(eventToView.id);
+		viewEventDialog.close();
     }
 </script>
 

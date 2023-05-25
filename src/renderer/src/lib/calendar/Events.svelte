@@ -52,10 +52,9 @@
 
     function deleteEvent() {
         searching = false;
-        if (confirm('Are you sure you want to delete this event?')) {
-			eventStore.deleteEvent(selectedID);
-			selectedID = null;
-		}
+			
+        eventStore.deleteEvent(selectedID);
+		selectedID = null;
     }
 
     function jumptoEvent() {
