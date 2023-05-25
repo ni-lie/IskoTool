@@ -6,7 +6,7 @@
     import NewItem from "./NewItem.svelte";
 
     function handleNewItem(e) {
-
+        
     }
 
     function handleUpdate(e) {
@@ -27,7 +27,7 @@
 
 
 <div class="list">
-    <NewItem></NewItem>
+    <NewItem on:newitem={handleNewItem}/>
     {#each $items as item (item)}
         <Item {...item} onupdate={handleUpdate} on:delete={handleDelete} />
     {:else}
