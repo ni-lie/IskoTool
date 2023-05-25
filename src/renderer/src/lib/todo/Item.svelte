@@ -1,5 +1,6 @@
 <script>
     import { createEventDispatcher } from "svelte";
+    import ConfirmDelete from "../global-components/ConfirmDelete.svelte";
 
     export let id, text, completed;
 
@@ -14,13 +15,16 @@
     }
 </script>
 
-<div class="item" class:completed on:dblclick = {handleDoubleClick}>
-    <input class="text-input" type="text" bind:value={text} readonly={completed} 
-    on:keyup={({key, target}) => key === 'Enter' && target.blur()}
-    on:blur={() => triggerUpdate()} /> 
-    <input class="completed-checkbox" type="checkbox" bind:checked={completed}
-    on:change={() => triggerUpdate()} />
-</div>
+<ConfirmDelete let:confirm="{confirmDeleteItem}">
+    <div class="item" class:completed on:dblclick = {() => confirmDeleteItem(handleDoubleClick)}>
+        <input class="text-input" type="text" bind:value={text} readonly={completed} 
+        on:keyup={({key}) => key === 'Enter'}
+        on:blur={() => triggerUpdate()} /> 
+        <input class="completed-checkbox" type="checkbox" bind:checked={completed}
+        on:change={() => triggerUpdate()} />
+    </div>
+</ConfirmDelete>
+
 
 <style>
     .item {

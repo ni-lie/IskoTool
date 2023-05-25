@@ -11,10 +11,6 @@
 <style>
     .container {
         width: 500px;
-        background: #009579;
-    }
-
-    :global(.container *) {
-        font-family:sans-serif
+        background: var(--evergreen-dark);
     }
 </style>
