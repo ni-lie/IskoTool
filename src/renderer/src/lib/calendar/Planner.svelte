@@ -223,12 +223,18 @@
 	}
 
 	.eventdisplay {
-		font-weight: 600;
-		padding-top: 2em;
-		text-align: center;
-		color: #000000;
+		background-color: white;
+        border-radius: 4px;
+        margin: 0px;
+        padding: 0px 0px 0px 0px;
+        box-shadow: 0px 2px 4px #8f8f8f;
 		user-select: none;
-		border: outset 1px;
+
+		height: 33%;
+		font-family: 'Rubik';
+		font-style: normal;
+		color: black;
+		font-size: 24px;
 	}
 
 	.eventdisplay.noevent{
@@ -237,5 +243,20 @@
 
 	.eventdisplay:hover {
 		color: #6E7ED3;
+	}
+	
+	.event-time {
+		color:#FFC085;
+		margin-top: 10px;
+		margin-bottom: 15px;
+		font-size: 15px;
+	}
+
+	.event-type {
+		margin: 0px;
+        font-family: 'Space Grotesk';
+        font-size: 16px;
+        font-weight: 400;
+        color: gray;
 	}
 </style>
