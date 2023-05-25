@@ -31,6 +31,19 @@
         TodoApi.save($items);
     }
 
+    let itemsSorted = [];
+
+    $: {
+        itemsSorted = [...$items];
+        itemsSorted.sort((a, b) => {
+            if (a.completed && b.completed) return 0;
+            if (a.completed) return 1;
+            if (b.completed) return -1;
+
+            return 0;
+        });
+    }
+
     onMount(async () => {
         $items = await TodoApi.getAll();
     });
@@ -39,7 +52,7 @@
 
 <div class="list">
     <NewItem on:newitem={handleNewItem}/>
-    {#each $items as item (item)}
+    {#each itemsSorted as item (item)}
         <Item {...item} on:update={handleUpdate} on:delete={handleDelete} />
     {:else}
         <p class="list-status"> No items exist</p>
