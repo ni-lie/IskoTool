@@ -2,6 +2,7 @@
     import { onMount } from "svelte";
     import { items } from "./stores";
     import TodoApi from "./TodoApi";
+    import Item from "./Item.svelte";
 
     function handleNewItem(e) {
 
@@ -23,7 +24,7 @@
 
 <div class="list">
     {#each $items as item (item)}
-        {JSON.stringify(item)} 
+        <Item {...item} />
     {:else}
         <p class="list-status"> No items Exist</p>
     {/each}
