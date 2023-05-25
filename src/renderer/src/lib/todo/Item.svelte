@@ -8,9 +8,17 @@
     function triggerUpdate(){
         dispatch("update", {id, text, completed});
     }
+
+    function handleDoubleClick() {
+        const yes = confirm("Are you sure you wish to delete this item?");
+
+        if (yes) {
+            dispatch("delete", id);
+        }
+    }
 </script>
 
-<div class="item" class:completed>
+<div class="item" class:completed on:dblclick = {handleDoubleClick}>
     <input class="text-input" type="text" bind:value={text} readonly={completed} 
     on:keyup={({key, target}) => key === 'Enter' && target.blur()}
     on:blur={() => triggerUpdate()} /> 
