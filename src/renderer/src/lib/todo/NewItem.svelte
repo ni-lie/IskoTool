@@ -5,6 +5,8 @@
 
     function handleKeyUp({key}){
         if (key !== 'Enter' || value.length === 0) return;
+        dispatch("newitem", value);
+        value = "";
     }
     let value = "";
 </script>
