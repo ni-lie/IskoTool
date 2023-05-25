@@ -3,8 +3,9 @@
 	import EventsDropdown from './Events.svelte';
 	import type { Event } from '../../types/event';
 	import DialogBox from '../global-components/DialogBox.svelte';
-	import EditEventForm from './EditEventForm.svelte';
+	import ConfirmDelete from '../global-components/ConfirmDelete.svelte';
 	import Button from '../global-components/Button.svelte';
+	import EditEventForm from './EditEventForm.svelte';
 	import timeDisplayOptions from '../calendar/Calendar.svelte'
 	import { timeAscending } from '../helper-functions/timeAscending';
 	import { isInRange } from '../helper-functions/isInRange';
@@ -133,7 +134,9 @@
 				<h2 slot="header" class="pop-up">Edit Event</h2>
 				<EditEventForm slot="contents" bind:event={eventToView} on:editExistingEvent={editEvent} />
 			</DialogBox>
-			<Button type="danger" style="float: right; width: 5em;" on:click={deleteEvent}>Delete</Button>
+			<ConfirmDelete let:confirm="{confirmDeleteEvent}">
+				<Button type="danger" style="float: right; width: 5em;" on:click={() => confirmDeleteEvent(deleteEvent)}>Delete</Button>
+			</ConfirmDelete>
 		</div>
 		
 	</DialogBox>
