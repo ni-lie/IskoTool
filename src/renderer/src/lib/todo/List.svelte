@@ -5,7 +5,7 @@
     import TodoApi from "./TodoApi";
     import Item from "./Item.svelte";
     import NewItem from "./NewItem.svelte";
-    import Todo from "./Todo.svelte";
+
 
     function handleNewItem(e) {
         $items = [
