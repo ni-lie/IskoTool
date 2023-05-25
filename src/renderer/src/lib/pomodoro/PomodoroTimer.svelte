@@ -93,6 +93,7 @@
         return;
       }
       else if(currentTime === 0 ){
+        progbar.style.background = "conic-gradient(#ffffff 0deg, rgb(200, 200, 200, 0.4) 0deg)";
         audio.play()  
       }
       if (isCustom) idle();
