@@ -1,12 +1,23 @@
 <script>
     import { onMount } from "svelte";
+    import { v4 as uuidv4 } from "uuid";
     import { items } from "./stores";
     import TodoApi from "./TodoApi";
     import Item from "./Item.svelte";
     import NewItem from "./NewItem.svelte";
+    import Todo from "./Todo.svelte";
 
     function handleNewItem(e) {
-        
+        $items = [
+            {
+                id: uuidv4(),
+                text: e.detail,
+                completed: false
+            },
+            ...$items
+        ];
+
+        TodoApi.save($items);
     }
 
     function handleUpdate(e) {
@@ -31,7 +42,7 @@
     {#each $items as item (item)}
         <Item {...item} onupdate={handleUpdate} on:delete={handleDelete} />
     {:else}
-        <p class="list-status"> No items Exist</p>
+        <p class="list-status"> No items exist</p>
     {/each}
 </div>
 
