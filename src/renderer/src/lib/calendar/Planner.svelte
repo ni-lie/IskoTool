@@ -129,7 +129,15 @@
 						showModal = true;
 						eventToView = ev;
 						}}>
+					{#if (eventTime = getEventTime(ev)) != null}
+						<p class="event-time">{getEventTime(ev)[0]}
+							{#if getEventTime(ev)[1] != null}
+                                - {getEventTime(ev)[1]}
+                            {/if}
+						</p>
+					{/if}
 					{ ev != null ? ev.name : ''}
+                    <p class="event-type">{ev.eventType}</p>
 				</div>
 			{/each}
 		</span>
