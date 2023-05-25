@@ -111,7 +111,7 @@
 </script>
 
 <header>
-	<h1>Week Planner</h1>
+	<h1>Weekly Planner</h1>
 	<EventsDropdown right />
 </header>
 
