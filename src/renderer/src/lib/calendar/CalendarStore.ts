@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import { loadEvents, setEvents } from '../../types/LocalStorageAccess';
+import { loadEvents, setEvents } from '../helper-functions/LocalStorageAccess';
 import type { Event } from '../../types/event';
 
 const init: Event[] = loadEvents();

@@ -30,6 +30,11 @@
                             <t class="longbutton">View your notes</t>
                         </span>
                     </Button>
+                    <Button type="primary" on:click={() => push("#/todo")}>
+                        <span>
+                            <t class="longbutton">To do list</t>
+                        </span>
+                    </Button>
                 </div>
             </div>
         </div>

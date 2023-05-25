@@ -80,7 +80,6 @@
     <div>
         <Button type="primary">Save note</Button>
     </div>
-    
 </form>
 
 <style>

@@ -6,6 +6,7 @@
   import Calendar from './pages/CalendarPage.svelte'
   import Planner from './pages/PlannerPage.svelte';
   import Notes from './pages/NotesPage.svelte';
+  import TodoPage from './pages/TodoPage.svelte';
 
   const routes = {
     '/': Dashboard,
@@ -13,6 +14,7 @@
     '/planner': Planner,
     '/pomodoro': Pomodoro,
     '/notes':Notes,
+    '/todo':TodoPage,
   }
   
 </script>

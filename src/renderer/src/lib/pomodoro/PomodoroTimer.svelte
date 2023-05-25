@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
 
-  import {loadCustomModes, setCustomModes} from '../../types/LocalStorageAccess';
+  import {loadCustomModes, setCustomModes} from '../helper-functions/LocalStorageAccess';
   import DialogBox from '../global-components/DialogBox.svelte';
   import CustomModeForm from './CustomModeForm.svelte';
   import type { CustomMode } from '../../types/customtimer';

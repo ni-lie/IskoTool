@@ -1,6 +1,6 @@
 import { writable } from "svelte/store";
 import type { Note } from '../../../types/note'
-import { loadNotes, setNotes } from '../../../types/LocalStorageAccess';
+import { loadNotes, setNotes } from '../../helper-functions/LocalStorageAccess';
 
 let sampleNote: Note = {
     title: 'first note',
