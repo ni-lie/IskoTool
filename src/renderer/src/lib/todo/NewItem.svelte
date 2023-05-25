@@ -27,4 +27,8 @@
         font-size: 1em;
         cursor: pointer;
     }
+
+    input::placeceholder {
+        color: white;
+    }
 </style>
