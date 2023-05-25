@@ -1,6 +1,7 @@
 <script>
     import Button from './Button.svelte';
 
+    export let style = "";
     let showDialog = false
     let functionToCall = {
     func: null,
@@ -22,7 +23,7 @@
 
 {#if showDialog}
     <div class="overlay"></div>
-    <div class="confirm-dialog">
+    <div class="confirm-dialog" style={style}>
         <p>Do you wish to delete this item?</p>
         <span class="button-group">
             <Button type="tertiary" on:click="{() => showDialog = false }"> Cancel </Button>

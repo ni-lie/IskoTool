@@ -1,11 +1,12 @@
 <script lang="ts">
     import { createEventDispatcher } from "svelte";
+    import Svelecte from 'svelecte';
     import { eventStore } from './CalendarStore';
     import type { Event } from '../../types/event';
     import DialogBox from '../global-components/DialogBox.svelte';
+    import ConfirmDelete from "../global-components/ConfirmDelete.svelte";
     import EditEventForm from './EditEventForm.svelte';
     import AddEventForm from './AddEventForm.svelte';
-    import Svelecte from 'svelecte';
     import Button from "../global-components/Button.svelte";
     import addButtonFilePath from '../../images/white_plus_resized.png';
     import searchButtonPath from '../../images/search_icon.png';
@@ -77,8 +78,10 @@
             <Button type="primary" style="margin: 4px 2px; float: right;" disabled={selectedID === null} on:click={jumptoEvent}>Jump to Event</Button>
         {/if}
 
-        <Button type="danger" style="margin: 4px 2px; float: right;" disabled={selectedID === null} on:click={deleteEvent}>Delete</Button>
-        <Button type="primary" style="margin: 4px 2px; float: right;" disabled={selectedID === null} on:click={() => {showEditEventModal = true; searching = false;}}>Edit Event</Button>
+        <ConfirmDelete let:confirm="{confirmDeleteEvent}" style="transform:translate(-2%, 25%)">
+            <Button type="danger" style="margin: 4px 2px; float: right;" disabled={selectedID === null} on:click={() => confirmDeleteEvent(deleteEvent)}>Delete</Button>
+        </ConfirmDelete>
+            <Button type="primary" style="margin: 4px 2px; float: right;" disabled={selectedID === null} on:click={() => {showEditEventModal = true; searching = false;}}>Edit Event</Button>
     </section>
 {/if}
 

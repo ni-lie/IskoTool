@@ -134,7 +134,7 @@
 				<h2 slot="header" class="pop-up">Edit Event</h2>
 				<EditEventForm slot="contents" bind:event={eventToView} on:editExistingEvent={editEvent} />
 			</DialogBox>
-			<ConfirmDelete let:confirm="{confirmDeleteEvent}">
+			<ConfirmDelete let:confirm="{confirmDeleteEvent}" style="transform:translate(40%,-25%)">
 				<Button type="danger" style="float: right; width: 5em;" on:click={() => confirmDeleteEvent(deleteEvent)}>Delete</Button>
 			</ConfirmDelete>
 		</div>
