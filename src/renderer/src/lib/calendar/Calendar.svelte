@@ -5,6 +5,7 @@
 	import EventsDropdown from './Events.svelte';
 	import type { Event } from '../../types/event';
 	import DialogBox from '../global-components/DialogBox.svelte';
+	import ConfirmDelete from '../global-components/ConfirmDelete.svelte';
 	import GotoDateForm from './GotoDateForm.svelte';
 	import EditEventForm from './EditEventForm.svelte';
 	import Button from '../global-components/Button.svelte';
@@ -208,7 +209,9 @@
 				<h2 slot="header" class="pop-up">Edit Event</h2>
 				<EditEventForm slot="contents" bind:event={eventToView} on:editExistingEvent={editEvent} />
 			</DialogBox>
-			<Button type="danger" style="float: right; width: 5em;" on:click={deleteEvent}>Delete</Button>
+			<ConfirmDelete let:confirm="{confirmDeleteEvent}">
+				<Button type="danger" style="float: right; width: 5em;" on:click={() => confirmDeleteEvent(deleteEvent)}>Delete</Button>
+			</ConfirmDelete>
 		</div>
 		
 	</DialogBox>
