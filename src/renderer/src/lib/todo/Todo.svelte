@@ -1,10 +1,11 @@
 <script>
 	import Header from "./Header.svelte";
+    import List from "./List.svelte";
 </script>
 
 <div class="container">
     <Header />
-    sample text
+    <List />
 </div>
 
 <style>
