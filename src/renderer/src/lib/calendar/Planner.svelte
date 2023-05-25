@@ -14,6 +14,7 @@
 	const month = today.getMonth();
 	const weekday = today.getDay();
 	const offset = 0; // Display Sunday as first day of the week
+	let eventTime;
 
 	export let labels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 	export let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -87,6 +88,25 @@
 			eventStore.deleteEvent(eventToView.id);
 			viewEventDialog.close();
 		}
+    }
+	function getEventTime(event: Event) {
+        if (["Birthday", "Holiday"].includes(event.eventType)) {
+            return null;
+        }
+
+        const eventStart = new Date(event.startTime);
+        const eventEnd = new Date(event.endTime);
+        let eventStartTime = new Intl.DateTimeFormat('en-US', {hour: 'numeric', minute: 'numeric'}).format(eventStart);
+        let eventEndTime;
+
+        // Show end time if the event ends on the same day
+        if (today_day === eventEnd.getDate() && today_month === eventEnd.getMonth() && today_year === eventEnd.getFullYear()) {
+            eventEndTime = new Intl.DateTimeFormat('en-US', {hour: 'numeric', minute: 'numeric'}).format(eventEnd);
+        } else {
+            eventEndTime = null;
+        }
+
+        return [eventStartTime, eventEndTime];
     }
 </script>
 
