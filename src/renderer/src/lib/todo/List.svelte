@@ -3,6 +3,7 @@
     import { items } from "./stores";
     import TodoApi from "./TodoApi";
     import Item from "./Item.svelte";
+    import NewItem from "./NewItem.svelte";
 
     function handleNewItem(e) {
 
@@ -26,6 +27,7 @@
 
 
 <div class="list">
+    <NewItem></NewItem>
     {#each $items as item (item)}
         <Item {...item} onupdate={handleUpdate} on:delete={handleDelete} />
     {:else}
