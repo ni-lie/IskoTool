@@ -8,5 +8,27 @@
 </div>
 
 <style>
+    .item {
+        display: flex;
+        align-items: center;
+        padding: 15px;
+        background: white;
+    }
 
+    .item:focus-within {
+        background: rgba(255, 255, 255, 0.8)
+    }
+
+    .text-input {
+        flex-grow: 1;
+        background: none;
+        border: none;
+        outline: none;
+        font-weight: 500;
+        font-size: 1em;
+    }
+
+    .completed-checkbox {
+        margin-left: 15px;
+    }
 </style>
