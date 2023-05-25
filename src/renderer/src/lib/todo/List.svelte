@@ -1,5 +1,7 @@
 <script>
     import { onMount } from "svelte";
+    import { items } from "./stores";
+    import TodoApi from "./TodoApi";
 
     function handleNewItem(e) {
 
@@ -14,6 +16,20 @@
     }
 
     onMount(async () => {
-        // fetch from API
+        $items = await TodoApi.getAll();
     });
 </script>
+
+
+<div class="list">
+    {#each $items as item (item)}
+        {JSON.stringify(item)} 
+    {:else}
+        <p class="list-status"> No items Exist</p>
+    {/each}
+</div>
+
+<style>
+
+</style>
+
