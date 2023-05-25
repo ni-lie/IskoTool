@@ -24,7 +24,7 @@
 
 <div class="list">
     {#each $items as item (item)}
-        <Item {...item} />
+        <Item {...item} onupdate={handleUpdate} on:delete={handleDelete} />
     {:else}
         <p class="list-status"> No items Exist</p>
     {/each}
