@@ -21,13 +21,13 @@
     }
 
     function handleUpdate(e) {
-        const index = $items.findIndex(item => item.id === e.detail.id);
+        const index = $items.findIndex((item) => item.id === e.detail.id);
         $items[index] = e.detail;
         TodoApi.save($items);
     }
 
     function handleDelete(e) {
-        $items = $items.filter(item => item.id !== e.detail)
+        $items = $items.filter((item) => item.id !== e.detail)
         TodoApi.save($items);
     }
 
@@ -40,7 +40,7 @@
 <div class="list">
     <NewItem on:newitem={handleNewItem}/>
     {#each $items as item (item)}
-        <Item {...item} onupdate={handleUpdate} on:delete={handleDelete} />
+        <Item {...item} on:update={handleUpdate} on:delete={handleDelete} />
     {:else}
         <p class="list-status"> No items exist</p>
     {/each}
