@@ -18,6 +18,7 @@
         font-weight: 800;
         box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.2);
         transition: background 0.1s linear;
+        min-width: fit-content;
     }
 
     .primary {
@@ -46,6 +47,15 @@
         background: var(--orange-light);
     }
 
+    .tertiary {
+        background: darkgray;
+        color: white;
+    }
+
+    .tertiary:hover {
+        background: lightgray;
+    }
+
     .danger {
         background: rgb(255, 82, 82);
         color: white;
@@ -56,6 +66,5 @@
     }
 
     .danger:hover:not([disabled]) {
-        background: lightcoral;
-    }
+        background: rgb(241, 155, 155)    }
 </style>
