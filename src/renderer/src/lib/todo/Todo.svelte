@@ -1,8 +1,9 @@
 <script>
-	
+	import Header from "./Header.svelte";
 </script>
 
 <div class="container">
+    <Header />
     sample text
 </div>
 
