@@ -2,7 +2,7 @@
     export let id, text, completed;
 </script>
 
-<div class="item">
+<div class="item" class:completed>
     <input class="text-input" type="text" bind:value={text} readonly={completed} /> 
     <input class="completed-checkbox" type="checkbox" bind:checked={completed} />
 </div>
@@ -15,6 +15,14 @@
         background: white;
     }
 
+    .item.completed {
+        background: #dddddd;
+    }
+
+    .item.completed .text-input {
+        color: #555555;
+        text-decoration: line-through;
+    }
     .item:focus-within {
         background: rgba(255, 255, 255, 0.8)
     }
