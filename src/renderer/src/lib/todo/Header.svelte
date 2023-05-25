@@ -2,11 +2,13 @@
     import { items } from "./stores";
 
     $: itemCount = $items.length;
+    $: completedItemCount = $items.filter(item => item.completed).length;
+
 </script>
 
 <div class = "header">
     <span> To-Do List</span>
-    <span>0/0</span>
+    <span> {completedItemCount}/{itemCount} </span>
 </div>
 
 <style>
