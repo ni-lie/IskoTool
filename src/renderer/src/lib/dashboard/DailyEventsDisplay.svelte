@@ -2,7 +2,7 @@
     import { push } from "svelte-spa-router";
     import { eventStore } from "../calendar/CalendarStore";
     import type { Event } from "../../types/event";
-    import { timeAscending } from "../calendar/timeAscending";
+    import { timeAscending } from "../helper-functions/timeAscending";
     import Button from "../global-components/Button.svelte";
 
     let dailyEvents: Event[] = [];

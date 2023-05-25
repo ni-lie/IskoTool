@@ -6,8 +6,8 @@
 	import EditEventForm from './EditEventForm.svelte';
 	import Button from '../global-components/Button.svelte';
 	import timeDisplayOptions from '../calendar/Calendar.svelte'
-	import { timeAscending } from './timeAscending';
-	import { isInRange } from '../isInRange';
+	import { timeAscending } from '../helper-functions/timeAscending';
+	import { isInRange } from '../helper-functions/isInRange';
 
 	const today = new Date();
 	const year = today.getFullYear();

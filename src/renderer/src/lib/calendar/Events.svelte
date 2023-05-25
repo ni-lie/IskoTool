@@ -9,8 +9,8 @@
     import Button from "../global-components/Button.svelte";
     import addButtonFilePath from '../../images/white_plus_resized.png';
     import searchButtonPath from '../../images/search_icon.png';
-    import { timeAscending } from "./timeAscending";
-    import { clickOutside } from "../global-components/clickOutside";
+    import { timeAscending } from "../helper-functions/timeAscending";
+    import { clickOutside } from "../helper-functions/clickOutside";
 
     export let right = false;
     export let calendar = false;

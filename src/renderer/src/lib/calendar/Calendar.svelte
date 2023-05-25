@@ -1,16 +1,17 @@
 <script lang="ts">
 	import calendarize from 'calendarize';
+	import type { Event } from '../../types/event';
 	import { eventStore } from './CalendarStore';
 	import Arrow from './Arrow.svelte';
 	import EventsDropdown from './Events.svelte';
-	import type { Event } from '../../types/event';
 	import DialogBox from '../global-components/DialogBox.svelte';
 	import ConfirmDelete from '../global-components/ConfirmDelete.svelte';
 	import GotoDateForm from './GotoDateForm.svelte';
 	import EditEventForm from './EditEventForm.svelte';
 	import Button from '../global-components/Button.svelte';
-	import { timeAscending } from './timeAscending';
-	import { isInRange } from '../isInRange';
+	import { timeAscending } from '../helper-functions/timeAscending';
+	import { isInRange } from '../helper-functions/isInRange';
+    
 
 	export let today = new Date();
 	export let year = today.getFullYear();
