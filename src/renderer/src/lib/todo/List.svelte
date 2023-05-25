@@ -2,7 +2,7 @@
     import { onMount } from "svelte";
     import { v4 as uuidv4 } from "uuid";
     import { items } from "./stores";
-    import TodoApi from "./TodoApi";
+    import { loadToDo, setToDo } from "../helper-functions/LocalStorageAccess";
     import Item from "./Item.svelte";
     import NewItem from "./NewItem.svelte";
 
@@ -16,19 +16,18 @@
             },
             ...$items
         ];
-
-        TodoApi.save($items);
+        setToDo($items);
     }
 
     function handleUpdate(e) {
         const index = $items.findIndex((item) => item.id === e.detail.id);
         $items[index] = e.detail;
-        TodoApi.save($items);
+        setToDo($items);
     }
 
     function handleDelete(e) {
         $items = $items.filter((item) => item.id !== e.detail)
-        TodoApi.save($items);
+        setToDo($items);
     }
 
     let itemsSorted = [];
@@ -45,7 +44,7 @@
     }
 
     onMount(async () => {
-        $items = await TodoApi.getAll();
+        $items = await loadToDo();
     });
 </script>
 
