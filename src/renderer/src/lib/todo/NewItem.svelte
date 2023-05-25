@@ -1,6 +1,8 @@
 <script>
     import { createEventDispatcher } from "svelte";
-    
+
+    const dispatch = createEventDispatcher();
+
     function handleKeyUp({key}){
         if (key !== 'Enter' || value.length === 0) return;
     }
