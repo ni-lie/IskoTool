@@ -30,6 +30,16 @@
 </div>
 
 <style>
+    .list {
+        padding: 15px;
+    }
 
+    .list-status {
+        margin: 0;
+        text-align: center;
+        color: white;
+        font-weight: bold;
+        font-size: 1.1em;
+    }
 </style>
 
