@@ -14,7 +14,8 @@
     <input class="text-input" type="text" bind:value={text} readonly={completed} 
     on:keyup={({key, target}) => key === 'Enter' && target.blur()}
     on:blur={() => triggerUpdate()} /> 
-    <input class="completed-checkbox" type="checkbox" bind:checked={completed} />
+    <input class="completed-checkbox" type="checkbox" bind:checked={completed}
+    on:change={() => triggerUpdate()} />
 </div>
 
 <style>
