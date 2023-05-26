@@ -139,6 +139,7 @@
   }
 
   function addCustomMode(e) {
+    customModeDialog.close();
     customModes.push(e.detail);
     customModes = customModes;
     setCustomModes(customModes);
