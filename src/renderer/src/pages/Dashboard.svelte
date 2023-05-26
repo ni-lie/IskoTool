@@ -32,7 +32,8 @@
                     </Button>
                     <Button type="primary" on:click={() => push("#/todo")}>
                         <span>
-                            <t class="longbutton">To do list</t>
+                            <img class="icon" src={Notes} alt="To-do icon"/>
+                            <t class="longbutton">Check your To-do list</t>
                         </span>
                     </Button>
                 </div>
@@ -55,11 +56,13 @@
 
     .button-group {
         margin: 2em;
-        height: 7em;
+        height: fit-content;
+        height: 5em;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
+        row-gap: 1em;
     }
 
     .longbutton {
