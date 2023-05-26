@@ -15,6 +15,7 @@
 	const month = today.getMonth();
 	const weekday = today.getDay();
 	const offset = 0; // Display Sunday as first day of the week
+	let eventTime;
 
 	export let labels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 	export let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -87,10 +88,29 @@
 		eventStore.deleteEvent(eventToView.id);
 		viewEventDialog.close();
     }
+	function getEventTime(event: Event) {
+        if (["Birthday", "Holiday"].includes(event.eventType)) {
+            return null;
+        }
+
+        const eventStart = new Date(event.startTime);
+        const eventEnd = new Date(event.endTime);
+        let eventStartTime = new Intl.DateTimeFormat('en-US', {hour: 'numeric', minute: 'numeric'}).format(eventStart);
+        let eventEndTime;
+
+        // Show end time if the event ends on the same day
+        if (today_day === eventEnd.getDate() && today_month === eventEnd.getMonth() && today_year === eventEnd.getFullYear()) {
+            eventEndTime = new Intl.DateTimeFormat('en-US', {hour: 'numeric', minute: 'numeric'}).format(eventEnd);
+        } else {
+            eventEndTime = null;
+        }
+
+        return [eventStartTime, eventEndTime];
+    }
 </script>
 
 <header>
-	<h1>Week Planner</h1>
+	<h1>Weekly Planner</h1>
 	<EventsDropdown right />
 </header>
 
@@ -108,7 +128,15 @@
 						showModal = true;
 						eventToView = ev;
 						}}>
+					{#if (eventTime = getEventTime(ev)) != null}
+						<p class="event-time">{getEventTime(ev)[0]}
+							{#if getEventTime(ev)[1] != null}
+                                - {getEventTime(ev)[1]}
+                            {/if}
+						</p>
+					{/if}
 					{ ev != null ? ev.name : ''}
+                    <p class="event-type">{ev.eventType}</p>
 				</div>
 			{/each}
 		</span>
@@ -196,12 +224,18 @@
 	}
 
 	.eventdisplay {
-		font-weight: 600;
-		padding-top: 2em;
-		text-align: center;
-		color: #000000;
+		background-color: white;
+        border-radius: 4px;
+        margin: 0px;
+        padding: 0px 0px 0px 0px;
+        box-shadow: 0px 2px 4px #8f8f8f;
 		user-select: none;
-		border: outset 1px;
+
+		height: 33%;
+		font-family: 'Rubik';
+		font-style: normal;
+		color: black;
+		font-size: 24px;
 	}
 
 	.eventdisplay.noevent{
@@ -210,5 +244,20 @@
 
 	.eventdisplay:hover {
 		color: #6E7ED3;
+	}
+	
+	.event-time {
+		color:#FFC085;
+		margin-top: 10px;
+		margin-bottom: 15px;
+		font-size: 15px;
+	}
+
+	.event-type {
+		margin: 0px;
+        font-family: 'Space Grotesk';
+        font-size: 16px;
+        font-weight: 400;
+        color: gray;
 	}
 </style>
