@@ -179,7 +179,7 @@
     <div class="button-class">
       <p class = "choice-prompt">Choose a mode:</p>
       <!-- USING THE DROPDOWN -->
-      <Dropdown />
+      <Dropdown isUnselectable={currentState === State.InProgress}/>
       <!--  -->
       {#each customModes as customMode}
         <div class="custom-mode-select">

@@ -1,13 +1,15 @@
 <script lang="ts">
     import { mode } from './PomodoroModeChoice';
 
+    export let isUnselectable = false;
+
     let select: HTMLSelectElement;
     function onChange() {
         mode.set(select.selectedIndex);
     }
 </script>
 
-<select bind:this={select} on:change={onChange}>
+<select bind:this={select} on:change={onChange} disabled={isUnselectable}>
     <option>Pomodoro</option>
     <option>Short Break</option>
     <option>Long Break</option>
