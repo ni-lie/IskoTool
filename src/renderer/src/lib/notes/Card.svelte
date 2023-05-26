@@ -1,7 +1,7 @@
 <script>
-    export let showModal;
+    export const showModal = false;
+    export const showAddNoteForm = false;
     export let toggleEdit;
-    export let showAddNoteForm;
 
     function handleEdit(){
         toggleEdit();
@@ -9,6 +9,8 @@
     
 
 </script>
+
+<!-- svelte-ignore a11y-click-events-have-key-events -->
 <div class="card" on:click={handleEdit} on:click> 
     <slot></slot>
 </div>
