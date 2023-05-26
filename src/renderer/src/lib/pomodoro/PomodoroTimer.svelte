@@ -4,10 +4,12 @@
   import {loadCustomModes, setCustomModes} from '../helper-functions/LocalStorageAccess';
   import DialogBox from '../global-components/DialogBox.svelte';
   import CustomModeForm from './CustomModeForm.svelte';
+  import ConfirmDelete from '../global-components/ConfirmDelete.svelte';
   import type { CustomMode } from '../../types/customtimer';
 
   import { mode } from './PomodoroModeChoice';
   import Dropdown from './PomodoroDropdown.svelte';
+    
 
   enum State {
     Idle = 'idle',
@@ -187,12 +189,14 @@
           >
             {customMode.name}
           </button>
-          <button class="danger-action" 
-            on:click={() => deleteCustomMode(customMode.id)} 
-            disabled={currentState === State.InProgress || currentState === State.Pause}
-          >
-            Delete
-          </button>
+          <ConfirmDelete let:confirm="{confirmDeleteMode}">
+              <button class="danger-action" 
+                on:click={() => confirmDeleteMode(deleteCustomMode, customMode.id)} 
+                disabled={currentState === State.InProgress || currentState === State.Pause}
+              >
+              Delete
+            </button>
+          </ConfirmDelete>
         </div>
       {/each}
       <button class="fadedtext" on:click={() => (showModal = true)} disabled={currentState === State.InProgress || currentState === State.Pause}>+ Custom Mode</button>
