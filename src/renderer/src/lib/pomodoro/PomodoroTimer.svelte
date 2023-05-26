@@ -73,6 +73,9 @@
   function startPomodoro() {
     if (currentState != State.Pause)
       currentTime = baseDuration;
+    if (currentState == State.Idle) {
+      progbar.style.background = "conic-gradient(#ffffff 0deg, rgb(200, 200, 200, 0.4) 0deg)";
+    }
     setState(State.InProgress);
     
     // Distinguish between modes.
@@ -86,9 +89,11 @@
     countdown = setInterval(() => {
       if (currentTime !== 0) {
         --currentTime;
+        rot();
         return;
       }
       else if(currentTime === 0 ){
+        progbar.style.background = "conic-gradient(#ffffff 0deg, rgb(200, 200, 200, 0.4) 0deg)";
         audio.play()  
       }
       if (isCustom) idle();
@@ -112,6 +117,7 @@
 
   function cancelPomodoro() {
     idle();
+    progbar.style.background = "conic-gradient(#ffffff 0deg, rgb(200, 200, 200, 0.4) 0deg)";
   }
   
   function idle(){
@@ -138,15 +144,21 @@
   }
 
   function setCustomModeState(min: number, sec: number) {
+    progbar.style.background = "conic-gradient(#ffffff 0deg, rgb(200, 200, 200, 0.4) 0deg)";
     baseDuration = minutesToSeconds(min) + sec; 
     isCustom = true;
+  }
+
+  function rot(){
+    var currot = (baseDuration-currentTime)/baseDuration;
+    progbar.style.background = "conic-gradient(#ffffff calc(" + currot + " *360deg), rgb(200, 200, 200, 0.4) 0deg)";
   }
 </script>
 
 <section>
   <div class = "whole">
     <div class = "timer-class">
-      <div class="prog">  
+      <div class="prog" id="prog">  
         <div class="timer">
           <time class="actual-time">
             {formatTime(currentTime)}
@@ -190,6 +202,9 @@
       </DialogBox>
     </div>
   </div>
+  <script type="text/javascript" defer>
+    var progbar = document.getElementById("prog");
+  </script>
 </section>
 
 <audio src="https://freesound.org/data/previews/536/536420_4921277-lq.mp3" bind:this={audio}></audio>
