@@ -30,7 +30,6 @@
   let currentState = State.Idle;
   let baseDuration: number;
   let currentTime: number;
-  let audio;
 
   $: switch ($mode) {
       case 0:
@@ -55,6 +54,14 @@
 
   let showModal = false;
   let customModes: CustomMode[] = [];
+  let soundOptions = [
+    {url: "https://freesound.org/data/previews/536/536420_4921277-lq.mp3", name: "Alarm clock"},
+    {url: "https://www.myinstants.com/media/sounds/ding-sound-effect.mp3", name: "Bell ding"},
+  ]
+  let selectedaudio;
+  let audio;
+
+  $: console.log(audio);//
 
   onMount(() => {
     if ("pomodoroCustomModes" in localStorage)
@@ -96,7 +103,7 @@
       }
       else if(currentTime === 0 ){
         progbar.style.background = "conic-gradient(#ffffff 0deg, rgb(200, 200, 200, 0.4) 0deg)";
-        audio.play()  
+        audio.play();
       }
       if (isCustom) idle();
       else if (isBreakMode) {
@@ -204,6 +211,16 @@
         <h2 slot="header" class="pop-up">Create Custom Timer</h2>
         <CustomModeForm slot="contents" on:addCustomMode={addCustomMode} />
       </DialogBox>
+
+      <select bind:value={selectedaudio}>
+        <option style="color:grey" value="">Choose an alarm sound...</option>
+        {#each soundOptions as sound}
+          <option value={sound}>
+            {sound.name}
+          </option>
+        {/each}
+      </select>
+
     </div>
   </div>
   <script type="text/javascript" defer>
@@ -211,7 +228,9 @@
   </script>
 </section>
 
-<audio src="https://freesound.org/data/previews/536/536420_4921277-lq.mp3" bind:this={audio}></audio>
+<!-- <audio src={audio ? audio.url : ''} bind:this={audio}></audio> -->
+<audio src="{selectedaudio ? selectedaudio.url : ''}" bind:this={audio}></audio>
+
 
 <style>
   section {
