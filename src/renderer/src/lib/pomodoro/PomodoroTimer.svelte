@@ -239,7 +239,7 @@
     padding: 1rem;
     display: flex;
     justify-content: center;
-    height: 100vh;
+    min-height: 100%;
   }
 
   time {
@@ -323,14 +323,12 @@
     flex-wrap: wrap-reverse;
     margin: auto;
     width: clamp(600px, 100%, 1200px);
-    ;
     align-items: flex-end;
     justify-content: center;
   }
 
   .whole > *{
     width: 50%;
-    /*max-width: 600px;*/
     min-width: 600px;
   }
 
@@ -373,8 +371,6 @@
     display: inline-flex;
     margin-block-start: -20px;
   }
-
-
 
   .custom-mode-select > *:first-child {
     margin-right: 0px;
