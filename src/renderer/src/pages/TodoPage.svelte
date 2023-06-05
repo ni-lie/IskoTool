@@ -3,7 +3,6 @@
 </script>
 
 <main>
-    <a href="#/">Back to Dashboard</a>
     <Todo/>
 </main>
 

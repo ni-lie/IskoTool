@@ -1,6 +1,6 @@
 <script>
   // Import routes
-  import Router from 'svelte-spa-router';
+  import Router, { location } from 'svelte-spa-router';
   import Dashboard from './pages/Dashboard.svelte';
   import Pomodoro from './pages/PomodoroPage.svelte';
   import Calendar from './pages/CalendarPage.svelte'
@@ -20,5 +20,8 @@
 </script>
 
 <main>
+  {#if $location != "/"}
+    <a href="#/">Back to Dashboard</a>
+  {/if}
   <Router {routes} />
 </main>

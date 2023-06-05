@@ -3,7 +3,6 @@
 </script>
 
 <main>
-  <a class="navbar" href="#/">Back to Dashboard</a>
   <PomodoroTimer />
 </main>
 
