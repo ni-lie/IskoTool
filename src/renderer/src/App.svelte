@@ -29,3 +29,12 @@
   {/if}
   <Router {routes} />
 </main>
+
+<style>
+  img {
+    width: 2.5rem;
+    height: 2.5rem;
+    padding-top: 0.75rem;
+    padding-left: 0.75rem;
+  }
+</style>
