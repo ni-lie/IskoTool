@@ -9,7 +9,7 @@
 
 <style>
   main {
-    height: 100%;
+    height: 100vh;
   }
 
   .navbar { /*temp just so I can remove the scrollbar*/
