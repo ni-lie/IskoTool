@@ -3,6 +3,5 @@
 </script>
 
 <main>
-    <a href="#/">Back to Dashboard</a>
     <Planner />
 </main>

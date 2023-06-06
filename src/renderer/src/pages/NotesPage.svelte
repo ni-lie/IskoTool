@@ -43,7 +43,6 @@
 
 </script>
 
-<a href="#/">Back to Dashboard</a>
 <Modal {showModal} on:click={toggleNote}>
     {#if showAddNoteForm}
         <AddnoteForm on:addNote={addNote} /> 
