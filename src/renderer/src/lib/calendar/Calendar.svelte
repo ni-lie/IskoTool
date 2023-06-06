@@ -11,7 +11,7 @@
 	import Button from '../global-components/Button.svelte';
 	import { timeAscending } from '../helper-functions/timeAscending';
 	import { isInRange } from '../helper-functions/isInRange';
-    
+	import { eventCrossesMonths } from '../helper-functions/eventCrossesMonths';
 
 	export let today = new Date();
 	export let year = today.getFullYear();
@@ -68,8 +68,13 @@
 				const endYr = end.getFullYear();
 				const endMth = end.getMonth()+1;
 				const endDay = end.getDate();
-				if (isInRange(year, startYr, endYr) && isInRange(month+1, startMth, endMth) && isInRange(day, startDay, endDay)) {
+				if (isInRange(year, startYr, endYr) && isInRange(month+1, startMth, endMth)) {
+					if (isInRange(day, startDay, endDay)) {
 					eventsOnDay.push(e);
+					}
+					else if (eventCrossesMonths(month+1, startMth, endMth, day, startDay, endDay)) {
+						eventsOnDay.push(e);
+					}
 				}
 			}
 			// Display a one-day event
