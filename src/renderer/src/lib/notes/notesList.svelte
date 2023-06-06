@@ -13,6 +13,10 @@
         selectedNote = e.detail;
         dispatch('selectedNote', selectedNote);
     };
+    
+    function deleteAction() {
+        dispatch('delete');
+    }
 
     function pinnedFirst(a,b) {
         if (a.pinned && !b.pinned) {
@@ -32,7 +36,7 @@
 <div class="notes-list">
     {#each filteredNotes as note (note.id)}
     <div class = "card-container">
-        <NotesDetails note={note} showModal={showModal} toggleEdit={toggleEdit} showAddNoteForm={showAddNoteForm} on:cardClick={noteSelection}/> 
+        <NotesDetails note={note} toggleEdit={toggleEdit} on:cardClick={noteSelection} on:propagateDelete={deleteAction}/> 
     </div>
     {:else}
         <p>There are no notes to show...</p>

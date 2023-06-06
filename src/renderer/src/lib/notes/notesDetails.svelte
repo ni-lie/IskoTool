@@ -15,6 +15,7 @@
         NotesStore.update(notes => {
             return notes.filter(note => note.id != id)
         })
+        dispatch('propagateDelete');
     }
 
     function handleCardClick(sel) {
