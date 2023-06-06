@@ -20,6 +20,5 @@
         color: white;
         font-weight: bold;
         font-size: 1.5em;
-        background: rgba(0, 0, 0, 0.1);
     }
 </style>

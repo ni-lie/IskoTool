@@ -7,5 +7,9 @@
 </main>
 
 <style>
-    
+   main {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 2rem;
+   } 
 </style>
