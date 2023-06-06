@@ -4,7 +4,7 @@
     import Button from "../global-components/Button.svelte";
     import ConfirmDelete from "../global-components/ConfirmDelete.svelte";
     import { createEventDispatcher } from "svelte";
-    import DialogBox from "../global-components/DialogBox.svelte";
+    import Pin from "../../images/Pin.png"
 
     let dispatch = createEventDispatcher();
 
@@ -27,7 +27,7 @@
 <Card showModal={showModal} toggleEdit={toggleEdit} showAddNoteForm={showAddNoteForm} on:click={() => handleCardClick(note)}>
     
     <div class="note">
-        <div class="{note.pinned ? '' : 'unpinned'}">📌</div>
+        <div class="{note.pinned ? '' : 'unpinned'}"><img class="pinicon" src={Pin} alt="Note is pinned"></div>
         <h4>{note.title}</h4>
         <p>{note.noteContent}</p>
         <div class = "delete">
@@ -73,13 +73,7 @@
         display: none;
     }
 
-    /* .note.title, .note-content{
-        background: #fafafa;
-        cursor: pointer;
-        margin: 10px auto;
-        position: relative;
+    .pinicon {
+        width: 1.25rem;
     }
-    .title:hover, .note-content:hover{
-    opacity: 0.6;
-    } */
 </style>

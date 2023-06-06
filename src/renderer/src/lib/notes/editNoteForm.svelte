@@ -4,6 +4,7 @@
     import { createEventDispatcher } from "svelte";
     import Button from "../global-components/Button.svelte";
     import EmojiPicker from "./EmojiPicker.svelte";
+    import Pin from "../../images/Pin.png"
 
     export let selectedNote: Note;
 
@@ -50,7 +51,7 @@
         on:click={() => {
             selectedNote.pinned = !selectedNote.pinned;
             }
-        }>📌</button>
+        }><img src={Pin} class="icon" alt="Pin the current note"></button>
     
     <textarea placeholder= "Type your note" cols="30" rows="10" bind:value={selectedNote.noteContent}></textarea>
     <br>
@@ -75,5 +76,9 @@
         background-color: var(--orange-faded);
         border-radius: 2.5px;
         border-color: rgb(90, 90, 90);
+    }
+
+    .icon {
+        width: 0.95rem;
     }
 </style>
