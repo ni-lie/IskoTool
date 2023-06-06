@@ -1,7 +1,6 @@
 <script>
     import Button from './Button.svelte';
 
-    export let style = "";
     let showDialog = false
     let functionToCall = {
     func: null,
@@ -23,12 +22,12 @@
 
 {#if showDialog}
     <div class="overlay"></div>
-    <div class="confirm-dialog" style={style}>
+    <div class="confirm-dialog">
         <p>Do you wish to delete this item?</p>
-        <span class="button-group">
-            <Button type="tertiary" on:click="{() => showDialog = false }"> Cancel </Button>
-            <Button type="danger" on:click="{callFunction}"> Delete </Button>
-        </span>
+    <span class="button-group">
+        <Button type="tertiary" on:click="{() => showDialog = false }"> Cancel </Button>
+        <Button type="danger" on:click="{callFunction}"> Delete </Button>
+    </span>
     </div>
 {/if}
 
@@ -36,10 +35,11 @@
 div.confirm-dialog {
     min-width: fit-content;
     min-height: fit-content;
-    position: absolute;
+    position: fixed;
+    top: 50%;
+    left: 35%;
     z-index: 999;
     transform: translate(40%);
-    margin: 0;
     padding: 1em;
     border-radius: 3px;
     background: white;
