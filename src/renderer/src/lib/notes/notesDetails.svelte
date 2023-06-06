@@ -9,9 +9,7 @@
     let dispatch = createEventDispatcher();
 
     export let note;
-    export let showModal;
     export let toggleEdit;
-    export let showAddNoteForm;
 
     const handleDelete = (id) => {
         NotesStore.update(notes => {
@@ -24,7 +22,7 @@
     }
 </script>
 
-<Card showModal={showModal} toggleEdit={toggleEdit} showAddNoteForm={showAddNoteForm} on:click={() => handleCardClick(note)}>
+<Card toggleEdit={toggleEdit} on:click={() => handleCardClick(note)}>
     
     <div class="note">
         <div class="{note.pinned ? '' : 'unpinned'}"><img class="pinicon" src={Pin} alt="Note is pinned"></div>

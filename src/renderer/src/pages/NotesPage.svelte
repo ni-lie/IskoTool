@@ -27,18 +27,13 @@
         showAddNoteForm = false;
     };
 
-    const addNote = (e) => {
+    const addNote = () => {
         showModal = false;
     };
 
-    const editNote = (e) => {
+    const editNote = () => {
         showModal = false;
         selectedNote = null;
-    };
-
-    function handleInput(event) {
-        searchTerm = event.target.value;
-        console.log(searchTerm);
     };
 
 </script>
@@ -56,7 +51,7 @@
 </Modal>
 
 <main>
-    <input type="text" placeholder="Search..." bind:value={searchTerm}> <!-- on:input={handleInput}-->
+    <input type="text" placeholder="Search..." bind:value={searchTerm}>
     <br>
     <button class="add-note" on:click={toggleNote}><img class="white-plus" src={addButtonFilePath} alt="Add note"/></button>
     <NotesList showModal={showModal} toggleEdit={toggleEdit} showAddNoteForm={showAddNoteForm} on:selectedNote={noteSelection} searchTerm={searchTerm}/> 
