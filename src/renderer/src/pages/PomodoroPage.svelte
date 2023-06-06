@@ -10,10 +10,4 @@
   main {
     height: 100vh;
   }
-
-  .navbar { /*temp just so I can remove the scrollbar*/
-    position: fixed;
-    text-decoration: none;
-    color: white;
-  }
 </style>
