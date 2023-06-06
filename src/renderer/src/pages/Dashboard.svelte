@@ -7,6 +7,7 @@
 
     import Tomato from '../../src/images/Tomato.png';
     import Notes from '../../src/images/Notesheet.png';
+    import Todo from '../../src/images/to-do.png';
 </script>
   
 <main>
@@ -32,8 +33,8 @@
                     </Button>
                     <Button type="primary" on:click={() => push("#/todo")}>
                         <span>
-                            <img class="icon" src={Notes} alt="To-do icon"/>
-                            <t class="longbutton">Check your To-do list</t>
+                            <img class="icon" src={Todo} alt="To-do icon"/>
+                            <t class="longbutton">Check your to-do list</t>
                         </span>
                     </Button>
                 </div>
@@ -47,7 +48,6 @@
         display: flex;
         margin: 0px;
         justify-content: space-evenly;
-        /* max-height: 30rem; */
     }
 
     .vertical-line {
