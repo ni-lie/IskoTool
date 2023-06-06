@@ -22,7 +22,9 @@
 </script>
 
 <main>
-  {#if $location != "/"}
+  {#if $location === "/pomodoro"}
+    <a href="#/" class="abs"><BackToDashboard/></a>
+  {:else if $location !== "/"}
     <a href="#/"><BackToDashboard/></a>
   {:else}
     <img src={Logo} alt="IskoTool logo">
@@ -36,5 +38,10 @@
     height: 2.5rem;
     padding-top: 0.75rem;
     padding-left: 0.75rem;
+  }
+
+  a.abs {
+    position: absolute;
+    z-index: 1;
   }
 </style>
