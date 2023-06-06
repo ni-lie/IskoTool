@@ -60,8 +60,7 @@
   ]
   let selectedaudio;
   let audio;
-
-  $: console.log(audio);//
+  let selectingSound = false;
 
   onMount(() => {
     if ("pomodoroCustomModes" in localStorage)
@@ -186,9 +185,7 @@
     </div>
     <div class="button-class">
       <p class = "choice-prompt">Choose a mode:</p>
-      <!-- USING THE DROPDOWN -->
       <Dropdown isUnselectable={currentState === State.InProgress}/>
-      <!--  -->
       {#each customModes as customMode}
         <div class="custom-mode-select">
           <button 
@@ -208,21 +205,17 @@
         </div>
       {/each}
       <button class="fadedtext" on:click={() => (showModal = true)} disabled={currentState === State.InProgress || currentState === State.Pause}>+ Custom Mode</button>
-      <DialogBox bind:showModal bind:dialog={customModeDialog}>
-        <h2 slot="header" class="pop-up">Create Custom Timer</h2>
-        <CustomModeForm slot="contents" on:addCustomMode={addCustomMode} />
-      </DialogBox>
-
-      <select bind:value={selectedaudio}>
-        <option style="color:grey" value="">Choose an alarm sound...</option>
+      <select bind:value={selectedaudio} on:click={() => selectingSound = !selectingSound} on:blur={() => selectingSound = false}>
+        <option value="">🕪 Choose an alarm sound...</option>
         {#each soundOptions as sound}
-          <option value={sound}>
-            {sound.name}
-          </option>
-        {/each}
+              <option value={sound}>{sound.name}</option>
+          {/each}
       </select>
-
     </div>
+    <DialogBox bind:showModal bind:dialog={customModeDialog}>
+      <h2 slot="header" class="pop-up">Create Custom Timer</h2>
+      <CustomModeForm slot="contents" on:addCustomMode={addCustomMode} />
+    </DialogBox>
   </div>
   <script type="text/javascript" defer>
     var progbar = document.getElementById("prog");
@@ -348,11 +341,11 @@
     display: block;
   }
 
-
   .button-class {
     width: 100%;
     max-width: 600px;
-    margin-top: 4%;
+    display: flex;
+    flex-direction: column;
   }
   
   .button-class button {
@@ -381,6 +374,11 @@
 
   .custom-mode-select > *:first-child {
     margin-right: 0px;
+  }
+
+  select {
+    width: 250px;
+    margin: 20px;
   }
 
 </style>

@@ -18,10 +18,8 @@
 
 </script>
 
-
-
 <span class="select-holder">
-    <select  bind:this={select} on:change={onChange} on:click={toggleChoiceList} on:blur={setInactive}>
+    <select bind:this={select} on:change={onChange} on:click={toggleChoiceList} on:blur={setInactive}>
         {#each options as option}
             <option>{option}</option>
         {/each}
