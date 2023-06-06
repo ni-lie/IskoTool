@@ -279,6 +279,7 @@
   }
 
   button {
+    cursor: pointer;
     text-align: center;
     color: white;
     font-family: 'Space Grotesk';
@@ -292,12 +293,18 @@
     border-style: solid;
     border-color: white;
     background-color: transparent;
+    transition: opacity 0.1s;
   }
 
   button:disabled {
+    cursor: default;
     border-color: var(--evergreen-faded);
     color: var(--evergreen-faded);
     background-color: transparent;
+  }
+
+  button:hover:not([disabled]) {
+    opacity: 50%;
   }
 
   .time-start {
@@ -307,7 +314,7 @@
     transition: background 0.25s ease-in-out, border 0.25s ease-in-out;
   }
 
-  .time-start:hover {
+  .time-start:hover:not([disabled]) {
     background: var(--orange-faded);
     border-color: var(--orange-faded);
   }
