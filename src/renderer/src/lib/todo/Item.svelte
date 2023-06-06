@@ -59,4 +59,15 @@
     .completed-checkbox {
         margin-left: 15px;
     }
+
+    button {
+        background-color: rgb(255, 82, 82);
+        border: none;
+        border-radius: 0.125rem;
+        color: var(--white-bg);
+        transition: opacity 0.1s;
+    }
+    button:hover {
+        opacity: 70%;
+    }
 </style>
