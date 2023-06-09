@@ -22,7 +22,6 @@
         height: 100%;
         position: fixed;
         background: rgba(0, 0, 0, 0.8);
-        z-index: 2;
     }
     .modal{
         padding: 100px;
